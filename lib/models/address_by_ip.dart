@@ -18,7 +18,8 @@ class AddressByIp {
     this.org,
     this.timeZone,
   });
-  AddressByIp fromJson(dynamic data){
+
+ factory AddressByIp.fromJson(dynamic data){
     return AddressByIp(
       ip: data['ip'],
       hostname: data['hostname'],

@@ -16,16 +16,12 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$GoogleMapEvent {
-  double get lat => throw _privateConstructorUsedError;
-  double get long => throw _privateConstructorUsedError;
-  double? get currentLat => throw _privateConstructorUsedError;
-  double? get currentLong => throw _privateConstructorUsedError;
-  bool get selectionObject => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(double lat, double long, double? currentLat,
             double? currentLong, bool selectionObject)
         initAddress,
+    required TResult Function(String search) searchAddress,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -33,6 +29,7 @@ mixin _$GoogleMapEvent {
     TResult? Function(double lat, double long, double? currentLat,
             double? currentLong, bool selectionObject)?
         initAddress,
+    TResult? Function(String search)? searchAddress,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -40,28 +37,28 @@ mixin _$GoogleMapEvent {
     TResult Function(double lat, double long, double? currentLat,
             double? currentLong, bool selectionObject)?
         initAddress,
+    TResult Function(String search)? searchAddress,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_InitAddress value) initAddress,
+    required TResult Function(_SearchAddress value) searchAddress,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_InitAddress value)? initAddress,
+    TResult? Function(_SearchAddress value)? searchAddress,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitAddress value)? initAddress,
+    TResult Function(_SearchAddress value)? searchAddress,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $GoogleMapEventCopyWith<GoogleMapEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -70,13 +67,6 @@ abstract class $GoogleMapEventCopyWith<$Res> {
   factory $GoogleMapEventCopyWith(
           GoogleMapEvent value, $Res Function(GoogleMapEvent) then) =
       _$GoogleMapEventCopyWithImpl<$Res, GoogleMapEvent>;
-  @useResult
-  $Res call(
-      {double lat,
-      double long,
-      double? currentLat,
-      double? currentLong,
-      bool selectionObject});
 }
 
 /// @nodoc
@@ -88,48 +78,13 @@ class _$GoogleMapEventCopyWithImpl<$Res, $Val extends GoogleMapEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? lat = null,
-    Object? long = null,
-    Object? currentLat = freezed,
-    Object? currentLong = freezed,
-    Object? selectionObject = null,
-  }) {
-    return _then(_value.copyWith(
-      lat: null == lat
-          ? _value.lat
-          : lat // ignore: cast_nullable_to_non_nullable
-              as double,
-      long: null == long
-          ? _value.long
-          : long // ignore: cast_nullable_to_non_nullable
-              as double,
-      currentLat: freezed == currentLat
-          ? _value.currentLat
-          : currentLat // ignore: cast_nullable_to_non_nullable
-              as double?,
-      currentLong: freezed == currentLong
-          ? _value.currentLong
-          : currentLong // ignore: cast_nullable_to_non_nullable
-              as double?,
-      selectionObject: null == selectionObject
-          ? _value.selectionObject
-          : selectionObject // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$_InitAddressCopyWith<$Res>
-    implements $GoogleMapEventCopyWith<$Res> {
+abstract class _$$_InitAddressCopyWith<$Res> {
   factory _$$_InitAddressCopyWith(
           _$_InitAddress value, $Res Function(_$_InitAddress) then) =
       __$$_InitAddressCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call(
       {double lat,
@@ -239,6 +194,7 @@ class _$_InitAddress implements _InitAddress {
     required TResult Function(double lat, double long, double? currentLat,
             double? currentLong, bool selectionObject)
         initAddress,
+    required TResult Function(String search) searchAddress,
   }) {
     return initAddress(lat, long, currentLat, currentLong, selectionObject);
   }
@@ -249,6 +205,7 @@ class _$_InitAddress implements _InitAddress {
     TResult? Function(double lat, double long, double? currentLat,
             double? currentLong, bool selectionObject)?
         initAddress,
+    TResult? Function(String search)? searchAddress,
   }) {
     return initAddress?.call(
         lat, long, currentLat, currentLong, selectionObject);
@@ -260,6 +217,7 @@ class _$_InitAddress implements _InitAddress {
     TResult Function(double lat, double long, double? currentLat,
             double? currentLong, bool selectionObject)?
         initAddress,
+    TResult Function(String search)? searchAddress,
     required TResult orElse(),
   }) {
     if (initAddress != null) {
@@ -272,6 +230,7 @@ class _$_InitAddress implements _InitAddress {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_InitAddress value) initAddress,
+    required TResult Function(_SearchAddress value) searchAddress,
   }) {
     return initAddress(this);
   }
@@ -280,6 +239,7 @@ class _$_InitAddress implements _InitAddress {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_InitAddress value)? initAddress,
+    TResult? Function(_SearchAddress value)? searchAddress,
   }) {
     return initAddress?.call(this);
   }
@@ -288,6 +248,7 @@ class _$_InitAddress implements _InitAddress {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitAddress value)? initAddress,
+    TResult Function(_SearchAddress value)? searchAddress,
     required TResult orElse(),
   }) {
     if (initAddress != null) {
@@ -305,43 +266,209 @@ abstract class _InitAddress implements GoogleMapEvent {
       final double? currentLong,
       final bool selectionObject}) = _$_InitAddress;
 
-  @override
   double get lat;
-  @override
   double get long;
-  @override
   double? get currentLat;
-  @override
   double? get currentLong;
-  @override
   bool get selectionObject;
-  @override
   @JsonKey(ignore: true)
   _$$_InitAddressCopyWith<_$_InitAddress> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
+abstract class _$$_SearchAddressCopyWith<$Res> {
+  factory _$$_SearchAddressCopyWith(
+          _$_SearchAddress value, $Res Function(_$_SearchAddress) then) =
+      __$$_SearchAddressCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String search});
+}
+
+/// @nodoc
+class __$$_SearchAddressCopyWithImpl<$Res>
+    extends _$GoogleMapEventCopyWithImpl<$Res, _$_SearchAddress>
+    implements _$$_SearchAddressCopyWith<$Res> {
+  __$$_SearchAddressCopyWithImpl(
+      _$_SearchAddress _value, $Res Function(_$_SearchAddress) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? search = null,
+  }) {
+    return _then(_$_SearchAddress(
+      search: null == search
+          ? _value.search
+          : search // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_SearchAddress implements _SearchAddress {
+  const _$_SearchAddress({required this.search});
+
+  @override
+  final String search;
+
+  @override
+  String toString() {
+    return 'GoogleMapEvent.searchAddress(search: $search)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_SearchAddress &&
+            (identical(other.search, search) || other.search == search));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, search);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_SearchAddressCopyWith<_$_SearchAddress> get copyWith =>
+      __$$_SearchAddressCopyWithImpl<_$_SearchAddress>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(double lat, double long, double? currentLat,
+            double? currentLong, bool selectionObject)
+        initAddress,
+    required TResult Function(String search) searchAddress,
+  }) {
+    return searchAddress(search);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(double lat, double long, double? currentLat,
+            double? currentLong, bool selectionObject)?
+        initAddress,
+    TResult? Function(String search)? searchAddress,
+  }) {
+    return searchAddress?.call(search);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(double lat, double long, double? currentLat,
+            double? currentLong, bool selectionObject)?
+        initAddress,
+    TResult Function(String search)? searchAddress,
+    required TResult orElse(),
+  }) {
+    if (searchAddress != null) {
+      return searchAddress(search);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_InitAddress value) initAddress,
+    required TResult Function(_SearchAddress value) searchAddress,
+  }) {
+    return searchAddress(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_InitAddress value)? initAddress,
+    TResult? Function(_SearchAddress value)? searchAddress,
+  }) {
+    return searchAddress?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_InitAddress value)? initAddress,
+    TResult Function(_SearchAddress value)? searchAddress,
+    required TResult orElse(),
+  }) {
+    if (searchAddress != null) {
+      return searchAddress(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SearchAddress implements GoogleMapEvent {
+  const factory _SearchAddress({required final String search}) =
+      _$_SearchAddress;
+
+  String get search;
+  @JsonKey(ignore: true)
+  _$$_SearchAddressCopyWith<_$_SearchAddress> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$GoogleMapState {
-  bool get loading => throw _privateConstructorUsedError;
+  bool get loadingAddresses => throw _privateConstructorUsedError;
+  bool get loadingAddress => throw _privateConstructorUsedError;
+  List<PlaceSearch>? get places => throw _privateConstructorUsedError;
+  List<PlaceSearch>? get searchingPlaces => throw _privateConstructorUsedError;
+  LocationMap? get location => throw _privateConstructorUsedError;
   List<Marker>? get markers => throw _privateConstructorUsedError;
-  String? get address => throw _privateConstructorUsedError;
+  String? get currentAddress => throw _privateConstructorUsedError;
+  String? get selectedAddress => throw _privateConstructorUsedError;
+  String? get error => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            bool loading, List<Marker>? markers, String? address)
+            bool loadingAddresses,
+            bool loadingAddress,
+            List<PlaceSearch>? places,
+            List<PlaceSearch>? searchingPlaces,
+            LocationMap? location,
+            List<Marker>? markers,
+            String? currentAddress,
+            String? selectedAddress,
+            String? error)
         google,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(bool loading, List<Marker>? markers, String? address)?
+    TResult? Function(
+            bool loadingAddresses,
+            bool loadingAddress,
+            List<PlaceSearch>? places,
+            List<PlaceSearch>? searchingPlaces,
+            LocationMap? location,
+            List<Marker>? markers,
+            String? currentAddress,
+            String? selectedAddress,
+            String? error)?
         google,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool loading, List<Marker>? markers, String? address)?
+    TResult Function(
+            bool loadingAddresses,
+            bool loadingAddress,
+            List<PlaceSearch>? places,
+            List<PlaceSearch>? searchingPlaces,
+            LocationMap? location,
+            List<Marker>? markers,
+            String? currentAddress,
+            String? selectedAddress,
+            String? error)?
         google,
     required TResult orElse(),
   }) =>
@@ -374,7 +501,16 @@ abstract class $GoogleMapStateCopyWith<$Res> {
           GoogleMapState value, $Res Function(GoogleMapState) then) =
       _$GoogleMapStateCopyWithImpl<$Res, GoogleMapState>;
   @useResult
-  $Res call({bool loading, List<Marker>? markers, String? address});
+  $Res call(
+      {bool loadingAddresses,
+      bool loadingAddress,
+      List<PlaceSearch>? places,
+      List<PlaceSearch>? searchingPlaces,
+      LocationMap? location,
+      List<Marker>? markers,
+      String? currentAddress,
+      String? selectedAddress,
+      String? error});
 }
 
 /// @nodoc
@@ -390,22 +526,52 @@ class _$GoogleMapStateCopyWithImpl<$Res, $Val extends GoogleMapState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? loading = null,
+    Object? loadingAddresses = null,
+    Object? loadingAddress = null,
+    Object? places = freezed,
+    Object? searchingPlaces = freezed,
+    Object? location = freezed,
     Object? markers = freezed,
-    Object? address = freezed,
+    Object? currentAddress = freezed,
+    Object? selectedAddress = freezed,
+    Object? error = freezed,
   }) {
     return _then(_value.copyWith(
-      loading: null == loading
-          ? _value.loading
-          : loading // ignore: cast_nullable_to_non_nullable
+      loadingAddresses: null == loadingAddresses
+          ? _value.loadingAddresses
+          : loadingAddresses // ignore: cast_nullable_to_non_nullable
               as bool,
+      loadingAddress: null == loadingAddress
+          ? _value.loadingAddress
+          : loadingAddress // ignore: cast_nullable_to_non_nullable
+              as bool,
+      places: freezed == places
+          ? _value.places
+          : places // ignore: cast_nullable_to_non_nullable
+              as List<PlaceSearch>?,
+      searchingPlaces: freezed == searchingPlaces
+          ? _value.searchingPlaces
+          : searchingPlaces // ignore: cast_nullable_to_non_nullable
+              as List<PlaceSearch>?,
+      location: freezed == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as LocationMap?,
       markers: freezed == markers
           ? _value.markers
           : markers // ignore: cast_nullable_to_non_nullable
               as List<Marker>?,
-      address: freezed == address
-          ? _value.address
-          : address // ignore: cast_nullable_to_non_nullable
+      currentAddress: freezed == currentAddress
+          ? _value.currentAddress
+          : currentAddress // ignore: cast_nullable_to_non_nullable
+              as String?,
+      selectedAddress: freezed == selectedAddress
+          ? _value.selectedAddress
+          : selectedAddress // ignore: cast_nullable_to_non_nullable
+              as String?,
+      error: freezed == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -418,7 +584,16 @@ abstract class _$$_GoogleCopyWith<$Res>
       __$$_GoogleCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool loading, List<Marker>? markers, String? address});
+  $Res call(
+      {bool loadingAddresses,
+      bool loadingAddress,
+      List<PlaceSearch>? places,
+      List<PlaceSearch>? searchingPlaces,
+      LocationMap? location,
+      List<Marker>? markers,
+      String? currentAddress,
+      String? selectedAddress,
+      String? error});
 }
 
 /// @nodoc
@@ -431,22 +606,52 @@ class __$$_GoogleCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? loading = null,
+    Object? loadingAddresses = null,
+    Object? loadingAddress = null,
+    Object? places = freezed,
+    Object? searchingPlaces = freezed,
+    Object? location = freezed,
     Object? markers = freezed,
-    Object? address = freezed,
+    Object? currentAddress = freezed,
+    Object? selectedAddress = freezed,
+    Object? error = freezed,
   }) {
     return _then(_$_Google(
-      loading: null == loading
-          ? _value.loading
-          : loading // ignore: cast_nullable_to_non_nullable
+      loadingAddresses: null == loadingAddresses
+          ? _value.loadingAddresses
+          : loadingAddresses // ignore: cast_nullable_to_non_nullable
               as bool,
+      loadingAddress: null == loadingAddress
+          ? _value.loadingAddress
+          : loadingAddress // ignore: cast_nullable_to_non_nullable
+              as bool,
+      places: freezed == places
+          ? _value._places
+          : places // ignore: cast_nullable_to_non_nullable
+              as List<PlaceSearch>?,
+      searchingPlaces: freezed == searchingPlaces
+          ? _value._searchingPlaces
+          : searchingPlaces // ignore: cast_nullable_to_non_nullable
+              as List<PlaceSearch>?,
+      location: freezed == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as LocationMap?,
       markers: freezed == markers
           ? _value._markers
           : markers // ignore: cast_nullable_to_non_nullable
               as List<Marker>?,
-      address: freezed == address
-          ? _value.address
-          : address // ignore: cast_nullable_to_non_nullable
+      currentAddress: freezed == currentAddress
+          ? _value.currentAddress
+          : currentAddress // ignore: cast_nullable_to_non_nullable
+              as String?,
+      selectedAddress: freezed == selectedAddress
+          ? _value.selectedAddress
+          : selectedAddress // ignore: cast_nullable_to_non_nullable
+              as String?,
+      error: freezed == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -456,12 +661,47 @@ class __$$_GoogleCopyWithImpl<$Res>
 
 class _$_Google implements _Google {
   const _$_Google(
-      {this.loading = false, final List<Marker>? markers, this.address})
-      : _markers = markers;
+      {this.loadingAddresses = false,
+      this.loadingAddress = false,
+      final List<PlaceSearch>? places,
+      final List<PlaceSearch>? searchingPlaces,
+      this.location,
+      final List<Marker>? markers,
+      this.currentAddress,
+      this.selectedAddress,
+      this.error})
+      : _places = places,
+        _searchingPlaces = searchingPlaces,
+        _markers = markers;
 
   @override
   @JsonKey()
-  final bool loading;
+  final bool loadingAddresses;
+  @override
+  @JsonKey()
+  final bool loadingAddress;
+  final List<PlaceSearch>? _places;
+  @override
+  List<PlaceSearch>? get places {
+    final value = _places;
+    if (value == null) return null;
+    if (_places is EqualUnmodifiableListView) return _places;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<PlaceSearch>? _searchingPlaces;
+  @override
+  List<PlaceSearch>? get searchingPlaces {
+    final value = _searchingPlaces;
+    if (value == null) return null;
+    if (_searchingPlaces is EqualUnmodifiableListView) return _searchingPlaces;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  final LocationMap? location;
   final List<Marker>? _markers;
   @override
   List<Marker>? get markers {
@@ -473,11 +713,15 @@ class _$_Google implements _Google {
   }
 
   @override
-  final String? address;
+  final String? currentAddress;
+  @override
+  final String? selectedAddress;
+  @override
+  final String? error;
 
   @override
   String toString() {
-    return 'GoogleMapState.google(loading: $loading, markers: $markers, address: $address)';
+    return 'GoogleMapState.google(loadingAddresses: $loadingAddresses, loadingAddress: $loadingAddress, places: $places, searchingPlaces: $searchingPlaces, location: $location, markers: $markers, currentAddress: $currentAddress, selectedAddress: $selectedAddress, error: $error)';
   }
 
   @override
@@ -485,14 +729,35 @@ class _$_Google implements _Google {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Google &&
-            (identical(other.loading, loading) || other.loading == loading) &&
+            (identical(other.loadingAddresses, loadingAddresses) ||
+                other.loadingAddresses == loadingAddresses) &&
+            (identical(other.loadingAddress, loadingAddress) ||
+                other.loadingAddress == loadingAddress) &&
+            const DeepCollectionEquality().equals(other._places, _places) &&
+            const DeepCollectionEquality()
+                .equals(other._searchingPlaces, _searchingPlaces) &&
+            (identical(other.location, location) ||
+                other.location == location) &&
             const DeepCollectionEquality().equals(other._markers, _markers) &&
-            (identical(other.address, address) || other.address == address));
+            (identical(other.currentAddress, currentAddress) ||
+                other.currentAddress == currentAddress) &&
+            (identical(other.selectedAddress, selectedAddress) ||
+                other.selectedAddress == selectedAddress) &&
+            (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, loading,
-      const DeepCollectionEquality().hash(_markers), address);
+  int get hashCode => Object.hash(
+      runtimeType,
+      loadingAddresses,
+      loadingAddress,
+      const DeepCollectionEquality().hash(_places),
+      const DeepCollectionEquality().hash(_searchingPlaces),
+      location,
+      const DeepCollectionEquality().hash(_markers),
+      currentAddress,
+      selectedAddress,
+      error);
 
   @JsonKey(ignore: true)
   @override
@@ -504,30 +769,67 @@ class _$_Google implements _Google {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            bool loading, List<Marker>? markers, String? address)
+            bool loadingAddresses,
+            bool loadingAddress,
+            List<PlaceSearch>? places,
+            List<PlaceSearch>? searchingPlaces,
+            LocationMap? location,
+            List<Marker>? markers,
+            String? currentAddress,
+            String? selectedAddress,
+            String? error)
         google,
   }) {
-    return google(loading, markers, address);
+    return google(loadingAddresses, loadingAddress, places, searchingPlaces,
+        location, markers, currentAddress, selectedAddress, error);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(bool loading, List<Marker>? markers, String? address)?
+    TResult? Function(
+            bool loadingAddresses,
+            bool loadingAddress,
+            List<PlaceSearch>? places,
+            List<PlaceSearch>? searchingPlaces,
+            LocationMap? location,
+            List<Marker>? markers,
+            String? currentAddress,
+            String? selectedAddress,
+            String? error)?
         google,
   }) {
-    return google?.call(loading, markers, address);
+    return google?.call(
+        loadingAddresses,
+        loadingAddress,
+        places,
+        searchingPlaces,
+        location,
+        markers,
+        currentAddress,
+        selectedAddress,
+        error);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool loading, List<Marker>? markers, String? address)?
+    TResult Function(
+            bool loadingAddresses,
+            bool loadingAddress,
+            List<PlaceSearch>? places,
+            List<PlaceSearch>? searchingPlaces,
+            LocationMap? location,
+            List<Marker>? markers,
+            String? currentAddress,
+            String? selectedAddress,
+            String? error)?
         google,
     required TResult orElse(),
   }) {
     if (google != null) {
-      return google(loading, markers, address);
+      return google(loadingAddresses, loadingAddress, places, searchingPlaces,
+          location, markers, currentAddress, selectedAddress, error);
     }
     return orElse();
   }
@@ -563,16 +865,34 @@ class _$_Google implements _Google {
 
 abstract class _Google implements GoogleMapState {
   const factory _Google(
-      {final bool loading,
+      {final bool loadingAddresses,
+      final bool loadingAddress,
+      final List<PlaceSearch>? places,
+      final List<PlaceSearch>? searchingPlaces,
+      final LocationMap? location,
       final List<Marker>? markers,
-      final String? address}) = _$_Google;
+      final String? currentAddress,
+      final String? selectedAddress,
+      final String? error}) = _$_Google;
 
   @override
-  bool get loading;
+  bool get loadingAddresses;
+  @override
+  bool get loadingAddress;
+  @override
+  List<PlaceSearch>? get places;
+  @override
+  List<PlaceSearch>? get searchingPlaces;
+  @override
+  LocationMap? get location;
   @override
   List<Marker>? get markers;
   @override
-  String? get address;
+  String? get currentAddress;
+  @override
+  String? get selectedAddress;
+  @override
+  String? get error;
   @override
   @JsonKey(ignore: true)
   _$$_GoogleCopyWith<_$_Google> get copyWith =>

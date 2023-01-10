@@ -6,12 +6,14 @@ import 'package:map_flutter/constants/assets.dart';
 import 'package:map_flutter/main_bloc/main_bloc.dart';
 import 'package:map_flutter/maps/google_map/bloc/google_map_bloc.dart';
 import 'package:map_flutter/maps/google_map/google_map_screen.dart';
-import 'package:map_flutter/repo/api_ip_address.dart';
+import 'package:map_flutter/repo/map_api.dart';
 import 'package:map_flutter/widgets/action_map_address.dart';
+import 'package:map_flutter/widgets/app_bottom_sheet/bottom_sheet_search_address.dart';
 import 'package:map_flutter/widgets/current_location_button.dart';
 import 'package:map_flutter/widgets/search_text_field.dart';
-
+import 'package:yandex_mapkit/yandex_mapkit.dart';
 void main() {
+  AndroidYandexMap.useAndroidViewSurface = false;
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
@@ -26,10 +28,54 @@ void main() {
     DeviceOrientation.portraitDown,
     DeviceOrientation.portraitUp,
   ]);
-  runApp(const MyApp());
+  runApp( MaterialApp(
+    title: 'Flutter Map',
+    theme: ThemeData(
+      primarySwatch: Colors.blue,
+    ),
+    home: const YandexApp(),
+  ),);
 }
 
 const String api = 'AIzaSyDOaiRTglZiVGsdvOq1hgK4wGKRhqdQRMY';
+const String apiYandex = '7a26197b-e302-4aec-a72a-2dea22ef0724';
+class YandexApp extends StatefulWidget {
+  const YandexApp({Key? key}) : super(key: key);
+
+  @override
+  State<YandexApp> createState() => _YandexAppState();
+}
+
+class _YandexAppState extends State<YandexApp> {
+  late YandexMapController controller;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        children: [
+
+          Expanded(child:YandexMap(
+            onMapCreated: (YandexMapController yandexMapController) async {
+              controller = yandexMapController;
+            },
+          )),
+        ],
+      ),
+    );
+  }
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -37,16 +83,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RepositoryProvider(
-      create: (context) => ApiIpAddress(),
+      create: (context) => MapApi(),
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
             create: (context) => MainBloc(
-              api: RepositoryProvider.of<ApiIpAddress>(context),
+              api: RepositoryProvider.of<MapApi>(context),
             )..add(const MainEvent.initLocation()),
           ),
           BlocProvider(
-            create: (context) => GoogleMapBloc(),
+            create: (context) => GoogleMapBloc(
+              api: RepositoryProvider.of<MapApi>(context),
+            ),
           ),
         ],
         child: MaterialApp(
@@ -69,13 +117,13 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       body: BlocConsumer<MainBloc, MainState>(
         listener: (context, state) {
-          state.maybeWhen(
+          state.maybeMap(
             orElse: () {},
-            map: (_, lat, long) {
+            map: (map) {
               BlocProvider.of<GoogleMapBloc>(context).add(
                 GoogleMapEvent.initAddress(
-                  lat: lat!,
-                  long: long!,
+                  lat: map.latitude!,
+                  long: map.longitude!,
                 ),
               );
             },
@@ -84,13 +132,13 @@ class MyHomePage extends StatelessWidget {
         builder: (context, state) {
           return Stack(
             children: [
-              state.maybeWhen(
+              state.maybeMap(
                 orElse: () => const SizedBox.shrink(),
-                loading: () => const Center(child: CircularProgressIndicator(color: Colors.blue)),
-                map: (type, latitude, longitude) {
+                loading: (_) => const Center(child: CircularProgressIndicator(color: Colors.blue)),
+                map: (map) {
                   return GoogleMapScreen(
-                    latitude: latitude,
-                    longitude: longitude,
+                    latitude: map.latitude,
+                    longitude: map.longitude,
                   );
                 },
               ),
@@ -101,9 +149,24 @@ class MyHomePage extends StatelessWidget {
                 child: Row(
                   children: [
                     Expanded(
-                      child: SearchTextField(
-                        hintText: 'Куда поедете?',
-                        onTap: () {},
+                      child: InkWell(
+                        onTap: () async {
+                          await showBottomSheetSearchAddress(context: context).then((value) {
+                            if (value != null && value.lat != null && value.lng != null) {
+                              BlocProvider.of<GoogleMapBloc>(context)
+                                  .add(GoogleMapEvent.initAddress(
+                                lat: value.lat!,
+                                long: value.lng!,
+                                selectionObject: true,
+                              ));
+                            }
+                          });
+                        },
+                        child: const SearchTextField(
+                          enabled: false,
+                          hintText: 'Куда поедете?',
+                          uniqueKey: '1',
+                        ),
                       ),
                     ),
                     const SizedBox(width: 16),
@@ -115,7 +178,7 @@ class MyHomePage extends StatelessWidget {
                 ),
               ),
               Positioned(
-                bottom: 16,
+                bottom: 28,
                 right: 16,
                 left: 16,
                 child: Column(

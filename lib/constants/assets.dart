@@ -11,6 +11,9 @@ class _Svg {
   final String navigationButton = 'assets/svg/navigation_button.svg';
   final String point = 'assets/svg/point.svg';
   final String mapSelection = 'assets/svg/map_selection.svg';
+  final String time = 'assets/svg/time.svg';
+  final String currentLocation = 'assets/svg/current_location.svg';
+  final String route = 'assets/svg/route.svg';
 }
 
 class _Images {

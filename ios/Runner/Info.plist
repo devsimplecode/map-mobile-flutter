@@ -49,5 +49,11 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>Чтобы Вы могли найти свой дом на карте</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>Чтобы Вы могли найти свой дом на карте</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Чтобы Вы могли найти свой дом на карте</string>
 </dict>
 </plist>

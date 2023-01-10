@@ -11,7 +11,8 @@ class CurrentLocationButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        BlocProvider.of<MainBloc>(context).add(const MainEvent.initLocation());
+        BlocProvider.of<MainBloc>(context)
+            .add(const MainEvent.initLocation(moveToCurrentLocation: true));
       },
       child: SvgPicture.asset(AppAssets.svg.navigationButton),
     );

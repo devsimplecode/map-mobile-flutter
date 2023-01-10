@@ -5,9 +5,8 @@ extension InitLocation on MainBloc {
     _InitLocation event,
     Emitter<MainState> emit,
   ) async {
-    emit(const MainState.loading());
+    if (!event.moveToCurrentLocation)  emit(const MainState.loading());
     Location location = Location();
-
     try {
       await location.getLocation().then((location) {
         latitude = location.latitude;
@@ -19,6 +18,7 @@ extension InitLocation on MainBloc {
       emit(MainState.map(
         latitude: latitude,
         longitude: longitude,
+        moveToCurrentLocation: event.moveToCurrentLocation,
       ));
     } catch (error) {
       var serviceEnabled = await location.serviceEnabled();
@@ -30,9 +30,11 @@ extension InitLocation on MainBloc {
       }
       var permissionGranted = await location.hasPermission();
       if (permissionGranted == PermissionStatus.denied) {
-        final response = await api.get();
+        final response = await api.getIpAddress();
         if (response.error != null) {
-          emit(const MainState.error());
+          emit(MainState.error(
+            error: response.error?.message,
+          ));
           return;
         }
         final location = response.data?.loc?.split(',');
@@ -41,6 +43,7 @@ extension InitLocation on MainBloc {
         emit(MainState.map(
           latitude: latitude,
           longitude: longitude,
+          moveToCurrentLocation: event.moveToCurrentLocation,
         ));
         return;
       }

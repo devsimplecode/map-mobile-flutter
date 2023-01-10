@@ -4,65 +4,23 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:map_flutter/constants/assets.dart';
+import 'package:map_flutter/models/location.dart';
+import 'package:map_flutter/models/place_search.dart';
+import 'package:map_flutter/repo/map_api.dart';
 
 part 'google_map_bloc.freezed.dart';
 
-class GoogleMapBloc extends Bloc<GoogleMapEvent, GoogleMapState> {
-  GoogleMapBloc() : super(const GoogleMapState.google()) {
-    on<_InitAddress>((event, emit) async {
-      emit(const GoogleMapState.google(loading: true));
-      List<Marker> markers = [];
-      List<Placemark> placeMarks = await placemarkFromCoordinates(
-        event.lat,
-        event.long,
-        localeIdentifier: 'en_US',
-      );
-      var iconPoint = await BitmapDescriptor.fromAssetImage(
-        const ImageConfiguration(),
-        AppAssets.images.point,
-      );
-      var iconLocation = await BitmapDescriptor.fromAssetImage(
-        const ImageConfiguration(),
-        AppAssets.images.location,
-      );
+part 'parts/init_address.dart';
 
-      if (event.selectionObject) {
-        markers.add(
-          Marker(
-            icon: iconLocation,
-            anchor: const Offset(0.5, 0.5),
-            markerId: const MarkerId('1'),
-            position: LatLng(event.currentLat ?? event.lat, event.currentLong ?? event.long),
-          ),
-        );
-        markers.add(
-          Marker(
-            icon: iconPoint,
-            anchor: const Offset(0.5, 0.5),
-            markerId: const MarkerId('2'),
-            position: LatLng(event.lat, event.long),
-          ),
-        );
-      } else {
-        markers.add(
-          Marker(
-            icon: iconLocation,
-            anchor: const Offset(0.5, 0.5),
-            markerId: const MarkerId('1'),
-            position: LatLng(event.currentLat ?? event.lat, event.currentLong ?? event.long),
-          ),
-        );
-      }
-      emit(
-        GoogleMapState.google(
-          loading: false,
-          address:
-              '${placeMarks.first.street}, ${placeMarks.first.administrativeArea}, ${placeMarks.first.subAdministrativeArea}, ${placeMarks.first.country}',
-          markers: markers,
-        ),
-      );
-    });
+part 'parts/search_address.dart';
+
+class GoogleMapBloc extends Bloc<GoogleMapEvent, GoogleMapState> {
+  GoogleMapBloc({required this.api}) : super(const GoogleMapState.google()) {
+    on<_InitAddress>(_initAddress);
+    on<_SearchAddress>(_searchAddress);
   }
+
+  final MapApi api;
 }
 
 @freezed
@@ -74,13 +32,23 @@ class GoogleMapEvent with _$GoogleMapEvent {
     double? currentLong,
     @Default(false) bool selectionObject,
   }) = _InitAddress;
+
+  const factory GoogleMapEvent.searchAddress({
+    required String search,
+  }) = _SearchAddress;
 }
 
 @freezed
 class GoogleMapState with _$GoogleMapState {
   const factory GoogleMapState.google({
-    @Default(false) bool loading,
+    @Default(false) bool loadingAddresses,
+    @Default(false) bool loadingAddress,
+    List<PlaceSearch>? places,
+    List<PlaceSearch>? searchingPlaces,
+    LocationMap? location,
     List<Marker>? markers,
-    String? address,
+    String? currentAddress,
+    String? selectedAddress,
+    String? error,
   }) = _Google;
 }
