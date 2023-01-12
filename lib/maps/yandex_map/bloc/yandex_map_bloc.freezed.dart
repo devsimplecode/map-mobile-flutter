@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'google_map_bloc.dart';
+part of 'yandex_map_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$GoogleMapEvent {
+mixin _$YandexMapEvent {
   String get search => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
@@ -51,23 +51,23 @@ mixin _$GoogleMapEvent {
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $GoogleMapEventCopyWith<GoogleMapEvent> get copyWith =>
+  $YandexMapEventCopyWith<YandexMapEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $GoogleMapEventCopyWith<$Res> {
-  factory $GoogleMapEventCopyWith(
-          GoogleMapEvent value, $Res Function(GoogleMapEvent) then) =
-      _$GoogleMapEventCopyWithImpl<$Res, GoogleMapEvent>;
+abstract class $YandexMapEventCopyWith<$Res> {
+  factory $YandexMapEventCopyWith(
+          YandexMapEvent value, $Res Function(YandexMapEvent) then) =
+      _$YandexMapEventCopyWithImpl<$Res, YandexMapEvent>;
   @useResult
   $Res call({String search});
 }
 
 /// @nodoc
-class _$GoogleMapEventCopyWithImpl<$Res, $Val extends GoogleMapEvent>
-    implements $GoogleMapEventCopyWith<$Res> {
-  _$GoogleMapEventCopyWithImpl(this._value, this._then);
+class _$YandexMapEventCopyWithImpl<$Res, $Val extends YandexMapEvent>
+    implements $YandexMapEventCopyWith<$Res> {
+  _$YandexMapEventCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -90,7 +90,7 @@ class _$GoogleMapEventCopyWithImpl<$Res, $Val extends GoogleMapEvent>
 
 /// @nodoc
 abstract class _$$_SearchAddressCopyWith<$Res>
-    implements $GoogleMapEventCopyWith<$Res> {
+    implements $YandexMapEventCopyWith<$Res> {
   factory _$$_SearchAddressCopyWith(
           _$_SearchAddress value, $Res Function(_$_SearchAddress) then) =
       __$$_SearchAddressCopyWithImpl<$Res>;
@@ -101,7 +101,7 @@ abstract class _$$_SearchAddressCopyWith<$Res>
 
 /// @nodoc
 class __$$_SearchAddressCopyWithImpl<$Res>
-    extends _$GoogleMapEventCopyWithImpl<$Res, _$_SearchAddress>
+    extends _$YandexMapEventCopyWithImpl<$Res, _$_SearchAddress>
     implements _$$_SearchAddressCopyWith<$Res> {
   __$$_SearchAddressCopyWithImpl(
       _$_SearchAddress _value, $Res Function(_$_SearchAddress) _then)
@@ -131,7 +131,7 @@ class _$_SearchAddress implements _SearchAddress {
 
   @override
   String toString() {
-    return 'GoogleMapEvent.searchAddress(search: $search)';
+    return 'YandexMapEvent.searchAddress(search: $search)';
   }
 
   @override
@@ -208,7 +208,7 @@ class _$_SearchAddress implements _SearchAddress {
   }
 }
 
-abstract class _SearchAddress implements GoogleMapEvent {
+abstract class _SearchAddress implements YandexMapEvent {
   const factory _SearchAddress({required final String search}) =
       _$_SearchAddress;
 
@@ -221,60 +221,60 @@ abstract class _SearchAddress implements GoogleMapEvent {
 }
 
 /// @nodoc
-mixin _$GoogleMapState {
-  List<PlaceSearch>? get places => throw _privateConstructorUsedError;
+mixin _$YandexMapState {
+  List<Place>? get places => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<PlaceSearch>? places, String? error) google,
+    required TResult Function(List<Place>? places, String? error) yandex,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<PlaceSearch>? places, String? error)? google,
+    TResult? Function(List<Place>? places, String? error)? yandex,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<PlaceSearch>? places, String? error)? google,
+    TResult Function(List<Place>? places, String? error)? yandex,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Google value) google,
+    required TResult Function(_Yandex value) yandex,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Google value)? google,
+    TResult? Function(_Yandex value)? yandex,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Google value)? google,
+    TResult Function(_Yandex value)? yandex,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $GoogleMapStateCopyWith<GoogleMapState> get copyWith =>
+  $YandexMapStateCopyWith<YandexMapState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $GoogleMapStateCopyWith<$Res> {
-  factory $GoogleMapStateCopyWith(
-          GoogleMapState value, $Res Function(GoogleMapState) then) =
-      _$GoogleMapStateCopyWithImpl<$Res, GoogleMapState>;
+abstract class $YandexMapStateCopyWith<$Res> {
+  factory $YandexMapStateCopyWith(
+          YandexMapState value, $Res Function(YandexMapState) then) =
+      _$YandexMapStateCopyWithImpl<$Res, YandexMapState>;
   @useResult
-  $Res call({List<PlaceSearch>? places, String? error});
+  $Res call({List<Place>? places, String? error});
 }
 
 /// @nodoc
-class _$GoogleMapStateCopyWithImpl<$Res, $Val extends GoogleMapState>
-    implements $GoogleMapStateCopyWith<$Res> {
-  _$GoogleMapStateCopyWithImpl(this._value, this._then);
+class _$YandexMapStateCopyWithImpl<$Res, $Val extends YandexMapState>
+    implements $YandexMapStateCopyWith<$Res> {
+  _$YandexMapStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -291,7 +291,7 @@ class _$GoogleMapStateCopyWithImpl<$Res, $Val extends GoogleMapState>
       places: freezed == places
           ? _value.places
           : places // ignore: cast_nullable_to_non_nullable
-              as List<PlaceSearch>?,
+              as List<Place>?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -301,20 +301,20 @@ class _$GoogleMapStateCopyWithImpl<$Res, $Val extends GoogleMapState>
 }
 
 /// @nodoc
-abstract class _$$_GoogleCopyWith<$Res>
-    implements $GoogleMapStateCopyWith<$Res> {
-  factory _$$_GoogleCopyWith(_$_Google value, $Res Function(_$_Google) then) =
-      __$$_GoogleCopyWithImpl<$Res>;
+abstract class _$$_YandexCopyWith<$Res>
+    implements $YandexMapStateCopyWith<$Res> {
+  factory _$$_YandexCopyWith(_$_Yandex value, $Res Function(_$_Yandex) then) =
+      __$$_YandexCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<PlaceSearch>? places, String? error});
+  $Res call({List<Place>? places, String? error});
 }
 
 /// @nodoc
-class __$$_GoogleCopyWithImpl<$Res>
-    extends _$GoogleMapStateCopyWithImpl<$Res, _$_Google>
-    implements _$$_GoogleCopyWith<$Res> {
-  __$$_GoogleCopyWithImpl(_$_Google _value, $Res Function(_$_Google) _then)
+class __$$_YandexCopyWithImpl<$Res>
+    extends _$YandexMapStateCopyWithImpl<$Res, _$_Yandex>
+    implements _$$_YandexCopyWith<$Res> {
+  __$$_YandexCopyWithImpl(_$_Yandex _value, $Res Function(_$_Yandex) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -323,11 +323,11 @@ class __$$_GoogleCopyWithImpl<$Res>
     Object? places = freezed,
     Object? error = freezed,
   }) {
-    return _then(_$_Google(
+    return _then(_$_Yandex(
       places: freezed == places
           ? _value._places
           : places // ignore: cast_nullable_to_non_nullable
-              as List<PlaceSearch>?,
+              as List<Place>?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -338,13 +338,12 @@ class __$$_GoogleCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Google implements _Google {
-  const _$_Google({final List<PlaceSearch>? places, this.error})
-      : _places = places;
+class _$_Yandex implements _Yandex {
+  const _$_Yandex({final List<Place>? places, this.error}) : _places = places;
 
-  final List<PlaceSearch>? _places;
+  final List<Place>? _places;
   @override
-  List<PlaceSearch>? get places {
+  List<Place>? get places {
     final value = _places;
     if (value == null) return null;
     if (_places is EqualUnmodifiableListView) return _places;
@@ -357,14 +356,14 @@ class _$_Google implements _Google {
 
   @override
   String toString() {
-    return 'GoogleMapState.google(places: $places, error: $error)';
+    return 'YandexMapState.yandex(places: $places, error: $error)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Google &&
+            other is _$_Yandex &&
             const DeepCollectionEquality().equals(other._places, _places) &&
             (identical(other.error, error) || other.error == error));
   }
@@ -376,33 +375,33 @@ class _$_Google implements _Google {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_GoogleCopyWith<_$_Google> get copyWith =>
-      __$$_GoogleCopyWithImpl<_$_Google>(this, _$identity);
+  _$$_YandexCopyWith<_$_Yandex> get copyWith =>
+      __$$_YandexCopyWithImpl<_$_Yandex>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<PlaceSearch>? places, String? error) google,
+    required TResult Function(List<Place>? places, String? error) yandex,
   }) {
-    return google(places, error);
+    return yandex(places, error);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<PlaceSearch>? places, String? error)? google,
+    TResult? Function(List<Place>? places, String? error)? yandex,
   }) {
-    return google?.call(places, error);
+    return yandex?.call(places, error);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<PlaceSearch>? places, String? error)? google,
+    TResult Function(List<Place>? places, String? error)? yandex,
     required TResult orElse(),
   }) {
-    if (google != null) {
-      return google(places, error);
+    if (yandex != null) {
+      return yandex(places, error);
     }
     return orElse();
   }
@@ -410,42 +409,42 @@ class _$_Google implements _Google {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Google value) google,
+    required TResult Function(_Yandex value) yandex,
   }) {
-    return google(this);
+    return yandex(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Google value)? google,
+    TResult? Function(_Yandex value)? yandex,
   }) {
-    return google?.call(this);
+    return yandex?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Google value)? google,
+    TResult Function(_Yandex value)? yandex,
     required TResult orElse(),
   }) {
-    if (google != null) {
-      return google(this);
+    if (yandex != null) {
+      return yandex(this);
     }
     return orElse();
   }
 }
 
-abstract class _Google implements GoogleMapState {
-  const factory _Google(
-      {final List<PlaceSearch>? places, final String? error}) = _$_Google;
+abstract class _Yandex implements YandexMapState {
+  const factory _Yandex({final List<Place>? places, final String? error}) =
+      _$_Yandex;
 
   @override
-  List<PlaceSearch>? get places;
+  List<Place>? get places;
   @override
   String? get error;
   @override
   @JsonKey(ignore: true)
-  _$$_GoogleCopyWith<_$_Google> get copyWith =>
+  _$$_YandexCopyWith<_$_Yandex> get copyWith =>
       throw _privateConstructorUsedError;
 }

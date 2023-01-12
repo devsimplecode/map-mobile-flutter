@@ -1,11 +1,24 @@
-
 import 'package:map_flutter/models/location.dart';
 
 class Geometry {
-  final LocationMap? location;
+  final LocationMap? locationGoogle;
+  final LocationMap? locationYandex;
+  final LocationMap? locationOsm;
 
-  Geometry({this.location});
+  Geometry({
+    this.locationGoogle,
+    this.locationYandex,
+    this.locationOsm,
+  });
 
-  Geometry.fromJson(Map<dynamic,dynamic> parsedJson)
-      :location = LocationMap.fromJson(parsedJson['location']);
+  factory Geometry.fromJsonGoogle(Map<dynamic, dynamic> parsedJson) =>
+      Geometry(locationGoogle: LocationMap.fromJsonGoogle(parsedJson['location']));
+
+  factory Geometry.fromJsonYandex(Map<dynamic, dynamic> parsedJson) =>
+      Geometry(locationYandex: LocationMap.fromJsonYandex(parsedJson['coordinates']));
+
+  @override
+  String toString() {
+    return 'Geometry{locationGoogle: $locationGoogle, locationYandex: $locationYandex, locationOsm: $locationOsm}';
+  }
 }

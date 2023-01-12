@@ -1,5 +1,7 @@
 import UIKit
 import Flutter
+import GoogleMaps
+import YandexMapsMobile
 
 @UIApplicationMain
 @objc class AppDelegate: FlutterAppDelegate {
@@ -7,13 +9,17 @@ import Flutter
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
-    let dartDefinesString = Bundle.main.infoDictionary!["DART_DEFINES"] as! String
-    var dartDefinesDictionary = [String:String]()
-    for definedValue in dartDefinesString.components(separatedBy: ",") {
-      let decoded = String(data: Data(base64Encoded: definedValue)!, encoding: .utf8)!
-      let values = decoded.components(separatedBy: "=")
-      dartDefinesDictionary[values[0]] = values[1]
-    }
+    if let path = Bundle.main.path(forResource: "map-keys", ofType: "plist") {
+       let nsDictionary = NSDictionary(contentsOfFile: path)
+
+       if let googleApiKey = nsDictionary?["GOOGLE_API_KEY"] as? String {
+           print("AppDelegate: GOOGLE_API_KEY found")
+           GMSServices.provideAPIKey(googleApiKey)
+       }
+       if let yandexApiKey = nsDictionary?["YANDEX_API_KEY"] as? String {
+           print("AppDelegate: YANDEX_API_KEY found")
+           YMKMapKit.setApiKey(yandexApiKey)
+       }
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }

@@ -47,6 +47,8 @@ dependencies:
   logger: ^1.1.0
   geocoding: ^2.0.5
   yandex_mapkit: ^3.2.0
+  shared_preferences: ^2.0.15
+  flutter_osm_plugin: ^0.42.0
 
 dev_dependencies:
   flutter_test:

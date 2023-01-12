@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:map_flutter/constants/assets.dart';
-import 'package:map_flutter/maps/google_map/bloc/google_map_bloc.dart';
+import 'package:map_flutter/main_bloc/address_bloc/address_bloc.dart';
 
 class ActionMapAddress extends StatelessWidget {
   const ActionMapAddress({Key? key}) : super(key: key);
@@ -16,13 +16,13 @@ class ActionMapAddress extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         color: Colors.white,
       ),
-      child: BlocBuilder<GoogleMapBloc, GoogleMapState>(
+      child: BlocBuilder<AddressBloc, AddressState>(
         builder: (context, state) {
           return state.map(
-            google: (google) {
+            address: (address) {
               return Column(
                 children: [
-                  if (google.selectedAddress?.isEmpty ?? true)
+                  if (address.selectedAddress?.isEmpty ?? true)
                     const Text(
                       'Ваше текущее местоположение:',
                       style: TextStyle(
@@ -31,7 +31,7 @@ class ActionMapAddress extends StatelessWidget {
                       ),
                     ),
                   const SizedBox(height: 8),
-                  google.loadingAddress
+                  address.loadingAddress
                       ? const Center(child: CircularProgressIndicator(color: Colors.blue))
                       : Column(
                           children: [
@@ -41,7 +41,7 @@ class ActionMapAddress extends StatelessWidget {
                                 const SizedBox(width: 12),
                                 Flexible(
                                   child: Text(
-                                    google.currentAddress ?? '',
+                                    address.currentAddress ?? '',
                                     maxLines: 2,
                                     style: const TextStyle(
                                       fontSize: 12,
@@ -52,7 +52,7 @@ class ActionMapAddress extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            if (google.selectedAddress?.isNotEmpty ?? false) ...[
+                            if (address.selectedAddress?.isNotEmpty ?? false) ...[
                               const SizedBox(height: 16),
                               Row(
                                 children: [
@@ -60,7 +60,7 @@ class ActionMapAddress extends StatelessWidget {
                                   const SizedBox(width: 12),
                                   Flexible(
                                     child: Text(
-                                      google.selectedAddress ?? '',
+                                      address.selectedAddress ?? '',
                                       maxLines: 2,
                                       style: const TextStyle(
                                         fontSize: 12,

@@ -47,7 +47,7 @@ class MapApi {
     }
   }
 
-  Future<RequestResponse<List<PlaceSearch>>> getAutoComplete(
+  Future<RequestResponse<List<PlaceSearch>>> getAddressesGoogle(
     String search, {
     Map<String, dynamic>? queryParameters,
     Map<String, String>? headers,
@@ -76,7 +76,7 @@ class MapApi {
     }
   }
 
-  Future<RequestResponse<Place>> getPlace(
+  Future<RequestResponse<Place>> getPlaceGoogle(
     String placeId, {
     Map<String, dynamic>? queryParameters,
     Map<String, String>? headers,
@@ -93,7 +93,7 @@ class MapApi {
       );
       var jsonResult = response.data['result'] as Map<String, dynamic>;
       return RequestResponse(
-        data: Place.fromJson(jsonResult),
+        data: Place.fromJsonGoogle(jsonResult),
       );
     } on DioError catch (error) {
       return RequestResponse(
@@ -125,7 +125,36 @@ class MapApi {
       var json = convert.jsonDecode(response.data);
       var jsonResults = json['results'] as List;
       return RequestResponse(
-        data: jsonResults.map((place) => Place.fromJson(place)).toList(),
+        data: jsonResults.map((place) => Place.fromJsonGoogle(place)).toList(),
+      );
+    } on DioError catch (error) {
+      return RequestResponse(
+        error: AppError(
+          message: error.response?.statusMessage ?? '',
+          code: error.response?.statusCode,
+        ),
+      );
+    }
+  }
+
+  Future<RequestResponse<List<Place>>> getAddressesYandex(
+    String search, {
+    Map<String, dynamic>? queryParameters,
+    Map<String, String>? headers,
+  }) async {
+    try {
+      final response = await _dio.get(
+        'https://search-maps.yandex.ru/v1/?text=$search&type=biz&lang=en_US&apikey=${Environment.yandexApiKeyPlaces}',
+        queryParameters: queryParameters,
+        options: Options(
+          headers: headers,
+          sendTimeout: _options.sendTimeout,
+          receiveTimeout: _options.receiveTimeout,
+        ),
+      );
+      var jsonResults = response.data['features'] as List;
+      return RequestResponse(
+        data: jsonResults.map((place) => Place.fromJsonYandex(place)).toList(),
       );
     } on DioError catch (error) {
       return RequestResponse(

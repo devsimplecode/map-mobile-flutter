@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:map_flutter/widgets/debouncer.dart';
 
 class SearchTextField extends StatelessWidget {
-  const SearchTextField({
+  SearchTextField({
     Key? key,
-    this.onTap,
     this.onChanged,
     this.enabled = true,
+    this.onFieldSubmitted,
     required this.hintText,
     required this.uniqueKey,
     this.borderColor = Colors.white,
@@ -14,8 +15,9 @@ class SearchTextField extends StatelessWidget {
   final String hintText;
   final Color borderColor;
   final String uniqueKey;
-  final void Function()? onTap;
-  final void Function(String)? onChanged;
+  final Function(String)? onChanged;
+  final Function(String)? onFieldSubmitted;
+  final Debounce debounce = Debounce(duration: const Duration(seconds: 1));
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +27,12 @@ class SearchTextField extends StatelessWidget {
     );
     return TextFormField(
       key: ValueKey(uniqueKey),
-      onTap: onTap,
-      onChanged: onChanged,
+      onChanged: (value) {
+        debounce(() {
+          onChanged?.call(value);
+        });
+      },
+      onFieldSubmitted: onFieldSubmitted,
       decoration: InputDecoration(
         hintText: hintText,
         enabled: enabled,
