@@ -5,10 +5,6 @@ import 'package:map_flutter/constants/assets.dart';
 import 'package:map_flutter/main_bloc/address_bloc/address_bloc.dart';
 import 'package:map_flutter/main_bloc/location_bloc/location_bloc.dart';
 
-ValueNotifier<MarkersOsm> removeMarkerOsm = ValueNotifier(MarkersOsm.init);
-
-enum MarkersOsm { init, currentLocation, goLocation, addMarker }
-
 class OsmAppMap extends StatefulWidget {
   const OsmAppMap({
     Key? key,
@@ -23,39 +19,28 @@ class OsmAppMap extends StatefulWidget {
 }
 
 class _OsmAppMapState extends State<OsmAppMap> {
-  late ValueNotifier<MapController> markerController;
+  late MapController markerController;
   double? lat;
   double? lng;
 
   @override
   void initState() {
-    markerController = ValueNotifier(MapController(
+    markerController = MapController(
       initMapWithUserPosition: false,
       initPosition: GeoPoint(
         latitude: widget.latitude!,
         longitude: widget.longitude!,
       ),
-    ));
-
-    removeMarkerOsm.addListener(() async {
-      if (removeMarkerOsm.value == MarkersOsm.currentLocation) {
-        await moveToCurrentLocation();
-      }
-    });
-    markerController.value.listenerMapSingleTapping.addListener(() async {
-      if (markerController.value.listenerMapSingleTapping.value != null) {
-        initAddress(markerController.value.listenerMapSingleTapping.value!);
+    );
+    markerController.listenerMapSingleTapping.addListener(() async {
+      if (markerController.listenerMapSingleTapping.value != null) {
+        initAddress(markerController.listenerMapSingleTapping.value!);
       }
     });
     super.initState();
   }
 
   void initAddress(GeoPoint map) {
-    if (removeMarkerOsm.value == MarkersOsm.currentLocation) {
-      removeMarkerOsm.value = MarkersOsm.addMarker;
-    } else {
-      removeMarkerOsm.value = MarkersOsm.goLocation;
-    }
     BlocProvider.of<AddressBloc>(context).add(AddressEvent.initAddress(
       lat: map.latitude,
       lng: map.longitude,
@@ -66,13 +51,7 @@ class _OsmAppMapState extends State<OsmAppMap> {
   }
 
   Future<void> moveToCurrentLocation() async {
-    markerController.value.removeMarker(
-      GeoPoint(
-        latitude: lat!,
-        longitude: lng!,
-      ),
-    );
-    markerController.value.goToLocation(
+    markerController.goToLocation(
       GeoPoint(
         latitude: widget.latitude!,
         longitude: widget.longitude!,
@@ -84,8 +63,8 @@ class _OsmAppMapState extends State<OsmAppMap> {
     required double latitude,
     required double longitude,
   }) async {
-    if (lat != null && lng != null && removeMarkerOsm.value != MarkersOsm.addMarker) {
-      markerController.value.changeLocationMarker(
+    if (lat != null && lng != null) {
+      markerController.changeLocationMarker(
         oldLocation: GeoPoint(
           latitude: lat!,
           longitude: lng!,
@@ -96,14 +75,14 @@ class _OsmAppMapState extends State<OsmAppMap> {
         ),
       );
     } else {
-      markerController.value.addMarker(
+      await markerController.addMarker(
         GeoPoint(
           latitude: latitude,
           longitude: longitude,
         ),
       );
     }
-    markerController.value.goToLocation(
+    markerController.goToLocation(
       GeoPoint(
         latitude: latitude,
         longitude: longitude,
@@ -121,14 +100,14 @@ class _OsmAppMapState extends State<OsmAppMap> {
           orElse: () {},
           map: (osm) async {
             if (osm.moveToCurrentLocation) {
-              removeMarkerOsm.value = MarkersOsm.currentLocation;
+              await moveToCurrentLocation();
             }
           },
         );
       },
       child: BlocConsumer<AddressBloc, AddressState>(
         listener: (context, state) async {
-          if (state.setMarkersOsm && removeMarkerOsm.value != MarkersOsm.currentLocation) {
+          if (state.setMarkersOsm) {
             await goToLocation(
               latitude: state.location!.lat!,
               longitude: state.location!.lng!,
@@ -137,11 +116,11 @@ class _OsmAppMapState extends State<OsmAppMap> {
         },
         builder: (context, state) {
           return OSMFlutter(
-            controller: markerController.value,
+            controller: markerController,
             initZoom: 18,
             stepZoom: 5,
             onMapIsReady: (value) async {
-              await markerController.value.enableTracking();
+              await markerController.enableTracking();
             },
             staticPoints: [
               StaticPositionGeoPoint(

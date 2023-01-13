@@ -14,7 +14,6 @@ import 'package:map_flutter/widgets/action_map_address.dart';
 import 'package:map_flutter/widgets/current_location_button.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
 
-
 void main() {
   AndroidYandexMap.useAndroidViewSurface = false;
   WidgetsFlutterBinding.ensureInitialized();
@@ -67,6 +66,7 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) => OsmMapBloc(),
           ),
+
         ],
         child: MaterialApp(
           title: 'Flutter Map',

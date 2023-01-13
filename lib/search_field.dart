@@ -6,7 +6,6 @@ import 'package:map_flutter/main_bloc/address_bloc/address_bloc.dart';
 import 'package:map_flutter/main_bloc/location_bloc/location_bloc.dart';
 import 'package:map_flutter/main_bloc/type_map_bloc/type_map_bloc.dart';
 import 'package:map_flutter/maps/google_map/widgets/bottom_sheet.dart';
-import 'package:map_flutter/maps/osm_map/osm_app_map.dart';
 import 'package:map_flutter/maps/osm_map/widgets/bottom_sheet.dart';
 import 'package:map_flutter/maps/yandex_map/widgets/bottom_sheet.dart';
 import 'package:map_flutter/widgets/app_bottom_sheet/bottom_sheet_select_map.dart';
@@ -23,7 +22,7 @@ class SearchField extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: InkWell(
+          child: GestureDetector(
             onTap: () async {
               if (mapsType == MapsType.google) {
                 await showBottomSheetSearchGoogleAddress(context: context).then((value) {
@@ -54,7 +53,6 @@ class SearchField extends StatelessWidget {
               if (mapsType == MapsType.osm) {
                 await showBottomSheetSearchOsmAddress(context: context).then((value) {
                   if (value != null && value.lat != null && value.lng != null) {
-                    removeMarkerOsm.value = MarkersOsm.goLocation;
                     BlocProvider.of<AddressBloc>(context).add(AddressEvent.initAddress(
                       lat: value.lat!,
                       lng: value.lng!,
