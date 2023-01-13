@@ -356,6 +356,8 @@ mixin _$AddressState {
       throw _privateConstructorUsedError;
   String? get currentAddress => throw _privateConstructorUsedError;
   String? get selectedAddress => throw _privateConstructorUsedError;
+  double? get distanceInMeters => throw _privateConstructorUsedError;
+  double? get bearing => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
@@ -368,6 +370,8 @@ mixin _$AddressState {
             List<PlacemarkMapObject>? markersYandex,
             String? currentAddress,
             String? selectedAddress,
+            double? distanceInMeters,
+            double? bearing,
             String? error)
         address,
   }) =>
@@ -383,6 +387,8 @@ mixin _$AddressState {
             List<PlacemarkMapObject>? markersYandex,
             String? currentAddress,
             String? selectedAddress,
+            double? distanceInMeters,
+            double? bearing,
             String? error)?
         address,
   }) =>
@@ -398,6 +404,8 @@ mixin _$AddressState {
             List<PlacemarkMapObject>? markersYandex,
             String? currentAddress,
             String? selectedAddress,
+            double? distanceInMeters,
+            double? bearing,
             String? error)?
         address,
     required TResult orElse(),
@@ -440,6 +448,8 @@ abstract class $AddressStateCopyWith<$Res> {
       List<PlacemarkMapObject>? markersYandex,
       String? currentAddress,
       String? selectedAddress,
+      double? distanceInMeters,
+      double? bearing,
       String? error});
 }
 
@@ -464,6 +474,8 @@ class _$AddressStateCopyWithImpl<$Res, $Val extends AddressState>
     Object? markersYandex = freezed,
     Object? currentAddress = freezed,
     Object? selectedAddress = freezed,
+    Object? distanceInMeters = freezed,
+    Object? bearing = freezed,
     Object? error = freezed,
   }) {
     return _then(_value.copyWith(
@@ -499,6 +511,14 @@ class _$AddressStateCopyWithImpl<$Res, $Val extends AddressState>
           ? _value.selectedAddress
           : selectedAddress // ignore: cast_nullable_to_non_nullable
               as String?,
+      distanceInMeters: freezed == distanceInMeters
+          ? _value.distanceInMeters
+          : distanceInMeters // ignore: cast_nullable_to_non_nullable
+              as double?,
+      bearing: freezed == bearing
+          ? _value.bearing
+          : bearing // ignore: cast_nullable_to_non_nullable
+              as double?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -524,6 +544,8 @@ abstract class _$$_AddressCopyWith<$Res>
       List<PlacemarkMapObject>? markersYandex,
       String? currentAddress,
       String? selectedAddress,
+      double? distanceInMeters,
+      double? bearing,
       String? error});
 }
 
@@ -545,6 +567,8 @@ class __$$_AddressCopyWithImpl<$Res>
     Object? markersYandex = freezed,
     Object? currentAddress = freezed,
     Object? selectedAddress = freezed,
+    Object? distanceInMeters = freezed,
+    Object? bearing = freezed,
     Object? error = freezed,
   }) {
     return _then(_$_Address(
@@ -580,6 +604,14 @@ class __$$_AddressCopyWithImpl<$Res>
           ? _value.selectedAddress
           : selectedAddress // ignore: cast_nullable_to_non_nullable
               as String?,
+      distanceInMeters: freezed == distanceInMeters
+          ? _value.distanceInMeters
+          : distanceInMeters // ignore: cast_nullable_to_non_nullable
+              as double?,
+      bearing: freezed == bearing
+          ? _value.bearing
+          : bearing // ignore: cast_nullable_to_non_nullable
+              as double?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -600,6 +632,8 @@ class _$_Address implements _Address {
       final List<PlacemarkMapObject>? markersYandex,
       this.currentAddress,
       this.selectedAddress,
+      this.distanceInMeters,
+      this.bearing,
       this.error})
       : _markersGoogle = markersGoogle,
         _markersYandex = markersYandex;
@@ -640,11 +674,15 @@ class _$_Address implements _Address {
   @override
   final String? selectedAddress;
   @override
+  final double? distanceInMeters;
+  @override
+  final double? bearing;
+  @override
   final String? error;
 
   @override
   String toString() {
-    return 'AddressState.address(loadingAddress: $loadingAddress, setMarkersOsm: $setMarkersOsm, changeMarkersOsm: $changeMarkersOsm, location: $location, markersGoogle: $markersGoogle, markersYandex: $markersYandex, currentAddress: $currentAddress, selectedAddress: $selectedAddress, error: $error)';
+    return 'AddressState.address(loadingAddress: $loadingAddress, setMarkersOsm: $setMarkersOsm, changeMarkersOsm: $changeMarkersOsm, location: $location, markersGoogle: $markersGoogle, markersYandex: $markersYandex, currentAddress: $currentAddress, selectedAddress: $selectedAddress, distanceInMeters: $distanceInMeters, bearing: $bearing, error: $error)';
   }
 
   @override
@@ -668,6 +706,9 @@ class _$_Address implements _Address {
                 other.currentAddress == currentAddress) &&
             (identical(other.selectedAddress, selectedAddress) ||
                 other.selectedAddress == selectedAddress) &&
+            (identical(other.distanceInMeters, distanceInMeters) ||
+                other.distanceInMeters == distanceInMeters) &&
+            (identical(other.bearing, bearing) || other.bearing == bearing) &&
             (identical(other.error, error) || other.error == error));
   }
 
@@ -682,6 +723,8 @@ class _$_Address implements _Address {
       const DeepCollectionEquality().hash(_markersYandex),
       currentAddress,
       selectedAddress,
+      distanceInMeters,
+      bearing,
       error);
 
   @JsonKey(ignore: true)
@@ -702,11 +745,23 @@ class _$_Address implements _Address {
             List<PlacemarkMapObject>? markersYandex,
             String? currentAddress,
             String? selectedAddress,
+            double? distanceInMeters,
+            double? bearing,
             String? error)
         address,
   }) {
-    return address(loadingAddress, setMarkersOsm, changeMarkersOsm, location,
-        markersGoogle, markersYandex, currentAddress, selectedAddress, error);
+    return address(
+        loadingAddress,
+        setMarkersOsm,
+        changeMarkersOsm,
+        location,
+        markersGoogle,
+        markersYandex,
+        currentAddress,
+        selectedAddress,
+        distanceInMeters,
+        bearing,
+        error);
   }
 
   @override
@@ -721,6 +776,8 @@ class _$_Address implements _Address {
             List<PlacemarkMapObject>? markersYandex,
             String? currentAddress,
             String? selectedAddress,
+            double? distanceInMeters,
+            double? bearing,
             String? error)?
         address,
   }) {
@@ -733,6 +790,8 @@ class _$_Address implements _Address {
         markersYandex,
         currentAddress,
         selectedAddress,
+        distanceInMeters,
+        bearing,
         error);
   }
 
@@ -748,13 +807,25 @@ class _$_Address implements _Address {
             List<PlacemarkMapObject>? markersYandex,
             String? currentAddress,
             String? selectedAddress,
+            double? distanceInMeters,
+            double? bearing,
             String? error)?
         address,
     required TResult orElse(),
   }) {
     if (address != null) {
-      return address(loadingAddress, setMarkersOsm, changeMarkersOsm, location,
-          markersGoogle, markersYandex, currentAddress, selectedAddress, error);
+      return address(
+          loadingAddress,
+          setMarkersOsm,
+          changeMarkersOsm,
+          location,
+          markersGoogle,
+          markersYandex,
+          currentAddress,
+          selectedAddress,
+          distanceInMeters,
+          bearing,
+          error);
     }
     return orElse();
   }
@@ -798,6 +869,8 @@ abstract class _Address implements AddressState {
       final List<PlacemarkMapObject>? markersYandex,
       final String? currentAddress,
       final String? selectedAddress,
+      final double? distanceInMeters,
+      final double? bearing,
       final String? error}) = _$_Address;
 
   @override
@@ -816,6 +889,10 @@ abstract class _Address implements AddressState {
   String? get currentAddress;
   @override
   String? get selectedAddress;
+  @override
+  double? get distanceInMeters;
+  @override
+  double? get bearing;
   @override
   String? get error;
   @override

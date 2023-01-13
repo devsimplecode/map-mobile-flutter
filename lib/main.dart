@@ -34,11 +34,6 @@ void main() {
   runApp(const MyApp());
 }
 
-const String api = 'AIzaSyDOaiRTglZiVGsdvOq1hgK4wGKRhqdQRMY';
-const String apiYandex = '7a26197b-e302-4aec-a72a-2dea22ef0724';
-const String apiYandex2 = 'b0047eb3-5f02-4d61-9eec-32bbe58ed3bf';
-const String apiYandexPlaces = 'c687c609-ae0e-4b12-8d9a-aab953d8642f';
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 

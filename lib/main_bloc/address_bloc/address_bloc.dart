@@ -6,12 +6,15 @@ import 'package:map_flutter/models/location.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
 import 'package:map_flutter/main_bloc/address_bloc/parts/google_markers.dart';
 import 'package:map_flutter/main_bloc/address_bloc/parts/yandex_markers.dart';
+import 'package:geolocator/geolocator.dart';
 
 part 'address_bloc.freezed.dart';
 
 class AddressBloc extends Bloc<AddressEvent, AddressState> {
   AddressBloc() : super(const AddressState.address()) {
     on<_InitAddress>((event, emit) async {
+      double? distanceInMeters;
+      double? bearing;
       emit(state.copyWith(loadingAddress: true));
       List<Placemark> placeMarks = await placemarkFromCoordinates(
         event.lat,
@@ -28,9 +31,26 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
           selectedAddress: '',
         ));
       }
+      if (event.currentLat != null && event.currentLng != null) {
+        distanceInMeters = Geolocator.distanceBetween(
+          event.currentLat!,
+          event.currentLng!,
+          event.lat,
+          event.lng,
+        );
+
+        bearing = Geolocator.bearingBetween(
+          event.currentLat!,
+          event.currentLng!,
+          event.lat,
+          event.lng,
+        );
+      }
       emit(
         state.copyWith(
           loadingAddress: false,
+          bearing: bearing,
+          distanceInMeters: distanceInMeters,
           setMarkersOsm: event.selectionObject,
           changeMarkersOsm: event.changeMarkersOsm,
           markersGoogle: await googleMarkers(event, emit),
@@ -52,7 +72,6 @@ class AddressEvent with _$AddressEvent {
     @Default(false) bool selectionObject,
     @Default(false) bool changeMarkersOsm,
   }) = _InitAddress;
-
 }
 
 @freezed
@@ -66,6 +85,8 @@ class AddressState with _$AddressState {
     List<PlacemarkMapObject>? markersYandex,
     String? currentAddress,
     String? selectedAddress,
+    double? distanceInMeters,
+    double? bearing,
     String? error,
   }) = _Address;
 }

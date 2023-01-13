@@ -20,6 +20,9 @@ class ActionMapAddress extends StatelessWidget {
         builder: (context, state) {
           return state.map(
             address: (address) {
+              final distance = (address.distanceInMeters ?? 0) > 1000
+                  ? '${address.bearing?.toInt()} KM'
+                  : '${address.distanceInMeters?.toInt()} M';
               return Column(
                 children: [
                   if (address.selectedAddress?.isEmpty ?? true)
@@ -67,6 +70,15 @@ class ActionMapAddress extends StatelessWidget {
                                         fontWeight: FontWeight.w500,
                                         color: Colors.black,
                                       ),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 12),
+                                  Text(
+                                    distance,
+                                    style: const TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.grey,
                                     ),
                                   ),
                                 ],
