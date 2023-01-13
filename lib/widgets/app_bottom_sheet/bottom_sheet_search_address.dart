@@ -34,7 +34,6 @@ class BottomSheetSearchAddress extends StatelessWidget {
                 children: [
                   Expanded(
                     child: SearchTextField(
-                      uniqueKey: '2',
                       hintText: 'Поиск',
                       onChanged: onChanged,
                       borderColor: Colors.black,

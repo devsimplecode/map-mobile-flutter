@@ -95,6 +95,7 @@ class _OsmAppMapState extends State<OsmAppMap> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<LocationBloc, LocationState>(
+      listenWhen: (prev, curr) => prev.maybeListen() != curr.maybeListen(),
       listener: (context, state) {
         state.maybeMap(
           orElse: () {},
@@ -106,6 +107,7 @@ class _OsmAppMapState extends State<OsmAppMap> {
         );
       },
       child: BlocConsumer<AddressBloc, AddressState>(
+        listenWhen: (prev, curr) => prev.location != curr.location,
         listener: (context, state) async {
           if (state.setMarkersOsm) {
             await goToLocation(

@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:location/location.dart';
 import 'package:map_flutter/repo/map_api.dart';
+
 part 'location_bloc.freezed.dart';
 
 part 'parts/init_location.dart';
@@ -37,10 +38,11 @@ class LocationState with _$LocationState {
     @Default(false) bool moveToCurrentLocation,
     double? latitude,
     double? longitude,
+    @Default(0) int listen,
   }) = _Map;
 
   T? maybeCurrentLat<T extends double>() => maybeWhen(
-        map: (_, lat, lng) {
+        map: (_, lat, lng, __) {
           if (lat is T) {
             return lat;
           }
@@ -51,7 +53,7 @@ class LocationState with _$LocationState {
       );
 
   T? maybeCurrentLng<T extends double>() => maybeWhen(
-        map: (_, lat, lng) {
+        map: (_, lat, lng, __) {
           if (lng is T) {
             return lng;
           }
@@ -61,10 +63,10 @@ class LocationState with _$LocationState {
         orElse: () => null,
       );
 
-  T? maybeCurrentLocation<T extends bool>() => maybeWhen(
-        map: (loc, _, __) {
-          if (loc is T) {
-            return loc;
+  T? maybeListen<T extends int>() => maybeWhen(
+        map: (_, __, ___, listen) {
+          if (listen is T) {
+            return listen;
           }
 
           return null;

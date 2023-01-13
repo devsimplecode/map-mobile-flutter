@@ -6,11 +6,11 @@ import 'package:map_flutter/main_bloc/address_bloc/address_bloc.dart';
 
 extension GoogleMarkers on AddressBloc {
   Future<Set<Marker>> googleMarkers(
-    event,
+    InitAddress event,
     Emitter<AddressState> emit,
   ) async {
-    List<Marker> markersList = [];
     Set<Marker> markers = {};
+    List<Marker> markersList = [];
 
     var iconPoint = await BitmapDescriptor.fromAssetImage(
       const ImageConfiguration(),
@@ -20,14 +20,13 @@ extension GoogleMarkers on AddressBloc {
       const ImageConfiguration(),
       AppAssets.images.location,
     );
-
     if (event.selectionObject) {
       markersList.add(
         Marker(
           icon: iconLocation,
           anchor: const Offset(0.5, 0.5),
           markerId: const MarkerId('1'),
-          position: LatLng(event.currentLat ?? event.lat, event.currentLng ?? event.lng),
+          position: LatLng(event.currentLat ?? 0.0, event.currentLng ?? 0.0),
         ),
       );
       markersList.add(
@@ -44,7 +43,7 @@ extension GoogleMarkers on AddressBloc {
           icon: iconLocation,
           anchor: const Offset(0.5, 0.5),
           markerId: const MarkerId('1'),
-          position: LatLng(event.currentLat ?? event.lat, event.currentLng ?? event.lng),
+          position: LatLng(event.lat, event.lng),
         ),
       );
     }

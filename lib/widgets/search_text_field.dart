@@ -8,13 +8,11 @@ class SearchTextField extends StatelessWidget {
     this.enabled = true,
     this.onFieldSubmitted,
     required this.hintText,
-    required this.uniqueKey,
     this.borderColor = Colors.white,
   }) : super(key: key);
   final bool enabled;
   final String hintText;
   final Color borderColor;
-  final String uniqueKey;
   final Function(String)? onChanged;
   final Function(String)? onFieldSubmitted;
   final Debounce debounce = Debounce(duration: const Duration(seconds: 1));
@@ -26,7 +24,6 @@ class SearchTextField extends StatelessWidget {
       borderSide: BorderSide(color: borderColor),
     );
     return TextFormField(
-      key: ValueKey(uniqueKey),
       onChanged: (value) {
         debounce(() {
           onChanged?.call(value);

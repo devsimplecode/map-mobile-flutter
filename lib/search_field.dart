@@ -9,22 +9,25 @@ import 'package:map_flutter/maps/google_map/widgets/bottom_sheet.dart';
 import 'package:map_flutter/maps/osm_map/widgets/bottom_sheet.dart';
 import 'package:map_flutter/maps/yandex_map/widgets/bottom_sheet.dart';
 import 'package:map_flutter/widgets/app_bottom_sheet/bottom_sheet_select_map.dart';
-import 'package:map_flutter/widgets/search_text_field.dart';
 
 class SearchField extends StatelessWidget {
   const SearchField({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final mapsType = context.read<TypeMapCubit>().state.mapsType;
     final lat = context.read<LocationBloc>().state.maybeCurrentLat();
     final lng = context.read<LocationBloc>().state.maybeCurrentLng();
+    return BlocBuilder<TypeMapCubit, TypeMapState>(
+  builder: (context, mapsType) {
     return Row(
       children: [
         Expanded(
-          child: GestureDetector(
-            onTap: () async {
-              if (mapsType == MapsType.google) {
+          child: TextButton(
+            style: ButtonStyle(
+              overlayColor: MaterialStateProperty.all(Colors.transparent),
+            ),
+            onPressed: () async {
+              if (mapsType.mapsType == MapsType.google) {
                 await showBottomSheetSearchGoogleAddress(context: context).then((value) {
                   if (value != null && value.lat != null && value.lng != null) {
                     BlocProvider.of<AddressBloc>(context).add(AddressEvent.initAddress(
@@ -36,8 +39,7 @@ class SearchField extends StatelessWidget {
                     ));
                   }
                 });
-              }
-              if (mapsType == MapsType.yandex) {
+              } else if (mapsType.mapsType == MapsType.yandex) {
                 await showBottomSheetSearchYandexAddress(context: context).then((value) {
                   if (value != null && value.lat != null && value.lng != null) {
                     BlocProvider.of<AddressBloc>(context).add(AddressEvent.initAddress(
@@ -49,8 +51,7 @@ class SearchField extends StatelessWidget {
                     ));
                   }
                 });
-              }
-              if (mapsType == MapsType.osm) {
+              } else if (mapsType.mapsType == MapsType.osm) {
                 await showBottomSheetSearchOsmAddress(context: context).then((value) {
                   if (value != null && value.lat != null && value.lng != null) {
                     BlocProvider.of<AddressBloc>(context).add(AddressEvent.initAddress(
@@ -64,10 +65,28 @@ class SearchField extends StatelessWidget {
                 });
               }
             },
-            child: SearchTextField(
-              enabled: false,
-              hintText: 'Куда поедете?',
-              uniqueKey: '1',
+            child: Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Row(
+                children: const [
+                  Icon(
+                    Icons.search,
+                    color: Colors.grey,
+                  ),
+                  SizedBox(width: 8),
+                  Text(
+                    'Куда поедете?',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -80,5 +99,7 @@ class SearchField extends StatelessWidget {
         ),
       ],
     );
+  },
+);
   }
 }

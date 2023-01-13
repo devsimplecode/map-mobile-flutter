@@ -6,7 +6,7 @@ import 'package:yandex_mapkit/yandex_mapkit.dart';
 
 extension GoogleMarkers on AddressBloc {
   Future<List<PlacemarkMapObject>> yandexMarkers(
-    event,
+    InitAddress event,
     Emitter<AddressState> emit,
   ) async {
     List<PlacemarkMapObject> markers = [];
@@ -36,8 +36,8 @@ extension GoogleMarkers on AddressBloc {
           icon: iconLocation,
           mapId: const MapObjectId('1'),
           point: Point(
-            latitude: event.currentLat ?? event.lat,
-            longitude: event.currentLng ?? event.lng,
+            latitude: event.currentLat ?? 0.0,
+            longitude: event.currentLng ?? 0.0,
           ),
         ),
       );
@@ -57,8 +57,8 @@ extension GoogleMarkers on AddressBloc {
           icon: iconLocation,
           mapId: const MapObjectId('1'),
           point: Point(
-            latitude: event.currentLat ?? event.lat,
-            longitude: event.currentLng ?? event.lng,
+            latitude: event.lat,
+            longitude: event.lng,
           ),
         ),
       );

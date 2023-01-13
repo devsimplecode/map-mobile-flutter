@@ -21,42 +21,41 @@ mixin _$AddressEvent {
   double? get currentLat => throw _privateConstructorUsedError;
   double? get currentLng => throw _privateConstructorUsedError;
   bool get selectionObject => throw _privateConstructorUsedError;
-  bool get changeMarkersOsm => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(double lat, double lng, double? currentLat,
-            double? currentLng, bool selectionObject, bool changeMarkersOsm)
+            double? currentLng, bool selectionObject)
         initAddress,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(double lat, double lng, double? currentLat,
-            double? currentLng, bool selectionObject, bool changeMarkersOsm)?
+            double? currentLng, bool selectionObject)?
         initAddress,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(double lat, double lng, double? currentLat,
-            double? currentLng, bool selectionObject, bool changeMarkersOsm)?
+            double? currentLng, bool selectionObject)?
         initAddress,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_InitAddress value) initAddress,
+    required TResult Function(InitAddress value) initAddress,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_InitAddress value)? initAddress,
+    TResult? Function(InitAddress value)? initAddress,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_InitAddress value)? initAddress,
+    TResult Function(InitAddress value)? initAddress,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -77,8 +76,7 @@ abstract class $AddressEventCopyWith<$Res> {
       double lng,
       double? currentLat,
       double? currentLng,
-      bool selectionObject,
-      bool changeMarkersOsm});
+      bool selectionObject});
 }
 
 /// @nodoc
@@ -99,7 +97,6 @@ class _$AddressEventCopyWithImpl<$Res, $Val extends AddressEvent>
     Object? currentLat = freezed,
     Object? currentLng = freezed,
     Object? selectionObject = null,
-    Object? changeMarkersOsm = null,
   }) {
     return _then(_value.copyWith(
       lat: null == lat
@@ -122,20 +119,16 @@ class _$AddressEventCopyWithImpl<$Res, $Val extends AddressEvent>
           ? _value.selectionObject
           : selectionObject // ignore: cast_nullable_to_non_nullable
               as bool,
-      changeMarkersOsm: null == changeMarkersOsm
-          ? _value.changeMarkersOsm
-          : changeMarkersOsm // ignore: cast_nullable_to_non_nullable
-              as bool,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_InitAddressCopyWith<$Res>
+abstract class _$$InitAddressCopyWith<$Res>
     implements $AddressEventCopyWith<$Res> {
-  factory _$$_InitAddressCopyWith(
-          _$_InitAddress value, $Res Function(_$_InitAddress) then) =
-      __$$_InitAddressCopyWithImpl<$Res>;
+  factory _$$InitAddressCopyWith(
+          _$InitAddress value, $Res Function(_$InitAddress) then) =
+      __$$InitAddressCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -143,16 +136,15 @@ abstract class _$$_InitAddressCopyWith<$Res>
       double lng,
       double? currentLat,
       double? currentLng,
-      bool selectionObject,
-      bool changeMarkersOsm});
+      bool selectionObject});
 }
 
 /// @nodoc
-class __$$_InitAddressCopyWithImpl<$Res>
-    extends _$AddressEventCopyWithImpl<$Res, _$_InitAddress>
-    implements _$$_InitAddressCopyWith<$Res> {
-  __$$_InitAddressCopyWithImpl(
-      _$_InitAddress _value, $Res Function(_$_InitAddress) _then)
+class __$$InitAddressCopyWithImpl<$Res>
+    extends _$AddressEventCopyWithImpl<$Res, _$InitAddress>
+    implements _$$InitAddressCopyWith<$Res> {
+  __$$InitAddressCopyWithImpl(
+      _$InitAddress _value, $Res Function(_$InitAddress) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -163,9 +155,8 @@ class __$$_InitAddressCopyWithImpl<$Res>
     Object? currentLat = freezed,
     Object? currentLng = freezed,
     Object? selectionObject = null,
-    Object? changeMarkersOsm = null,
   }) {
-    return _then(_$_InitAddress(
+    return _then(_$InitAddress(
       lat: null == lat
           ? _value.lat
           : lat // ignore: cast_nullable_to_non_nullable
@@ -186,24 +177,19 @@ class __$$_InitAddressCopyWithImpl<$Res>
           ? _value.selectionObject
           : selectionObject // ignore: cast_nullable_to_non_nullable
               as bool,
-      changeMarkersOsm: null == changeMarkersOsm
-          ? _value.changeMarkersOsm
-          : changeMarkersOsm // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_InitAddress implements _InitAddress {
-  const _$_InitAddress(
+class _$InitAddress implements InitAddress {
+  const _$InitAddress(
       {required this.lat,
       required this.lng,
       this.currentLat,
       this.currentLng,
-      this.selectionObject = false,
-      this.changeMarkersOsm = false});
+      this.selectionObject = false});
 
   @override
   final double lat;
@@ -216,20 +202,17 @@ class _$_InitAddress implements _InitAddress {
   @override
   @JsonKey()
   final bool selectionObject;
-  @override
-  @JsonKey()
-  final bool changeMarkersOsm;
 
   @override
   String toString() {
-    return 'AddressEvent.initAddress(lat: $lat, lng: $lng, currentLat: $currentLat, currentLng: $currentLng, selectionObject: $selectionObject, changeMarkersOsm: $changeMarkersOsm)';
+    return 'AddressEvent.initAddress(lat: $lat, lng: $lng, currentLat: $currentLat, currentLng: $currentLng, selectionObject: $selectionObject)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_InitAddress &&
+            other is _$InitAddress &&
             (identical(other.lat, lat) || other.lat == lat) &&
             (identical(other.lng, lng) || other.lng == lng) &&
             (identical(other.currentLat, currentLat) ||
@@ -237,54 +220,49 @@ class _$_InitAddress implements _InitAddress {
             (identical(other.currentLng, currentLng) ||
                 other.currentLng == currentLng) &&
             (identical(other.selectionObject, selectionObject) ||
-                other.selectionObject == selectionObject) &&
-            (identical(other.changeMarkersOsm, changeMarkersOsm) ||
-                other.changeMarkersOsm == changeMarkersOsm));
+                other.selectionObject == selectionObject));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, lat, lng, currentLat, currentLng,
-      selectionObject, changeMarkersOsm);
+  int get hashCode => Object.hash(
+      runtimeType, lat, lng, currentLat, currentLng, selectionObject);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_InitAddressCopyWith<_$_InitAddress> get copyWith =>
-      __$$_InitAddressCopyWithImpl<_$_InitAddress>(this, _$identity);
+  _$$InitAddressCopyWith<_$InitAddress> get copyWith =>
+      __$$InitAddressCopyWithImpl<_$InitAddress>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(double lat, double lng, double? currentLat,
-            double? currentLng, bool selectionObject, bool changeMarkersOsm)
+            double? currentLng, bool selectionObject)
         initAddress,
   }) {
-    return initAddress(
-        lat, lng, currentLat, currentLng, selectionObject, changeMarkersOsm);
+    return initAddress(lat, lng, currentLat, currentLng, selectionObject);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(double lat, double lng, double? currentLat,
-            double? currentLng, bool selectionObject, bool changeMarkersOsm)?
+            double? currentLng, bool selectionObject)?
         initAddress,
   }) {
-    return initAddress?.call(
-        lat, lng, currentLat, currentLng, selectionObject, changeMarkersOsm);
+    return initAddress?.call(lat, lng, currentLat, currentLng, selectionObject);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(double lat, double lng, double? currentLat,
-            double? currentLng, bool selectionObject, bool changeMarkersOsm)?
+            double? currentLng, bool selectionObject)?
         initAddress,
     required TResult orElse(),
   }) {
     if (initAddress != null) {
-      return initAddress(
-          lat, lng, currentLat, currentLng, selectionObject, changeMarkersOsm);
+      return initAddress(lat, lng, currentLat, currentLng, selectionObject);
     }
     return orElse();
   }
@@ -292,7 +270,7 @@ class _$_InitAddress implements _InitAddress {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_InitAddress value) initAddress,
+    required TResult Function(InitAddress value) initAddress,
   }) {
     return initAddress(this);
   }
@@ -300,7 +278,7 @@ class _$_InitAddress implements _InitAddress {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_InitAddress value)? initAddress,
+    TResult? Function(InitAddress value)? initAddress,
   }) {
     return initAddress?.call(this);
   }
@@ -308,7 +286,7 @@ class _$_InitAddress implements _InitAddress {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_InitAddress value)? initAddress,
+    TResult Function(InitAddress value)? initAddress,
     required TResult orElse(),
   }) {
     if (initAddress != null) {
@@ -318,14 +296,13 @@ class _$_InitAddress implements _InitAddress {
   }
 }
 
-abstract class _InitAddress implements AddressEvent {
-  const factory _InitAddress(
+abstract class InitAddress implements AddressEvent {
+  const factory InitAddress(
       {required final double lat,
       required final double lng,
       final double? currentLat,
       final double? currentLng,
-      final bool selectionObject,
-      final bool changeMarkersOsm}) = _$_InitAddress;
+      final bool selectionObject}) = _$InitAddress;
 
   @override
   double get lat;
@@ -338,10 +315,8 @@ abstract class _InitAddress implements AddressEvent {
   @override
   bool get selectionObject;
   @override
-  bool get changeMarkersOsm;
-  @override
   @JsonKey(ignore: true)
-  _$$_InitAddressCopyWith<_$_InitAddress> get copyWith =>
+  _$$InitAddressCopyWith<_$InitAddress> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -349,7 +324,6 @@ abstract class _InitAddress implements AddressEvent {
 mixin _$AddressState {
   bool get loadingAddress => throw _privateConstructorUsedError;
   bool get setMarkersOsm => throw _privateConstructorUsedError;
-  bool get changeMarkersOsm => throw _privateConstructorUsedError;
   LocationMap? get location => throw _privateConstructorUsedError;
   Set<Marker>? get markersGoogle => throw _privateConstructorUsedError;
   List<PlacemarkMapObject>? get markersYandex =>
@@ -364,7 +338,6 @@ mixin _$AddressState {
     required TResult Function(
             bool loadingAddress,
             bool setMarkersOsm,
-            bool changeMarkersOsm,
             LocationMap? location,
             Set<Marker>? markersGoogle,
             List<PlacemarkMapObject>? markersYandex,
@@ -381,7 +354,6 @@ mixin _$AddressState {
     TResult? Function(
             bool loadingAddress,
             bool setMarkersOsm,
-            bool changeMarkersOsm,
             LocationMap? location,
             Set<Marker>? markersGoogle,
             List<PlacemarkMapObject>? markersYandex,
@@ -398,7 +370,6 @@ mixin _$AddressState {
     TResult Function(
             bool loadingAddress,
             bool setMarkersOsm,
-            bool changeMarkersOsm,
             LocationMap? location,
             Set<Marker>? markersGoogle,
             List<PlacemarkMapObject>? markersYandex,
@@ -442,7 +413,6 @@ abstract class $AddressStateCopyWith<$Res> {
   $Res call(
       {bool loadingAddress,
       bool setMarkersOsm,
-      bool changeMarkersOsm,
       LocationMap? location,
       Set<Marker>? markersGoogle,
       List<PlacemarkMapObject>? markersYandex,
@@ -468,7 +438,6 @@ class _$AddressStateCopyWithImpl<$Res, $Val extends AddressState>
   $Res call({
     Object? loadingAddress = null,
     Object? setMarkersOsm = null,
-    Object? changeMarkersOsm = null,
     Object? location = freezed,
     Object? markersGoogle = freezed,
     Object? markersYandex = freezed,
@@ -486,10 +455,6 @@ class _$AddressStateCopyWithImpl<$Res, $Val extends AddressState>
       setMarkersOsm: null == setMarkersOsm
           ? _value.setMarkersOsm
           : setMarkersOsm // ignore: cast_nullable_to_non_nullable
-              as bool,
-      changeMarkersOsm: null == changeMarkersOsm
-          ? _value.changeMarkersOsm
-          : changeMarkersOsm // ignore: cast_nullable_to_non_nullable
               as bool,
       location: freezed == location
           ? _value.location
@@ -538,7 +503,6 @@ abstract class _$$_AddressCopyWith<$Res>
   $Res call(
       {bool loadingAddress,
       bool setMarkersOsm,
-      bool changeMarkersOsm,
       LocationMap? location,
       Set<Marker>? markersGoogle,
       List<PlacemarkMapObject>? markersYandex,
@@ -561,7 +525,6 @@ class __$$_AddressCopyWithImpl<$Res>
   $Res call({
     Object? loadingAddress = null,
     Object? setMarkersOsm = null,
-    Object? changeMarkersOsm = null,
     Object? location = freezed,
     Object? markersGoogle = freezed,
     Object? markersYandex = freezed,
@@ -579,10 +542,6 @@ class __$$_AddressCopyWithImpl<$Res>
       setMarkersOsm: null == setMarkersOsm
           ? _value.setMarkersOsm
           : setMarkersOsm // ignore: cast_nullable_to_non_nullable
-              as bool,
-      changeMarkersOsm: null == changeMarkersOsm
-          ? _value.changeMarkersOsm
-          : changeMarkersOsm // ignore: cast_nullable_to_non_nullable
               as bool,
       location: freezed == location
           ? _value.location
@@ -626,7 +585,6 @@ class _$_Address implements _Address {
   const _$_Address(
       {this.loadingAddress = false,
       this.setMarkersOsm = false,
-      this.changeMarkersOsm = false,
       this.location,
       final Set<Marker>? markersGoogle,
       final List<PlacemarkMapObject>? markersYandex,
@@ -644,9 +602,6 @@ class _$_Address implements _Address {
   @override
   @JsonKey()
   final bool setMarkersOsm;
-  @override
-  @JsonKey()
-  final bool changeMarkersOsm;
   @override
   final LocationMap? location;
   final Set<Marker>? _markersGoogle;
@@ -682,7 +637,7 @@ class _$_Address implements _Address {
 
   @override
   String toString() {
-    return 'AddressState.address(loadingAddress: $loadingAddress, setMarkersOsm: $setMarkersOsm, changeMarkersOsm: $changeMarkersOsm, location: $location, markersGoogle: $markersGoogle, markersYandex: $markersYandex, currentAddress: $currentAddress, selectedAddress: $selectedAddress, distanceInMeters: $distanceInMeters, bearing: $bearing, error: $error)';
+    return 'AddressState.address(loadingAddress: $loadingAddress, setMarkersOsm: $setMarkersOsm, location: $location, markersGoogle: $markersGoogle, markersYandex: $markersYandex, currentAddress: $currentAddress, selectedAddress: $selectedAddress, distanceInMeters: $distanceInMeters, bearing: $bearing, error: $error)';
   }
 
   @override
@@ -694,8 +649,6 @@ class _$_Address implements _Address {
                 other.loadingAddress == loadingAddress) &&
             (identical(other.setMarkersOsm, setMarkersOsm) ||
                 other.setMarkersOsm == setMarkersOsm) &&
-            (identical(other.changeMarkersOsm, changeMarkersOsm) ||
-                other.changeMarkersOsm == changeMarkersOsm) &&
             (identical(other.location, location) ||
                 other.location == location) &&
             const DeepCollectionEquality()
@@ -717,7 +670,6 @@ class _$_Address implements _Address {
       runtimeType,
       loadingAddress,
       setMarkersOsm,
-      changeMarkersOsm,
       location,
       const DeepCollectionEquality().hash(_markersGoogle),
       const DeepCollectionEquality().hash(_markersYandex),
@@ -739,7 +691,6 @@ class _$_Address implements _Address {
     required TResult Function(
             bool loadingAddress,
             bool setMarkersOsm,
-            bool changeMarkersOsm,
             LocationMap? location,
             Set<Marker>? markersGoogle,
             List<PlacemarkMapObject>? markersYandex,
@@ -753,7 +704,6 @@ class _$_Address implements _Address {
     return address(
         loadingAddress,
         setMarkersOsm,
-        changeMarkersOsm,
         location,
         markersGoogle,
         markersYandex,
@@ -770,7 +720,6 @@ class _$_Address implements _Address {
     TResult? Function(
             bool loadingAddress,
             bool setMarkersOsm,
-            bool changeMarkersOsm,
             LocationMap? location,
             Set<Marker>? markersGoogle,
             List<PlacemarkMapObject>? markersYandex,
@@ -784,7 +733,6 @@ class _$_Address implements _Address {
     return address?.call(
         loadingAddress,
         setMarkersOsm,
-        changeMarkersOsm,
         location,
         markersGoogle,
         markersYandex,
@@ -801,7 +749,6 @@ class _$_Address implements _Address {
     TResult Function(
             bool loadingAddress,
             bool setMarkersOsm,
-            bool changeMarkersOsm,
             LocationMap? location,
             Set<Marker>? markersGoogle,
             List<PlacemarkMapObject>? markersYandex,
@@ -817,7 +764,6 @@ class _$_Address implements _Address {
       return address(
           loadingAddress,
           setMarkersOsm,
-          changeMarkersOsm,
           location,
           markersGoogle,
           markersYandex,
@@ -863,7 +809,6 @@ abstract class _Address implements AddressState {
   const factory _Address(
       {final bool loadingAddress,
       final bool setMarkersOsm,
-      final bool changeMarkersOsm,
       final LocationMap? location,
       final Set<Marker>? markersGoogle,
       final List<PlacemarkMapObject>? markersYandex,
@@ -877,8 +822,6 @@ abstract class _Address implements AddressState {
   bool get loadingAddress;
   @override
   bool get setMarkersOsm;
-  @override
-  bool get changeMarkersOsm;
   @override
   LocationMap? get location;
   @override

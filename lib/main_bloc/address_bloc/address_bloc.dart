@@ -12,7 +12,7 @@ part 'address_bloc.freezed.dart';
 
 class AddressBloc extends Bloc<AddressEvent, AddressState> {
   AddressBloc() : super(const AddressState.address()) {
-    on<_InitAddress>((event, emit) async {
+    on<InitAddress>((event, emit) async {
       double? distanceInMeters;
       double? bearing;
       emit(state.copyWith(loadingAddress: true));
@@ -52,7 +52,6 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
           bearing: bearing,
           distanceInMeters: distanceInMeters,
           setMarkersOsm: event.selectionObject,
-          changeMarkersOsm: event.changeMarkersOsm,
           markersGoogle: await googleMarkers(event, emit),
           markersYandex: await yandexMarkers(event, emit),
           location: LocationMap(lat: event.lat, lng: event.lng),
@@ -70,8 +69,7 @@ class AddressEvent with _$AddressEvent {
     double? currentLat,
     double? currentLng,
     @Default(false) bool selectionObject,
-    @Default(false) bool changeMarkersOsm,
-  }) = _InitAddress;
+  }) = InitAddress;
 }
 
 @freezed
@@ -79,7 +77,6 @@ class AddressState with _$AddressState {
   const factory AddressState.address({
     @Default(false) bool loadingAddress,
     @Default(false) bool setMarkersOsm,
-    @Default(false) bool changeMarkersOsm,
     LocationMap? location,
     Set<Marker>? markersGoogle,
     List<PlacemarkMapObject>? markersYandex,
