@@ -66,7 +66,6 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) => OsmMapBloc(),
           ),
-
         ],
         child: MaterialApp(
           title: 'Flutter Map',
