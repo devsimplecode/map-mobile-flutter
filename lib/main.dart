@@ -88,11 +88,11 @@ class MapScreen extends StatelessWidget {
       body: Stack(
         children: [
           const AppMap(),
-          const Positioned(
-            top: 28,
+          Positioned(
+            top: MediaQuery.of(context).viewPadding.top,
             left: 16,
             right: 16,
-            child: SearchField(),
+            child: const SearchField(),
           ),
           Positioned(
             bottom: 28,

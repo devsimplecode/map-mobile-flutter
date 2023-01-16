@@ -16,9 +16,11 @@ extension InitLocation on LocationBloc {
         latitude = location.latitude;
         longitude = location.longitude;
       });
+
       if (longitude == null || latitude == null) {
         emit(const LocationState.loading());
       }
+
       emit(LocationState.map(
         latitude: latitude,
         longitude: longitude,
