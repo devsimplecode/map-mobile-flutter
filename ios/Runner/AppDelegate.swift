@@ -20,6 +20,7 @@ import YandexMapsMobile
            print("AppDelegate: YANDEX_API_KEY found")
            YMKMapKit.setApiKey(yandexApiKey)
        }
+    }
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
