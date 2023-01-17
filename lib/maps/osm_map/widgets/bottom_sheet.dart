@@ -21,6 +21,7 @@ Future<dynamic> showBottomSheetSearchOsmAddress({required BuildContext context})
           return BlocBuilder<OsmMapBloc, OsmMapState>(
             builder: (context, state) {
               return BottomSheetSearchAddress(
+                error: state.error,
                 controller: controller,
                 loadingAddress: state.loadingAddress,
                 onTap: (result) {

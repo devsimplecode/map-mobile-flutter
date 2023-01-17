@@ -23,6 +23,7 @@ class YandexMapEvent with _$YandexMapEvent {
 @freezed
 class YandexMapState with _$YandexMapState {
   const factory YandexMapState.yandex({
+    @Default(false) bool loadingAddress,
     List<Place>? places,
     String? error,
   }) = _Yandex;

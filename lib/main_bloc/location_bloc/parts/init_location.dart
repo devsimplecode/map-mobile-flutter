@@ -39,8 +39,8 @@ extension InitLocation on LocationBloc {
       if (permissionGranted == PermissionStatus.denied) {
         final response = await api.getIpAddress();
         if (response.error != null) {
-          emit(LocationState.error(
-            error: response.error?.message,
+          emit(const LocationState.error(
+            error: 'Что-то пошло не так ;)',
           ));
           return;
         }

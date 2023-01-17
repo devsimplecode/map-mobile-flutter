@@ -20,6 +20,17 @@ class ActionMapAddress extends StatelessWidget {
         builder: (context, state) {
           return state.map(
             address: (address) {
+              if (address.error?.isNotEmpty ?? false) {
+                return Center(
+                  child: Text(
+                    address.error ?? '',
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: Colors.grey,
+                    ),
+                  ),
+                );
+              }
               final distance = (address.distanceInMeters ?? 0) > 1000
                   ? '${address.bearing?.toInt()} KM'
                   : '${address.distanceInMeters?.toInt()} M';

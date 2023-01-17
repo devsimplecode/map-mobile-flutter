@@ -13,26 +13,34 @@ extension SearchAddress on OsmMapBloc {
       return;
     }
     emit(state.copyWith(loadingAddress: true));
-    List<Place> takePlaces = [];
-    final addresses = await addressSuggestion(event.search);
-    for (var item in addresses) {
-      takePlaces.add(
-        Place(
-          geometry: Geometry(
-            locationOsm: LocationMap(
-              lat: item.point?.latitude,
-              lng: item.point?.longitude,
+    try {
+      List<Place> takePlaces = [];
+      final addresses = await addressSuggestion(event.search);
+      for (var item in addresses) {
+        takePlaces.add(
+          Place(
+            geometry: Geometry(
+              locationOsm: LocationMap(
+                lat: item.point?.latitude,
+                lng: item.point?.longitude,
+              ),
             ),
+            address:
+                '${item.address?.street ?? ''} ${item.address?.state ?? ''} ${item.address?.city ?? ''} ${item.address?.country ?? ''}',
+            name: '${item.address?.name}',
           ),
-          address:
-              '${item.address?.street ?? ''} ${item.address?.state ?? ''} ${item.address?.city ?? ''} ${item.address?.country ?? ''}',
-          name: '${item.address?.name}',
-        ),
-      );
+        );
+      }
+      emit(state.copyWith(
+        places: takePlaces,
+        loadingAddress: false,
+        error: '',
+      ));
+    } catch (error) {
+      emit(state.copyWith(
+        error: 'Что-то пошло не так ;)',
+        loadingAddress: false,
+      ));
     }
-    emit(state.copyWith(
-      places: takePlaces,
-      loadingAddress: false,
-    ));
   }
 }

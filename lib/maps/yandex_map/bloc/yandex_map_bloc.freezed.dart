@@ -222,21 +222,26 @@ abstract class _SearchAddress implements YandexMapEvent {
 
 /// @nodoc
 mixin _$YandexMapState {
+  bool get loadingAddress => throw _privateConstructorUsedError;
   List<Place>? get places => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<Place>? places, String? error) yandex,
+    required TResult Function(
+            bool loadingAddress, List<Place>? places, String? error)
+        yandex,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<Place>? places, String? error)? yandex,
+    TResult? Function(bool loadingAddress, List<Place>? places, String? error)?
+        yandex,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<Place>? places, String? error)? yandex,
+    TResult Function(bool loadingAddress, List<Place>? places, String? error)?
+        yandex,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -268,7 +273,7 @@ abstract class $YandexMapStateCopyWith<$Res> {
           YandexMapState value, $Res Function(YandexMapState) then) =
       _$YandexMapStateCopyWithImpl<$Res, YandexMapState>;
   @useResult
-  $Res call({List<Place>? places, String? error});
+  $Res call({bool loadingAddress, List<Place>? places, String? error});
 }
 
 /// @nodoc
@@ -284,10 +289,15 @@ class _$YandexMapStateCopyWithImpl<$Res, $Val extends YandexMapState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? loadingAddress = null,
     Object? places = freezed,
     Object? error = freezed,
   }) {
     return _then(_value.copyWith(
+      loadingAddress: null == loadingAddress
+          ? _value.loadingAddress
+          : loadingAddress // ignore: cast_nullable_to_non_nullable
+              as bool,
       places: freezed == places
           ? _value.places
           : places // ignore: cast_nullable_to_non_nullable
@@ -307,7 +317,7 @@ abstract class _$$_YandexCopyWith<$Res>
       __$$_YandexCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Place>? places, String? error});
+  $Res call({bool loadingAddress, List<Place>? places, String? error});
 }
 
 /// @nodoc
@@ -320,10 +330,15 @@ class __$$_YandexCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? loadingAddress = null,
     Object? places = freezed,
     Object? error = freezed,
   }) {
     return _then(_$_Yandex(
+      loadingAddress: null == loadingAddress
+          ? _value.loadingAddress
+          : loadingAddress // ignore: cast_nullable_to_non_nullable
+              as bool,
       places: freezed == places
           ? _value._places
           : places // ignore: cast_nullable_to_non_nullable
@@ -339,8 +354,13 @@ class __$$_YandexCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Yandex implements _Yandex {
-  const _$_Yandex({final List<Place>? places, this.error}) : _places = places;
+  const _$_Yandex(
+      {this.loadingAddress = false, final List<Place>? places, this.error})
+      : _places = places;
 
+  @override
+  @JsonKey()
+  final bool loadingAddress;
   final List<Place>? _places;
   @override
   List<Place>? get places {
@@ -356,7 +376,7 @@ class _$_Yandex implements _Yandex {
 
   @override
   String toString() {
-    return 'YandexMapState.yandex(places: $places, error: $error)';
+    return 'YandexMapState.yandex(loadingAddress: $loadingAddress, places: $places, error: $error)';
   }
 
   @override
@@ -364,13 +384,15 @@ class _$_Yandex implements _Yandex {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Yandex &&
+            (identical(other.loadingAddress, loadingAddress) ||
+                other.loadingAddress == loadingAddress) &&
             const DeepCollectionEquality().equals(other._places, _places) &&
             (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_places), error);
+  int get hashCode => Object.hash(runtimeType, loadingAddress,
+      const DeepCollectionEquality().hash(_places), error);
 
   @JsonKey(ignore: true)
   @override
@@ -381,27 +403,31 @@ class _$_Yandex implements _Yandex {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<Place>? places, String? error) yandex,
+    required TResult Function(
+            bool loadingAddress, List<Place>? places, String? error)
+        yandex,
   }) {
-    return yandex(places, error);
+    return yandex(loadingAddress, places, error);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<Place>? places, String? error)? yandex,
+    TResult? Function(bool loadingAddress, List<Place>? places, String? error)?
+        yandex,
   }) {
-    return yandex?.call(places, error);
+    return yandex?.call(loadingAddress, places, error);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<Place>? places, String? error)? yandex,
+    TResult Function(bool loadingAddress, List<Place>? places, String? error)?
+        yandex,
     required TResult orElse(),
   }) {
     if (yandex != null) {
-      return yandex(places, error);
+      return yandex(loadingAddress, places, error);
     }
     return orElse();
   }
@@ -436,9 +462,13 @@ class _$_Yandex implements _Yandex {
 }
 
 abstract class _Yandex implements YandexMapState {
-  const factory _Yandex({final List<Place>? places, final String? error}) =
-      _$_Yandex;
+  const factory _Yandex(
+      {final bool loadingAddress,
+      final List<Place>? places,
+      final String? error}) = _$_Yandex;
 
+  @override
+  bool get loadingAddress;
   @override
   List<Place>? get places;
   @override

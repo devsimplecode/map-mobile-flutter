@@ -21,35 +21,42 @@ class GoogleAppMap extends StatefulWidget {
 class _GoogleAppMapState extends State<GoogleAppMap> {
   final Completer<GoogleMapController> _controller = Completer();
   GoogleMapController? _baseController;
+  bool listenError = true;
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<LocationBloc, LocationState>(
-      listener: (context, state) {
-        state.maybeMap(
-            orElse: () {},
-            map: (google) {
-              if (google.moveToCurrentLocation) {
-                _baseController?.animateCamera(
-                  CameraUpdate.newLatLngZoom(
-                    LatLng(widget.latitude!, widget.longitude!),
-                    18,
-                  ),
-                );
-              }
-            });
-      },
-      child: BlocConsumer<AddressBloc, AddressState>(
-        listener: (context, state) {
-          if (state.markersGoogle?.isNotEmpty ?? false) {
-            _baseController?.animateCamera(
-              CameraUpdate.newLatLngZoom(
-                LatLng(state.location!.lat!, state.location!.lng!),
-                18,
-              ),
-            );
-          }
-        },
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<LocationBloc, LocationState>(
+          listener: (context, state) {
+            state.maybeMap(
+                orElse: () {},
+                map: (google) {
+                  if (google.moveToCurrentLocation) {
+                    _baseController?.animateCamera(
+                      CameraUpdate.newLatLngZoom(
+                        LatLng(widget.latitude!, widget.longitude!),
+                        18,
+                      ),
+                    );
+                  }
+                });
+          },
+        ),
+        BlocListener<AddressBloc, AddressState>(
+          listener: (context, state) async {
+            if (state.markersGoogle?.isNotEmpty ?? false) {
+              _baseController?.animateCamera(
+                CameraUpdate.newLatLngZoom(
+                  LatLng(state.location!.lat!, state.location!.lng!),
+                  18,
+                ),
+              );
+            }
+          },
+        ),
+      ],
+      child: BlocBuilder<AddressBloc, AddressState>(
         builder: (context, state) {
           return GoogleMap(
             initialCameraPosition: CameraPosition(

@@ -19,9 +19,9 @@ Future<dynamic> showBottomSheetSearchYandexAddress({required BuildContext contex
         minChildSize: .5,
         builder: (_, controller) {
           return BlocBuilder<YandexMapBloc, YandexMapState>(
-            buildWhen: (prev, curr) => prev.places != curr.places,
             builder: (context, state) {
               return BottomSheetSearchAddress(
+                error: state.error,
                 controller: controller,
                 onTap: (result) {
                   Navigator.of(context).pop(result?.geometry?.locationYandex);

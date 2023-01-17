@@ -25,6 +25,7 @@ class GoogleMapEvent with _$GoogleMapEvent {
 @freezed
 class GoogleMapState with _$GoogleMapState {
   const factory GoogleMapState.google({
+    @Default(false) bool loadingAddress,
     List<PlaceSearch>? places,
     String? error,
   }) = _Google;

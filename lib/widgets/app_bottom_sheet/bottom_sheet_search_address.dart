@@ -8,6 +8,7 @@ class BottomSheetSearchAddress extends StatelessWidget {
     Key? key,
     this.items = const [],
     this.onTap,
+    this.error,
     this.onChanged,
     this.onFieldSubmitted,
     this.loadingAddress,
@@ -20,6 +21,7 @@ class BottomSheetSearchAddress extends StatelessWidget {
   final Function(String)? onFieldSubmitted;
   final ScrollController controller;
   final bool? loadingAddress;
+  final String? error;
 
   @override
   Widget build(BuildContext context) {
@@ -45,45 +47,56 @@ class BottomSheetSearchAddress extends StatelessWidget {
             ),
           ],
         ),
-        loadingAddress == true
-            ? const Padding(
-              padding:  EdgeInsets.all(12.0),
-              child:  Text(
-                  'Идет загрузка...',
-                  style: TextStyle(
+        error?.isNotEmpty ?? false
+            ? Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  error!,
+                  style: const TextStyle(
                     fontSize: 16,
                     color: Colors.grey,
                   ),
                 ),
-            )
-            : Expanded(
-                child: ListView.separated(
-                  controller: controller,
-                  itemCount: items.length,
-                  itemBuilder: (context, index) {
-                    if (items[index].address?.isEmpty ?? true) return const SizedBox.shrink();
-                    return ListTile(
-                      title: Padding(
-                        padding: const EdgeInsets.all(8),
-                        child: Text(items[index].address ?? ''),
+              )
+            : loadingAddress == true
+                ? const Padding(
+                    padding: EdgeInsets.all(12.0),
+                    child: Text(
+                      'Идет загрузка...',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.grey,
                       ),
-                      trailing: SizedBox(
-                        width: 20.0,
-                        height: 20.0,
-                        child: SvgPicture.asset(
-                          AppAssets.svg.point,
-                        ),
-                      ),
-                      onTap: () {
-                        onTap?.call(items[index]);
+                    ),
+                  )
+                : Expanded(
+                    child: ListView.separated(
+                      controller: controller,
+                      itemCount: items.length,
+                      itemBuilder: (context, index) {
+                        if (items[index].address?.isEmpty ?? true) return const SizedBox.shrink();
+                        return ListTile(
+                          title: Padding(
+                            padding: const EdgeInsets.all(8),
+                            child: Text(items[index].address ?? ''),
+                          ),
+                          trailing: SizedBox(
+                            width: 20.0,
+                            height: 20.0,
+                            child: SvgPicture.asset(
+                              AppAssets.svg.point,
+                            ),
+                          ),
+                          onTap: () {
+                            onTap?.call(items[index]);
+                          },
+                        );
                       },
-                    );
-                  },
-                  separatorBuilder: (context, _) {
-                    return const Divider();
-                  },
-                ),
-              ),
+                      separatorBuilder: (context, _) {
+                        return const Divider();
+                      },
+                    ),
+                  ),
       ],
     );
   }

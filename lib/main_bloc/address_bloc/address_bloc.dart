@@ -13,50 +13,58 @@ part 'address_bloc.freezed.dart';
 class AddressBloc extends Bloc<AddressEvent, AddressState> {
   AddressBloc() : super(const AddressState.address()) {
     on<InitAddress>((event, emit) async {
-      double? distanceInMeters;
-      double? bearing;
-      emit(state.copyWith(loadingAddress: true));
-      List<Placemark> placeMarks = await placemarkFromCoordinates(
-        event.lat,
-        event.lng,
-        localeIdentifier: 'en_US',
-      );
-      final address =
-          '${placeMarks.first.street}, ${placeMarks.first.administrativeArea}, ${placeMarks.first.subAdministrativeArea}, ${placeMarks.first.country}';
-      if (event.selectionObject) {
-        emit(state.copyWith(selectedAddress: address));
-      } else {
+      try {
+        double? distanceInMeters;
+        double? bearing;
+        emit(state.copyWith(loadingAddress: true));
+        List<Placemark> placeMarks = await placemarkFromCoordinates(
+          event.lat,
+          event.lng,
+          localeIdentifier: 'en_US',
+        );
+        final address =
+            '${placeMarks.first.street}, ${placeMarks.first.administrativeArea}, ${placeMarks.first.subAdministrativeArea}, ${placeMarks.first.country}';
+        if (event.selectionObject) {
+          emit(state.copyWith(selectedAddress: address));
+        } else {
+          emit(state.copyWith(
+            currentAddress: address,
+            selectedAddress: '',
+          ));
+        }
+        if (event.currentLat != null && event.currentLng != null) {
+          distanceInMeters = Geolocator.distanceBetween(
+            event.currentLat!,
+            event.currentLng!,
+            event.lat,
+            event.lng,
+          );
+
+          bearing = Geolocator.bearingBetween(
+            event.currentLat!,
+            event.currentLng!,
+            event.lat,
+            event.lng,
+          );
+        }
+        emit(
+          state.copyWith(
+            loadingAddress: false,
+            bearing: bearing,
+            distanceInMeters: distanceInMeters,
+            setMarkersOsm: event.selectionObject,
+            markersGoogle: await googleMarkers(event, emit),
+            markersYandex: await yandexMarkers(event, emit),
+            location: LocationMap(lat: event.lat, lng: event.lng),
+            error: '',
+          ),
+        );
+      } catch (error) {
         emit(state.copyWith(
-          currentAddress: address,
-          selectedAddress: '',
+          error: 'Что-то пошло не так ;)',
+          location: LocationMap(lat: event.lat, lng: event.lng),
         ));
       }
-      if (event.currentLat != null && event.currentLng != null) {
-        distanceInMeters = Geolocator.distanceBetween(
-          event.currentLat!,
-          event.currentLng!,
-          event.lat,
-          event.lng,
-        );
-
-        bearing = Geolocator.bearingBetween(
-          event.currentLat!,
-          event.currentLng!,
-          event.lat,
-          event.lng,
-        );
-      }
-      emit(
-        state.copyWith(
-          loadingAddress: false,
-          bearing: bearing,
-          distanceInMeters: distanceInMeters,
-          setMarkersOsm: event.selectionObject,
-          markersGoogle: await googleMarkers(event, emit),
-          markersYandex: await yandexMarkers(event, emit),
-          location: LocationMap(lat: event.lat, lng: event.lng),
-        ),
-      );
     });
   }
 }

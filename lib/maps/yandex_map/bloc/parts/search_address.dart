@@ -9,10 +9,19 @@ extension SearchAddress on YandexMapBloc {
       emit(state.copyWith(places: []));
       return;
     }
+    emit(state.copyWith(loadingAddress: true));
     final responsePlaces = await api.getAddressesYandex(event.search);
     if (responsePlaces.error != null) {
-      emit(state.copyWith(error: responsePlaces.error?.message));
+      emit(state.copyWith(
+        error: 'Что-то пошло не так ;)',
+        loadingAddress: false,
+      ));
+      return;
     }
-    emit(state.copyWith(places: responsePlaces.data));
+    emit(state.copyWith(
+      places: responsePlaces.data,
+      loadingAddress: false,
+      error: '',
+    ));
   }
 }

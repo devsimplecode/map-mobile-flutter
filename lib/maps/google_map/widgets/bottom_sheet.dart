@@ -19,9 +19,11 @@ Future<dynamic> showBottomSheetSearchGoogleAddress({required BuildContext contex
         minChildSize: .5,
         builder: (_, controller) {
           return BlocBuilder<GoogleMapBloc, GoogleMapState>(
-            buildWhen: (prev, curr) => prev.places != curr.places,
             builder: (context, state) {
+              print(state.error);
+
               return BottomSheetSearchAddress(
+                error: state.error,
                 controller: controller,
                 onTap: (result) {
                   Navigator.of(context).pop(result?.place?.geometry?.locationGoogle);
