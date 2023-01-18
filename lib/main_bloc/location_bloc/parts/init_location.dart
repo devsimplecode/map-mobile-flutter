@@ -26,13 +26,10 @@ extension InitLocation on LocationBloc {
       ));
     } catch (error) {
       var serviceEnabled = await location.serviceEnabled();
+      var permissionGranted = await location.hasPermission();
       if (!serviceEnabled) {
         serviceEnabled = await location.requestService();
-        if (!serviceEnabled) {
-          return;
-        }
       }
-      var permissionGranted = await location.hasPermission();
       if (permissionGranted == PermissionStatus.denied) {
         final response = await api.getIpAddress();
         if (response.error != null) {
@@ -47,9 +44,9 @@ extension InitLocation on LocationBloc {
         emit(LocationState.map(
           latitude: latitude,
           longitude: longitude,
+          key: UniqueKey(),
           moveToCurrentLocation: event.moveToCurrentLocation,
         ));
-        return;
       }
     }
   }

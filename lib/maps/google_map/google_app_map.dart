@@ -32,6 +32,8 @@ class _GoogleAppMapState extends State<GoogleAppMap> {
             state.maybeMap(
                 orElse: () {},
                 map: (google) {
+                  print('aaaaaaaa');
+
                   if (google.moveToCurrentLocation) {
                     _baseController?.animateCamera(
                       CameraUpdate.newLatLngZoom(

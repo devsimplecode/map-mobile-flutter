@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:location/location.dart';
@@ -38,10 +39,11 @@ class LocationState with _$LocationState {
     @Default(false) bool moveToCurrentLocation,
     double? latitude,
     double? longitude,
+    UniqueKey? key,
   }) = _Map;
 
   T? maybeCurrentLat<T extends double>() => maybeWhen(
-        map: (_, lat, lng) {
+        map: (_, lat, lng,__) {
           if (lat is T) {
             return lat;
           }
@@ -52,7 +54,7 @@ class LocationState with _$LocationState {
       );
 
   T? maybeCurrentLng<T extends double>() => maybeWhen(
-        map: (_, lat, lng) {
+        map: (_, lat, lng,__) {
           if (lng is T) {
             return lng;
           }
