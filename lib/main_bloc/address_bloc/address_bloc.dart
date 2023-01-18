@@ -7,6 +7,7 @@ import 'package:yandex_mapkit/yandex_mapkit.dart';
 import 'package:map_flutter/main_bloc/address_bloc/parts/google_markers.dart';
 import 'package:map_flutter/main_bloc/address_bloc/parts/yandex_markers.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:map_flutter/l10n/generated/l10n.dart';
 
 part 'address_bloc.freezed.dart';
 
@@ -61,7 +62,7 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
         );
       } catch (error) {
         emit(state.copyWith(
-          error: 'Данные не загружено',
+          error: S.current.dataNoLoaded,
           location: LocationMap(lat: event.lat, lng: event.lng),
         ));
       }

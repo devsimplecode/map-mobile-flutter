@@ -16,6 +16,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   cupertino_icons: ^1.0.2
   google_maps_flutter: ^2.2.3
   location: ^4.4.0
@@ -36,6 +38,13 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^2.0.0
   build_runner: ^2.3.3
+
+flutter_intl:
+  enabled: true
+  main_locale: "ru_RU"
+  arb-dir: lib/l10n/intl_ru_RU.arb
+  template-arb-file: intl_ru_RU.arb
+  output_dir: lib/l10n/generated
 
 flutter:
   uses-material-design: true

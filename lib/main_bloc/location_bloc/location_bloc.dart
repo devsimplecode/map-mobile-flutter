@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:location/location.dart';
 import 'package:map_flutter/repo/map_api.dart';
+import 'package:map_flutter/l10n/generated/l10n.dart';
 
 part 'location_bloc.freezed.dart';
 

@@ -38,7 +38,7 @@ extension SearchAddress on OsmMapBloc {
       ));
     } catch (error) {
       emit(state.copyWith(
-        error: 'Данные не загружено',
+        error: S.current.dataNoLoaded,
         loadingAddress: false,
       ));
     }

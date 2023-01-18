@@ -33,8 +33,8 @@ extension InitLocation on LocationBloc {
       if (permissionGranted == PermissionStatus.denied) {
         final response = await api.getIpAddress();
         if (response.error != null) {
-          emit(const LocationState.error(
-            error: 'Данные не загружено',
+          emit(LocationState.error(
+            error: S.current.dataNoLoaded,
           ));
           return;
         }

@@ -17,7 +17,7 @@ extension SearchAddress on GoogleMapBloc {
     if (responsePlaces.error != null) {
 
       emit(state.copyWith(
-        error: 'Данные не загружено',
+        error: S.current.dataNoLoaded,
         loadingAddress: false,
       ));
       return;
@@ -28,7 +28,7 @@ extension SearchAddress on GoogleMapBloc {
 
         if (responsePlace.error != null) {
           emit(state.copyWith(
-            error: 'Данные не загружено',
+            error: 'S.current.dataNoLoaded',
             loadingAddress: false,
           ));
           return;

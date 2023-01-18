@@ -13,7 +13,7 @@ extension SearchAddress on YandexMapBloc {
     final responsePlaces = await api.getAddressesYandex(event.search);
     if (responsePlaces.error != null) {
       emit(state.copyWith(
-        error: 'Данные не загружено',
+        error: S.current.dataNoLoaded,
         loadingAddress: false,
       ));
       return;

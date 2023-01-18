@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:map_flutter/main_bloc/type_map_bloc/type_map_bloc.dart';
+import 'package:map_flutter/l10n/generated/l10n.dart';
 
 Future<dynamic> showBottomSheetTypeMap({required BuildContext context}) async {
   final result = await showModalBottomSheet(
@@ -55,11 +56,11 @@ class BottomSheetSelectMap extends StatelessWidget {
       child: Column(
         children: [
           Row(
-            children: const [
+            children:  [
               Expanded(
                 child: Text(
-                  'Выберите тип карты:',
-                  style: TextStyle(
+                  S.of(context).selectMap,
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                   ),

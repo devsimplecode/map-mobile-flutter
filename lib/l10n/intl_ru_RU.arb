@@ -1,0 +1,10 @@
+{
+  "whereDoYouGo": "Куда поедете?",
+  "tryAgain": "Пробовать снова",
+  "ok": "Ok",
+  "yourLocation": "Ваше текущее местоположение:",
+  "loading": "Идет загрузка...",
+  "search": "Поиск",
+  "selectMap": "Выберите тип карты:",
+  "dataNoLoaded": "S.current.dataNoLoaded"
+}

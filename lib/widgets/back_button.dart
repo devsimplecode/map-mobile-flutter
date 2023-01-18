@@ -7,7 +7,6 @@ class AppBackButton extends StatelessWidget {
     this.onPressed,
   }) : super(key: key);
 
-  ///[icon] Svg icon widget
   final bool close;
   final Function()? onPressed;
 

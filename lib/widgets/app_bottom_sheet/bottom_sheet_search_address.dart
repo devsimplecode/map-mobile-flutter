@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:map_flutter/constants/assets.dart';
 import 'package:map_flutter/widgets/search_text_field.dart';
+import 'package:map_flutter/l10n/generated/l10n.dart';
 
 class BottomSheetSearchAddress extends StatelessWidget {
   const BottomSheetSearchAddress({
@@ -36,7 +37,7 @@ class BottomSheetSearchAddress extends StatelessWidget {
                 children: [
                   Expanded(
                     child: SearchTextField(
-                      hintText: 'Поиск',
+                      hintText: S.of(context).search,
                       onChanged: onChanged,
                       borderColor: Colors.black,
                       onFieldSubmitted: onFieldSubmitted,
@@ -59,11 +60,11 @@ class BottomSheetSearchAddress extends StatelessWidget {
                 ),
               )
             : loadingAddress == true
-                ? const Padding(
-                    padding: EdgeInsets.all(12.0),
+                ? Padding(
+                    padding: const EdgeInsets.all(12.0),
                     child: Text(
-                      'Идет загрузка...',
-                      style: TextStyle(
+                      S.of(context).loading,
+                      style: const TextStyle(
                         fontSize: 16,
                         color: Colors.grey,
                       ),

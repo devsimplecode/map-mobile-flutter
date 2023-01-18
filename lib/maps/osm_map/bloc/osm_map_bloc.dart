@@ -4,6 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:map_flutter/models/geometry.dart';
 import 'package:map_flutter/models/location.dart';
 import 'package:map_flutter/models/place.dart';
+import 'package:map_flutter/l10n/generated/l10n.dart';
 
 part 'osm_map_bloc.freezed.dart';
 

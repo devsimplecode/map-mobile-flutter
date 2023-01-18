@@ -13,6 +13,8 @@ import 'package:map_flutter/search_field.dart';
 import 'package:map_flutter/widgets/action_map_address.dart';
 import 'package:map_flutter/widgets/current_location_button.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:map_flutter/l10n/generated/l10n.dart';
 
 void main() {
   AndroidYandexMap.useAndroidViewSurface = false;
@@ -72,6 +74,14 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
+          debugShowCheckedModeBanner: false,
+          localizationsDelegates: const [
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: S.delegate.supportedLocales,
           home: const MapScreen(),
         ),
       ),

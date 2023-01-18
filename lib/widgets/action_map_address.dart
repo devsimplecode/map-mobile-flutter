@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:map_flutter/constants/assets.dart';
 import 'package:map_flutter/main_bloc/address_bloc/address_bloc.dart';
+import 'package:map_flutter/l10n/generated/l10n.dart';
 
 class ActionMapAddress extends StatelessWidget {
   const ActionMapAddress({Key? key}) : super(key: key);
@@ -37,9 +38,9 @@ class ActionMapAddress extends StatelessWidget {
               return Column(
                 children: [
                   if (address.selectedAddress?.isEmpty ?? true)
-                    const Text(
-                      'Ваше текущее местоположение:',
-                      style: TextStyle(
+                    Text(
+                      S.of(context).yourLocation,
+                      style: const TextStyle(
                         fontSize: 16,
                         color: Colors.grey,
                       ),

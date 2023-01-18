@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:map_flutter/widgets/back_button.dart';
+import 'package:map_flutter/l10n/generated/l10n.dart';
 
 Future<T?> showAlert<T>(
   BuildContext context,
@@ -90,14 +91,14 @@ class _SimpleAlertBodyState extends State<_SimpleAlertBody> with SingleTickerPro
               ),
               const SizedBox(height: 16),
               TextButton(
-                child: const Text('Пробовать снова'),
+                child: Text(S.of(context).tryAgain),
                 onPressed: () {
                   Navigator.of(context).pop();
                   widget.onPressed?.call();
                 },
               ),
               TextButton(
-                child: const Text('Ok'),
+                child: Text(S.of(context).ok),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
