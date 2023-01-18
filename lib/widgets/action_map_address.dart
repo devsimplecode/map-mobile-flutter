@@ -32,8 +32,8 @@ class ActionMapAddress extends StatelessWidget {
                 );
               }
               final distance = (address.distanceInMeters ?? 0) > 1000
-                  ? '${address.bearing?.toInt()} KM'
-                  : '${address.distanceInMeters?.toInt()} M';
+                  ? '${address.bearing?.toInt() ?? 0} KM'
+                  : '${address.distanceInMeters?.toInt() ?? 0} M';
               return Column(
                 children: [
                   if (address.selectedAddress?.isEmpty ?? true)

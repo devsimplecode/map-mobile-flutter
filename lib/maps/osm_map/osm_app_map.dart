@@ -95,7 +95,6 @@ class _OsmAppMapState extends State<OsmAppMap> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<LocationBloc, LocationState>(
-      listenWhen: (prev, curr) => prev.maybeListen() != curr.maybeListen(),
       listener: (context, state) {
         state.maybeMap(
           orElse: () {},
@@ -121,9 +120,6 @@ class _OsmAppMapState extends State<OsmAppMap> {
             controller: markerController,
             initZoom: 18,
             stepZoom: 5,
-            onMapIsReady: (value) async {
-              await markerController.enableTracking();
-            },
             staticPoints: [
               StaticPositionGeoPoint(
                 '1',

@@ -5,8 +5,6 @@ extension InitLocation on LocationBloc {
     _InitLocation event,
     Emitter<LocationState> emit,
   ) async {
-    int listenNot = state.maybeListen() ?? 0;
-    listenNot++;
     double? latitude;
     double? longitude;
     if (!event.moveToCurrentLocation) emit(const LocationState.loading());
@@ -24,7 +22,6 @@ extension InitLocation on LocationBloc {
       emit(LocationState.map(
         latitude: latitude,
         longitude: longitude,
-        listen: listenNot,
         moveToCurrentLocation: event.moveToCurrentLocation,
       ));
     } catch (error) {
@@ -50,7 +47,6 @@ extension InitLocation on LocationBloc {
         emit(LocationState.map(
           latitude: latitude,
           longitude: longitude,
-          listen: listenNot,
           moveToCurrentLocation: event.moveToCurrentLocation,
         ));
         return;

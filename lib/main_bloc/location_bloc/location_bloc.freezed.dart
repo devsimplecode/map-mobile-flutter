@@ -229,8 +229,8 @@ mixin _$LocationState {
     required TResult Function() init,
     required TResult Function(String? error) error,
     required TResult Function() loading,
-    required TResult Function(bool moveToCurrentLocation, double? latitude,
-            double? longitude, int listen)
+    required TResult Function(
+            bool moveToCurrentLocation, double? latitude, double? longitude)
         map,
   }) =>
       throw _privateConstructorUsedError;
@@ -239,8 +239,8 @@ mixin _$LocationState {
     TResult? Function()? init,
     TResult? Function(String? error)? error,
     TResult? Function()? loading,
-    TResult? Function(bool moveToCurrentLocation, double? latitude,
-            double? longitude, int listen)?
+    TResult? Function(
+            bool moveToCurrentLocation, double? latitude, double? longitude)?
         map,
   }) =>
       throw _privateConstructorUsedError;
@@ -249,8 +249,8 @@ mixin _$LocationState {
     TResult Function()? init,
     TResult Function(String? error)? error,
     TResult Function()? loading,
-    TResult Function(bool moveToCurrentLocation, double? latitude,
-            double? longitude, int listen)?
+    TResult Function(
+            bool moveToCurrentLocation, double? latitude, double? longitude)?
         map,
     required TResult orElse(),
   }) =>
@@ -339,8 +339,8 @@ class _$_Init extends _Init {
     required TResult Function() init,
     required TResult Function(String? error) error,
     required TResult Function() loading,
-    required TResult Function(bool moveToCurrentLocation, double? latitude,
-            double? longitude, int listen)
+    required TResult Function(
+            bool moveToCurrentLocation, double? latitude, double? longitude)
         map,
   }) {
     return init();
@@ -352,8 +352,8 @@ class _$_Init extends _Init {
     TResult? Function()? init,
     TResult? Function(String? error)? error,
     TResult? Function()? loading,
-    TResult? Function(bool moveToCurrentLocation, double? latitude,
-            double? longitude, int listen)?
+    TResult? Function(
+            bool moveToCurrentLocation, double? latitude, double? longitude)?
         map,
   }) {
     return init?.call();
@@ -365,8 +365,8 @@ class _$_Init extends _Init {
     TResult Function()? init,
     TResult Function(String? error)? error,
     TResult Function()? loading,
-    TResult Function(bool moveToCurrentLocation, double? latitude,
-            double? longitude, int listen)?
+    TResult Function(
+            bool moveToCurrentLocation, double? latitude, double? longitude)?
         map,
     required TResult orElse(),
   }) {
@@ -484,8 +484,8 @@ class _$_Error extends _Error {
     required TResult Function() init,
     required TResult Function(String? error) error,
     required TResult Function() loading,
-    required TResult Function(bool moveToCurrentLocation, double? latitude,
-            double? longitude, int listen)
+    required TResult Function(
+            bool moveToCurrentLocation, double? latitude, double? longitude)
         map,
   }) {
     return error(this.error);
@@ -497,8 +497,8 @@ class _$_Error extends _Error {
     TResult? Function()? init,
     TResult? Function(String? error)? error,
     TResult? Function()? loading,
-    TResult? Function(bool moveToCurrentLocation, double? latitude,
-            double? longitude, int listen)?
+    TResult? Function(
+            bool moveToCurrentLocation, double? latitude, double? longitude)?
         map,
   }) {
     return error?.call(this.error);
@@ -510,8 +510,8 @@ class _$_Error extends _Error {
     TResult Function()? init,
     TResult Function(String? error)? error,
     TResult Function()? loading,
-    TResult Function(bool moveToCurrentLocation, double? latitude,
-            double? longitude, int listen)?
+    TResult Function(
+            bool moveToCurrentLocation, double? latitude, double? longitude)?
         map,
     required TResult orElse(),
   }) {
@@ -609,8 +609,8 @@ class _$_Loading extends _Loading {
     required TResult Function() init,
     required TResult Function(String? error) error,
     required TResult Function() loading,
-    required TResult Function(bool moveToCurrentLocation, double? latitude,
-            double? longitude, int listen)
+    required TResult Function(
+            bool moveToCurrentLocation, double? latitude, double? longitude)
         map,
   }) {
     return loading();
@@ -622,8 +622,8 @@ class _$_Loading extends _Loading {
     TResult? Function()? init,
     TResult? Function(String? error)? error,
     TResult? Function()? loading,
-    TResult? Function(bool moveToCurrentLocation, double? latitude,
-            double? longitude, int listen)?
+    TResult? Function(
+            bool moveToCurrentLocation, double? latitude, double? longitude)?
         map,
   }) {
     return loading?.call();
@@ -635,8 +635,8 @@ class _$_Loading extends _Loading {
     TResult Function()? init,
     TResult Function(String? error)? error,
     TResult Function()? loading,
-    TResult Function(bool moveToCurrentLocation, double? latitude,
-            double? longitude, int listen)?
+    TResult Function(
+            bool moveToCurrentLocation, double? latitude, double? longitude)?
         map,
     required TResult orElse(),
   }) {
@@ -694,11 +694,7 @@ abstract class _$$_MapCopyWith<$Res> {
   factory _$$_MapCopyWith(_$_Map value, $Res Function(_$_Map) then) =
       __$$_MapCopyWithImpl<$Res>;
   @useResult
-  $Res call(
-      {bool moveToCurrentLocation,
-      double? latitude,
-      double? longitude,
-      int listen});
+  $Res call({bool moveToCurrentLocation, double? latitude, double? longitude});
 }
 
 /// @nodoc
@@ -714,7 +710,6 @@ class __$$_MapCopyWithImpl<$Res>
     Object? moveToCurrentLocation = null,
     Object? latitude = freezed,
     Object? longitude = freezed,
-    Object? listen = null,
   }) {
     return _then(_$_Map(
       moveToCurrentLocation: null == moveToCurrentLocation
@@ -729,10 +724,6 @@ class __$$_MapCopyWithImpl<$Res>
           ? _value.longitude
           : longitude // ignore: cast_nullable_to_non_nullable
               as double?,
-      listen: null == listen
-          ? _value.listen
-          : listen // ignore: cast_nullable_to_non_nullable
-              as int,
     ));
   }
 }
@@ -741,10 +732,7 @@ class __$$_MapCopyWithImpl<$Res>
 
 class _$_Map extends _Map {
   const _$_Map(
-      {this.moveToCurrentLocation = false,
-      this.latitude,
-      this.longitude,
-      this.listen = 0})
+      {this.moveToCurrentLocation = false, this.latitude, this.longitude})
       : super._();
 
   @override
@@ -754,13 +742,10 @@ class _$_Map extends _Map {
   final double? latitude;
   @override
   final double? longitude;
-  @override
-  @JsonKey()
-  final int listen;
 
   @override
   String toString() {
-    return 'LocationState.map(moveToCurrentLocation: $moveToCurrentLocation, latitude: $latitude, longitude: $longitude, listen: $listen)';
+    return 'LocationState.map(moveToCurrentLocation: $moveToCurrentLocation, latitude: $latitude, longitude: $longitude)';
   }
 
   @override
@@ -773,13 +758,12 @@ class _$_Map extends _Map {
             (identical(other.latitude, latitude) ||
                 other.latitude == latitude) &&
             (identical(other.longitude, longitude) ||
-                other.longitude == longitude) &&
-            (identical(other.listen, listen) || other.listen == listen));
+                other.longitude == longitude));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, moveToCurrentLocation, latitude, longitude, listen);
+  int get hashCode =>
+      Object.hash(runtimeType, moveToCurrentLocation, latitude, longitude);
 
   @JsonKey(ignore: true)
   @override
@@ -793,11 +777,11 @@ class _$_Map extends _Map {
     required TResult Function() init,
     required TResult Function(String? error) error,
     required TResult Function() loading,
-    required TResult Function(bool moveToCurrentLocation, double? latitude,
-            double? longitude, int listen)
+    required TResult Function(
+            bool moveToCurrentLocation, double? latitude, double? longitude)
         map,
   }) {
-    return map(moveToCurrentLocation, latitude, longitude, listen);
+    return map(moveToCurrentLocation, latitude, longitude);
   }
 
   @override
@@ -806,11 +790,11 @@ class _$_Map extends _Map {
     TResult? Function()? init,
     TResult? Function(String? error)? error,
     TResult? Function()? loading,
-    TResult? Function(bool moveToCurrentLocation, double? latitude,
-            double? longitude, int listen)?
+    TResult? Function(
+            bool moveToCurrentLocation, double? latitude, double? longitude)?
         map,
   }) {
-    return map?.call(moveToCurrentLocation, latitude, longitude, listen);
+    return map?.call(moveToCurrentLocation, latitude, longitude);
   }
 
   @override
@@ -819,13 +803,13 @@ class _$_Map extends _Map {
     TResult Function()? init,
     TResult Function(String? error)? error,
     TResult Function()? loading,
-    TResult Function(bool moveToCurrentLocation, double? latitude,
-            double? longitude, int listen)?
+    TResult Function(
+            bool moveToCurrentLocation, double? latitude, double? longitude)?
         map,
     required TResult orElse(),
   }) {
     if (map != null) {
-      return map(moveToCurrentLocation, latitude, longitude, listen);
+      return map(moveToCurrentLocation, latitude, longitude);
     }
     return orElse();
   }
@@ -872,14 +856,12 @@ abstract class _Map extends LocationState {
   const factory _Map(
       {final bool moveToCurrentLocation,
       final double? latitude,
-      final double? longitude,
-      final int listen}) = _$_Map;
+      final double? longitude}) = _$_Map;
   const _Map._() : super._();
 
   bool get moveToCurrentLocation;
   double? get latitude;
   double? get longitude;
-  int get listen;
   @JsonKey(ignore: true)
   _$$_MapCopyWith<_$_Map> get copyWith => throw _privateConstructorUsedError;
 }

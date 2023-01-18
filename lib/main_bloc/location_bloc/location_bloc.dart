@@ -38,11 +38,10 @@ class LocationState with _$LocationState {
     @Default(false) bool moveToCurrentLocation,
     double? latitude,
     double? longitude,
-    @Default(0) int listen,
   }) = _Map;
 
   T? maybeCurrentLat<T extends double>() => maybeWhen(
-        map: (_, lat, lng, __) {
+        map: (_, lat, lng) {
           if (lat is T) {
             return lat;
           }
@@ -53,7 +52,7 @@ class LocationState with _$LocationState {
       );
 
   T? maybeCurrentLng<T extends double>() => maybeWhen(
-        map: (_, lat, lng, __) {
+        map: (_, lat, lng) {
           if (lng is T) {
             return lng;
           }
@@ -63,14 +62,4 @@ class LocationState with _$LocationState {
         orElse: () => null,
       );
 
-  T? maybeListen<T extends int>() => maybeWhen(
-        map: (_, __, ___, listen) {
-          if (listen is T) {
-            return listen;
-          }
-
-          return null;
-        },
-        orElse: () => null,
-      );
 }
