@@ -50,6 +50,7 @@ class _YandexAppMapState extends State<YandexAppMap> {
         );
       },
       child: BlocConsumer<AddressBloc, AddressState>(
+        listenWhen: (prev, curr) => prev.markersYandex != curr.markersYandex,
         listener: (context, state) {
           if (state.markersYandex?.isNotEmpty ?? false) {
             _baseController.moveCamera(

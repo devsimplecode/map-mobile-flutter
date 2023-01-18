@@ -44,6 +44,7 @@ class _GoogleAppMapState extends State<GoogleAppMap> {
           },
         ),
         BlocListener<AddressBloc, AddressState>(
+          listenWhen: (prev, curr) => prev.markersGoogle != curr.markersGoogle,
           listener: (context, state) async {
             if (state.markersGoogle?.isNotEmpty ?? false) {
               _baseController?.animateCamera(

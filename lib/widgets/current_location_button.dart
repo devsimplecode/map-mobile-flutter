@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:map_flutter/constants/assets.dart';
 import 'package:map_flutter/main_bloc/location_bloc/location_bloc.dart';
 
 class CurrentLocationButton extends StatelessWidget {
@@ -14,7 +12,14 @@ class CurrentLocationButton extends StatelessWidget {
         BlocProvider.of<LocationBloc>(context)
             .add(const LocationEvent.initLocation(moveToCurrentLocation: true));
       },
-      child: SvgPicture.asset(AppAssets.svg.navigationButton),
+      child: Container(
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: const Icon(Icons.my_location_rounded),
+      ),
     );
   }
 }
