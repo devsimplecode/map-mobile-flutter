@@ -61,7 +61,7 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
         );
       } catch (error) {
         emit(state.copyWith(
-          error: 'Что-то пошло не так ;)',
+          error: 'Данные не загружено',
           location: LocationMap(lat: event.lat, lng: event.lng),
         ));
       }

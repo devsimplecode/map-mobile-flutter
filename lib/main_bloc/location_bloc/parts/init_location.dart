@@ -37,7 +37,7 @@ extension InitLocation on LocationBloc {
         final response = await api.getIpAddress();
         if (response.error != null) {
           emit(const LocationState.error(
-            error: 'Что-то пошло не так ;)',
+            error: 'Данные не загружено',
           ));
           return;
         }
