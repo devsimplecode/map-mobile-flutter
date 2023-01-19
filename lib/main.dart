@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:map_flutter/app_map.dart';
+import 'package:map_flutter/core/check_internet/bloc/bloc_check_internet.dart';
+import 'package:map_flutter/core/check_internet/check_internet_connection.dart';
 import 'package:map_flutter/main_bloc/address_bloc/address_bloc.dart';
 import 'package:map_flutter/main_bloc/location_bloc/location_bloc.dart';
 import 'package:map_flutter/main_bloc/type_map_bloc/type_map_bloc.dart';
@@ -40,10 +42,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider(
-      create: (context) => MapApi(),
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider(
+          create: (context) => MapApi(),
+        ),
+        RepositoryProvider(
+          create: (context) => CheckInternetConnection(),
+        ),
+      ],
       child: MultiBlocProvider(
         providers: [
+          BlocProvider(
+            create: (context) => BlocCheckInternet(
+              RepositoryProvider.of<CheckInternetConnection>(context),
+            ),
+          ),
           BlocProvider(
             create: (context) => TypeMapCubit()..initMapsType(),
           ),
@@ -53,7 +67,9 @@ class MyApp extends StatelessWidget {
             )..add(const LocationEvent.initLocation()),
           ),
           BlocProvider(
-            create: (context) => AddressBloc(),
+            create: (context) => AddressBloc(
+              bloc: BlocProvider.of<LocationBloc>(context),
+            ),
           ),
           BlocProvider(
             create: (context) => GoogleMapBloc(
@@ -100,8 +116,8 @@ class MapScreen extends StatelessWidget {
           const AppMap(),
           Positioned(
             top: MediaQuery.of(context).viewPadding.top,
-            left: 16,
-            right: 16,
+            left: 0,
+            right: 0,
             child: const SearchField(),
           ),
           Positioned(

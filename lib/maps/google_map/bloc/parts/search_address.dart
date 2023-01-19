@@ -12,38 +12,39 @@ extension SearchAddress on GoogleMapBloc {
     emit(state.copyWith(loadingAddress: true));
 
     List<PlaceSearch> takePlaces = [];
-    final responsePlaces = await api.getAddressesGoogle(event.search);
+      final responsePlaces = await api.getAddressesGoogle(
+        event.search,
+      );
 
-    if (responsePlaces.error != null) {
-
-      emit(state.copyWith(
-        error: S.current.dataNoLoaded,
-        loadingAddress: false,
-      ));
-      return;
-    }
-    for (PlaceSearch item in responsePlaces.data ?? []) {
-      if (item.placeId != null) {
-        final responsePlace = await api.getPlaceGoogle(item.placeId!);
-
-        if (responsePlace.error != null) {
-          emit(state.copyWith(
-            error: 'S.current.dataNoLoaded',
-            loadingAddress: false,
-          ));
-          return;
-        }
-        takePlaces.add(PlaceSearch(
-          placeId: item.placeId,
-          address: item.address,
-          place: responsePlace.data,
+      if (responsePlaces.error != null) {
+        emit(state.copyWith(
+          error: S.current.dataNoLoaded,
+          loadingAddress: false,
         ));
+        return;
       }
-    }
-    emit(state.copyWith(
-      places: takePlaces,
-      loadingAddress: false,
-      error: '',
-    ));
+      for (PlaceSearch item in responsePlaces.data ?? []) {
+        if (item.placeId != null) {
+          final responsePlace = await api.getPlaceGoogle(item.placeId!);
+
+          if (responsePlace.error != null) {
+            emit(state.copyWith(
+              error: 'S.current.dataNoLoaded',
+              loadingAddress: false,
+            ));
+            return;
+          }
+          takePlaces.add(PlaceSearch(
+            placeId: item.placeId,
+            address: item.address,
+            place: responsePlace.data,
+          ));
+        }
+      }
+      emit(state.copyWith(
+        places: takePlaces,
+        loadingAddress: false,
+        error: '',
+      ));
   }
 }

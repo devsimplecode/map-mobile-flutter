@@ -31,16 +31,18 @@ extension GoogleMarkers on AddressBloc {
           )),
     ]);
     if (event.selectionObject) {
-      markers.add(
-        PlacemarkMapObject(
-          icon: iconLocation,
-          mapId: const MapObjectId('1'),
-          point: Point(
-            latitude: event.currentLat ?? 0.0,
-            longitude: event.currentLng ?? 0.0,
+      if (event.setCurrMarker) {
+        markers.add(
+          PlacemarkMapObject(
+            icon: iconLocation,
+            mapId: const MapObjectId('1'),
+            point: Point(
+              latitude: event.currentLat ?? 0.0,
+              longitude: event.currentLng ?? 0.0,
+            ),
           ),
-        ),
-      );
+        );
+      }
       markers.add(
         PlacemarkMapObject(
           icon: iconPoint,

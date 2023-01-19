@@ -6,5 +6,9 @@
   "loading": "Идет загрузка...",
   "search": "Поиск",
   "selectMap": "Выберите тип карты:",
-  "dataNoLoaded": "S.current.dataNoLoaded"
+  "dataNoLoaded": "Данные не загружено",
+  "givePermission": "Разрешите доступ к геолокации",
+  "unreceivedLocation": "Не удалось определить, где вы",
+  "noInternet": "Нет соединения",
+  "checkInternet": "Проверьте подключение к интернету"
 }

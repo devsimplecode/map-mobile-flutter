@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
+import 'package:location/location.dart';
 import 'package:map_flutter/constants/assets.dart';
+import 'package:map_flutter/core/check_internet/check_internet_connection.dart';
 import 'package:map_flutter/main_bloc/address_bloc/address_bloc.dart';
 import 'package:map_flutter/main_bloc/location_bloc/location_bloc.dart';
 
@@ -10,9 +12,13 @@ class OsmAppMap extends StatefulWidget {
     Key? key,
     required this.latitude,
     required this.longitude,
+    required this.locationStatus,
+    required this.connectionStatus,
   }) : super(key: key);
   final double? latitude;
   final double? longitude;
+  final PermissionStatus? locationStatus;
+  final ConnectionStatus? connectionStatus;
 
   @override
   State<OsmAppMap> createState() => _OsmAppMapState();
@@ -33,7 +39,8 @@ class _OsmAppMapState extends State<OsmAppMap> {
       ),
     );
     markerController.listenerMapSingleTapping.addListener(() async {
-      if (markerController.listenerMapSingleTapping.value != null) {
+      if (markerController.listenerMapSingleTapping.value != null &&
+          widget.connectionStatus == ConnectionStatus.online) {
         initAddress(markerController.listenerMapSingleTapping.value!);
       }
     });
@@ -47,6 +54,7 @@ class _OsmAppMapState extends State<OsmAppMap> {
       currentLng: widget.longitude!,
       currentLat: widget.latitude!,
       selectionObject: true,
+      setCurrMarker: widget.locationStatus == PermissionStatus.granted,
     ));
   }
 
@@ -95,11 +103,12 @@ class _OsmAppMapState extends State<OsmAppMap> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<LocationBloc, LocationState>(
+      listenWhen: (prev, curr) => prev.maybeKey() != curr.maybeKey(),
       listener: (context, state) {
         state.maybeMap(
           orElse: () {},
-          map: (osm) async {
-            if (osm.moveToCurrentLocation) {
+          map: (google) async {
+            if (google.status == PermissionStatus.granted) {
               await moveToCurrentLocation();
             }
           },
@@ -118,23 +127,24 @@ class _OsmAppMapState extends State<OsmAppMap> {
         builder: (context, state) {
           return OSMFlutter(
             controller: markerController,
-            initZoom: 18,
+            initZoom: widget.locationStatus == PermissionStatus.granted ? 18 : 2,
             stepZoom: 5,
             staticPoints: [
-              StaticPositionGeoPoint(
-                '1',
-                MarkerIcon(
-                  assetMarker: AssetMarker(
-                    image: AssetImage(AppAssets.images.location),
+              if (widget.locationStatus == PermissionStatus.granted)
+                StaticPositionGeoPoint(
+                  '1',
+                  MarkerIcon(
+                    assetMarker: AssetMarker(
+                      image: AssetImage(AppAssets.images.location),
+                    ),
                   ),
+                  [
+                    GeoPoint(
+                      latitude: widget.latitude!,
+                      longitude: widget.longitude!,
+                    ),
+                  ],
                 ),
-                [
-                  GeoPoint(
-                    latitude: widget.latitude!,
-                    longitude: widget.longitude!,
-                  ),
-                ],
-              ),
             ],
           );
         },

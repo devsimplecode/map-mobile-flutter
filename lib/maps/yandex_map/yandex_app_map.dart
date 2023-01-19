@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:location/location.dart';
+import 'package:map_flutter/core/check_internet/check_internet_connection.dart';
 import 'package:map_flutter/main_bloc/address_bloc/address_bloc.dart';
 import 'package:map_flutter/main_bloc/location_bloc/location_bloc.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
@@ -11,9 +13,13 @@ class YandexAppMap extends StatefulWidget {
     Key? key,
     required this.latitude,
     required this.longitude,
+    required this.locationStatus,
+    required this.connectionStatus,
   }) : super(key: key);
   final double? latitude;
   final double? longitude;
+  final PermissionStatus? locationStatus;
+  final ConnectionStatus? connectionStatus;
 
   @override
   State<YandexAppMap> createState() => _YandexAppMapState();
@@ -26,11 +32,12 @@ class _YandexAppMapState extends State<YandexAppMap> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<LocationBloc, LocationState>(
+      listenWhen: (prev, curr) => prev.maybeKey() != curr.maybeKey(),
       listener: (context, state) {
         state.maybeMap(
           orElse: () {},
-          map: (yandex) {
-            if (yandex.moveToCurrentLocation) {
+          map: (google) {
+            if (google.status == PermissionStatus.granted) {
               _baseController.moveCamera(
                 CameraUpdate.newCameraPosition(
                   CameraPosition(
@@ -73,30 +80,35 @@ class _YandexAppMapState extends State<YandexAppMap> {
           return YandexMap(
             onMapCreated: (YandexMapController yandexMapController) async {
               _baseController = yandexMapController;
-              _controller.complete(yandexMapController);
-              yandexMapController.moveCamera(
-                CameraUpdate.newCameraPosition(
-                  CameraPosition(
-                    target: Point(
-                      latitude: widget.latitude!,
-                      longitude: widget.longitude!,
+              if (widget.locationStatus == PermissionStatus.granted) {
+                yandexMapController.moveCamera(
+                  CameraUpdate.newCameraPosition(
+                    CameraPosition(
+                      target: Point(
+                        latitude: widget.latitude!,
+                        longitude: widget.longitude!,
+                      ),
+                      zoom: 16,
                     ),
-                    zoom: 16,
                   ),
-                ),
-                animation: const MapAnimation(
-                  duration: 2.0,
-                ),
-              );
+                  animation: const MapAnimation(
+                    duration: 2.0,
+                  ),
+                );
+              }
+              _controller.complete(yandexMapController);
             },
             onMapTap: (point) {
-              BlocProvider.of<AddressBloc>(context).add(AddressEvent.initAddress(
-                lat: point.latitude,
-                lng: point.longitude,
-                currentLat: widget.latitude!,
-                currentLng: widget.longitude!,
-                selectionObject: true,
-              ));
+              if (widget.connectionStatus == ConnectionStatus.online) {
+                BlocProvider.of<AddressBloc>(context).add(AddressEvent.initAddress(
+                  lat: point.latitude,
+                  lng: point.longitude,
+                  currentLat: widget.latitude!,
+                  currentLng: widget.longitude!,
+                  selectionObject: true,
+                  setCurrMarker: widget.locationStatus == PermissionStatus.granted,
+                ));
+              }
             },
             mapObjects: state.markersYandex ?? [],
           );

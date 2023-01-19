@@ -48,7 +48,8 @@ class MapApi {
   }
 
   Future<RequestResponse<List<PlaceSearch>>> getAddressesGoogle(
-    String search, {
+    String search,
+   {
     Map<String, dynamic>? queryParameters,
     Map<String, String>? headers,
   }) async {

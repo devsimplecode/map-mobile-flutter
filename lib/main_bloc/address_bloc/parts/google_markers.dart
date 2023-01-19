@@ -21,7 +21,8 @@ extension GoogleMarkers on AddressBloc {
       AppAssets.images.location,
     );
     if (event.selectionObject) {
-      markersList.add(
+     if(event.setCurrMarker) {
+       markersList.add(
         Marker(
           icon: iconLocation,
           anchor: const Offset(0.5, 0.5),
@@ -29,6 +30,7 @@ extension GoogleMarkers on AddressBloc {
           position: LatLng(event.currentLat ?? 0.0, event.currentLng ?? 0.0),
         ),
       );
+     }
       markersList.add(
         Marker(
           icon: iconPoint,

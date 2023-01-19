@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:map_flutter/main_bloc/location_bloc/location_bloc.dart';
 import 'package:map_flutter/models/place_search.dart';
 import 'package:map_flutter/repo/map_api.dart';
 import 'package:map_flutter/l10n/generated/l10n.dart';
@@ -9,7 +10,9 @@ part 'google_map_bloc.freezed.dart';
 part 'parts/search_address.dart';
 
 class GoogleMapBloc extends Bloc<GoogleMapEvent, GoogleMapState> {
-  GoogleMapBloc({required this.api}) : super(const GoogleMapState.google()) {
+  GoogleMapBloc({
+    required this.api,
+  }) : super(const GoogleMapState.google()) {
     on<_SearchAddress>(_searchAddress);
   }
 

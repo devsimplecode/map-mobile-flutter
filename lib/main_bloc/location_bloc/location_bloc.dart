@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -10,7 +12,9 @@ part 'location_bloc.freezed.dart';
 part 'parts/init_location.dart';
 
 class LocationBloc extends Bloc<LocationEvent, LocationState> {
-  LocationBloc({required this.api}) : super(const LocationState.init()) {
+  LocationBloc({
+    required this.api,
+  }) : super(const LocationState.init()) {
     on<_InitLocation>(_initLocation);
   }
 
@@ -30,21 +34,16 @@ class LocationState with _$LocationState {
 
   const factory LocationState.init() = _Init;
 
-  const factory LocationState.error({
-    required String? error,
-  }) = _Error;
-
-  const factory LocationState.loading() = _Loading;
-
   const factory LocationState.map({
     @Default(false) bool moveToCurrentLocation,
     double? latitude,
     double? longitude,
+    PermissionStatus? status,
     UniqueKey? key,
   }) = _Map;
 
   T? maybeCurrentLat<T extends double>() => maybeWhen(
-        map: (_, lat, lng,__) {
+        map: (_, lat, lng, __, ___) {
           if (lat is T) {
             return lat;
           }
@@ -55,7 +54,7 @@ class LocationState with _$LocationState {
       );
 
   T? maybeCurrentLng<T extends double>() => maybeWhen(
-        map: (_, lat, lng,__) {
+        map: (_, lat, lng, __, ___) {
           if (lng is T) {
             return lng;
           }
@@ -65,4 +64,25 @@ class LocationState with _$LocationState {
         orElse: () => null,
       );
 
+  T? maybeLocationStatus<T extends PermissionStatus>() => maybeWhen(
+        map: (_, lat, lng, status, ___) {
+          if (status is T) {
+            return status;
+          }
+
+          return null;
+        },
+        orElse: () => null,
+      );
+
+  T? maybeKey<T extends UniqueKey>() => maybeWhen(
+        map: (_, lat, lng, __, key) {
+          if (key is T) {
+            return key;
+          }
+
+          return null;
+        },
+        orElse: () => null,
+      );
 }

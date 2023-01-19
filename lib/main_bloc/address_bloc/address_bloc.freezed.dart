@@ -21,24 +21,25 @@ mixin _$AddressEvent {
   double? get currentLat => throw _privateConstructorUsedError;
   double? get currentLng => throw _privateConstructorUsedError;
   bool get selectionObject => throw _privateConstructorUsedError;
+  bool get setCurrMarker => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(double lat, double lng, double? currentLat,
-            double? currentLng, bool selectionObject)
+            double? currentLng, bool selectionObject, bool setCurrMarker)
         initAddress,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(double lat, double lng, double? currentLat,
-            double? currentLng, bool selectionObject)?
+            double? currentLng, bool selectionObject, bool setCurrMarker)?
         initAddress,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(double lat, double lng, double? currentLat,
-            double? currentLng, bool selectionObject)?
+            double? currentLng, bool selectionObject, bool setCurrMarker)?
         initAddress,
     required TResult orElse(),
   }) =>
@@ -76,7 +77,8 @@ abstract class $AddressEventCopyWith<$Res> {
       double lng,
       double? currentLat,
       double? currentLng,
-      bool selectionObject});
+      bool selectionObject,
+      bool setCurrMarker});
 }
 
 /// @nodoc
@@ -97,6 +99,7 @@ class _$AddressEventCopyWithImpl<$Res, $Val extends AddressEvent>
     Object? currentLat = freezed,
     Object? currentLng = freezed,
     Object? selectionObject = null,
+    Object? setCurrMarker = null,
   }) {
     return _then(_value.copyWith(
       lat: null == lat
@@ -119,6 +122,10 @@ class _$AddressEventCopyWithImpl<$Res, $Val extends AddressEvent>
           ? _value.selectionObject
           : selectionObject // ignore: cast_nullable_to_non_nullable
               as bool,
+      setCurrMarker: null == setCurrMarker
+          ? _value.setCurrMarker
+          : setCurrMarker // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -136,7 +143,8 @@ abstract class _$$InitAddressCopyWith<$Res>
       double lng,
       double? currentLat,
       double? currentLng,
-      bool selectionObject});
+      bool selectionObject,
+      bool setCurrMarker});
 }
 
 /// @nodoc
@@ -155,6 +163,7 @@ class __$$InitAddressCopyWithImpl<$Res>
     Object? currentLat = freezed,
     Object? currentLng = freezed,
     Object? selectionObject = null,
+    Object? setCurrMarker = null,
   }) {
     return _then(_$InitAddress(
       lat: null == lat
@@ -177,6 +186,10 @@ class __$$InitAddressCopyWithImpl<$Res>
           ? _value.selectionObject
           : selectionObject // ignore: cast_nullable_to_non_nullable
               as bool,
+      setCurrMarker: null == setCurrMarker
+          ? _value.setCurrMarker
+          : setCurrMarker // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -189,7 +202,8 @@ class _$InitAddress implements InitAddress {
       required this.lng,
       this.currentLat,
       this.currentLng,
-      this.selectionObject = false});
+      this.selectionObject = false,
+      this.setCurrMarker = true});
 
   @override
   final double lat;
@@ -202,10 +216,13 @@ class _$InitAddress implements InitAddress {
   @override
   @JsonKey()
   final bool selectionObject;
+  @override
+  @JsonKey()
+  final bool setCurrMarker;
 
   @override
   String toString() {
-    return 'AddressEvent.initAddress(lat: $lat, lng: $lng, currentLat: $currentLat, currentLng: $currentLng, selectionObject: $selectionObject)';
+    return 'AddressEvent.initAddress(lat: $lat, lng: $lng, currentLat: $currentLat, currentLng: $currentLng, selectionObject: $selectionObject, setCurrMarker: $setCurrMarker)';
   }
 
   @override
@@ -220,12 +237,14 @@ class _$InitAddress implements InitAddress {
             (identical(other.currentLng, currentLng) ||
                 other.currentLng == currentLng) &&
             (identical(other.selectionObject, selectionObject) ||
-                other.selectionObject == selectionObject));
+                other.selectionObject == selectionObject) &&
+            (identical(other.setCurrMarker, setCurrMarker) ||
+                other.setCurrMarker == setCurrMarker));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, lat, lng, currentLat, currentLng, selectionObject);
+  int get hashCode => Object.hash(runtimeType, lat, lng, currentLat, currentLng,
+      selectionObject, setCurrMarker);
 
   @JsonKey(ignore: true)
   @override
@@ -237,32 +256,35 @@ class _$InitAddress implements InitAddress {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(double lat, double lng, double? currentLat,
-            double? currentLng, bool selectionObject)
+            double? currentLng, bool selectionObject, bool setCurrMarker)
         initAddress,
   }) {
-    return initAddress(lat, lng, currentLat, currentLng, selectionObject);
+    return initAddress(
+        lat, lng, currentLat, currentLng, selectionObject, setCurrMarker);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(double lat, double lng, double? currentLat,
-            double? currentLng, bool selectionObject)?
+            double? currentLng, bool selectionObject, bool setCurrMarker)?
         initAddress,
   }) {
-    return initAddress?.call(lat, lng, currentLat, currentLng, selectionObject);
+    return initAddress?.call(
+        lat, lng, currentLat, currentLng, selectionObject, setCurrMarker);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(double lat, double lng, double? currentLat,
-            double? currentLng, bool selectionObject)?
+            double? currentLng, bool selectionObject, bool setCurrMarker)?
         initAddress,
     required TResult orElse(),
   }) {
     if (initAddress != null) {
-      return initAddress(lat, lng, currentLat, currentLng, selectionObject);
+      return initAddress(
+          lat, lng, currentLat, currentLng, selectionObject, setCurrMarker);
     }
     return orElse();
   }
@@ -302,7 +324,8 @@ abstract class InitAddress implements AddressEvent {
       required final double lng,
       final double? currentLat,
       final double? currentLng,
-      final bool selectionObject}) = _$InitAddress;
+      final bool selectionObject,
+      final bool setCurrMarker}) = _$InitAddress;
 
   @override
   double get lat;
@@ -314,6 +337,8 @@ abstract class InitAddress implements AddressEvent {
   double? get currentLng;
   @override
   bool get selectionObject;
+  @override
+  bool get setCurrMarker;
   @override
   @JsonKey(ignore: true)
   _$$InitAddressCopyWith<_$InitAddress> get copyWith =>
