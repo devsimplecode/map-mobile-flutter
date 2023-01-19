@@ -20,7 +20,6 @@ extension InitLocation on LocationBloc {
         status: PermissionStatus.granted,
         key: UniqueKey(),
       ));
-      print('$latitude,$longitude');
     } catch (error) {
       var permissionGranted = await location.hasPermission();
       final response = await api.getIpAddress();

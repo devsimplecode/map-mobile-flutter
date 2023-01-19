@@ -20,8 +20,6 @@ Future<dynamic> showBottomSheetSearchGoogleAddress({required BuildContext contex
         builder: (_, controller) {
           return BlocBuilder<GoogleMapBloc, GoogleMapState>(
             builder: (context, state) {
-              print(state.error);
-
               return BottomSheetSearchAddress(
                 error: state.error,
                 controller: controller,

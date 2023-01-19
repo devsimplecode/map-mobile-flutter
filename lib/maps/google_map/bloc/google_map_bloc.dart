@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:map_flutter/main_bloc/location_bloc/location_bloc.dart';
 import 'package:map_flutter/models/place_search.dart';
 import 'package:map_flutter/repo/map_api.dart';
 import 'package:map_flutter/l10n/generated/l10n.dart';
