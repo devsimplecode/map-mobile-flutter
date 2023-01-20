@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:location/location.dart';
@@ -5,6 +6,9 @@ import 'package:map_flutter/main_bloc/address_bloc/address_bloc.dart';
 import 'package:map_flutter/main_bloc/bloc_check_internet/bloc_check_internet.dart';
 import 'package:map_flutter/main_bloc/location_bloc/location_bloc.dart';
 import 'package:map_flutter/main_bloc/type_map_bloc/type_map_bloc.dart';
+import 'package:map_flutter/maps/default_maps/google_default_map.dart';
+import 'package:map_flutter/maps/default_maps/osm_default_map.dart';
+import 'package:map_flutter/maps/default_maps/yandex_default_map.dart';
 import 'package:map_flutter/maps/google_map/google_app_map.dart';
 import 'package:map_flutter/maps/osm_map/osm_app_map.dart';
 import 'package:map_flutter/maps/yandex_map/yandex_app_map.dart';
@@ -41,17 +45,24 @@ class AppMap extends StatelessWidget {
         buildWhen: (prev, curr) => prev.connection != curr.connection,
         builder: (context, connectionState) {
           return BlocBuilder<LocationBloc, LocationState>(
-            buildWhen: (prev, curr) => prev.maybeKey() != curr.maybeKey(),
             builder: (context, locationState) {
               return BlocBuilder<TypeMapCubit, TypeMapState>(
                 buildWhen: (prev, curr) => prev.mapsType != curr.mapsType,
                 builder: (context, mapState) {
                   return locationState.map(
-                    init: (_) => const Center(
-                      child: CircularProgressIndicator(
-                        color: Colors.blue,
-                      ),
-                    ),
+                    init: (init) {
+                      if (init.status != PermissionStatus.granted) {
+                        switch (mapState.mapsType) {
+                          case MapsType.yandex:
+                            return const YandexDefaultMap();
+                          case MapsType.osm:
+                            return const OsmDefaultMap();
+                          default:
+                            return const GoogleDefaultMap();
+                        }
+                      }
+                      return const Center(child: CupertinoActivityIndicator(color: Colors.blue));
+                    },
                     map: (location) {
                       switch (mapState.mapsType) {
                         case MapsType.yandex:

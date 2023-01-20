@@ -224,9 +224,10 @@ abstract class _InitLocation implements LocationEvent {
 
 /// @nodoc
 mixin _$LocationState {
+  PermissionStatus? get status => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() init,
+    required TResult Function(PermissionStatus? status) init,
     required TResult Function(bool moveToCurrentLocation, double? latitude,
             double? longitude, PermissionStatus? status, UniqueKey? key)
         map,
@@ -234,7 +235,7 @@ mixin _$LocationState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? init,
+    TResult? Function(PermissionStatus? status)? init,
     TResult? Function(bool moveToCurrentLocation, double? latitude,
             double? longitude, PermissionStatus? status, UniqueKey? key)?
         map,
@@ -242,7 +243,7 @@ mixin _$LocationState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? init,
+    TResult Function(PermissionStatus? status)? init,
     TResult Function(bool moveToCurrentLocation, double? latitude,
             double? longitude, PermissionStatus? status, UniqueKey? key)?
         map,
@@ -268,6 +269,10 @@ mixin _$LocationState {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $LocationStateCopyWith<LocationState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -275,6 +280,8 @@ abstract class $LocationStateCopyWith<$Res> {
   factory $LocationStateCopyWith(
           LocationState value, $Res Function(LocationState) then) =
       _$LocationStateCopyWithImpl<$Res, LocationState>;
+  @useResult
+  $Res call({PermissionStatus? status});
 }
 
 /// @nodoc
@@ -286,12 +293,28 @@ class _$LocationStateCopyWithImpl<$Res, $Val extends LocationState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? status = freezed,
+  }) {
+    return _then(_value.copyWith(
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as PermissionStatus?,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$_InitCopyWith<$Res> {
+abstract class _$$_InitCopyWith<$Res> implements $LocationStateCopyWith<$Res> {
   factory _$$_InitCopyWith(_$_Init value, $Res Function(_$_Init) then) =
       __$$_InitCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({PermissionStatus? status});
 }
 
 /// @nodoc
@@ -300,60 +323,84 @@ class __$$_InitCopyWithImpl<$Res>
     implements _$$_InitCopyWith<$Res> {
   __$$_InitCopyWithImpl(_$_Init _value, $Res Function(_$_Init) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? status = freezed,
+  }) {
+    return _then(_$_Init(
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as PermissionStatus?,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_Init extends _Init {
-  const _$_Init() : super._();
+  const _$_Init({this.status}) : super._();
+
+  @override
+  final PermissionStatus? status;
 
   @override
   String toString() {
-    return 'LocationState.init()';
+    return 'LocationState.init(status: $status)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Init);
+        (other.runtimeType == runtimeType &&
+            other is _$_Init &&
+            (identical(other.status, status) || other.status == status));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, status);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_InitCopyWith<_$_Init> get copyWith =>
+      __$$_InitCopyWithImpl<_$_Init>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() init,
+    required TResult Function(PermissionStatus? status) init,
     required TResult Function(bool moveToCurrentLocation, double? latitude,
             double? longitude, PermissionStatus? status, UniqueKey? key)
         map,
   }) {
-    return init();
+    return init(status);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? init,
+    TResult? Function(PermissionStatus? status)? init,
     TResult? Function(bool moveToCurrentLocation, double? latitude,
             double? longitude, PermissionStatus? status, UniqueKey? key)?
         map,
   }) {
-    return init?.call();
+    return init?.call(status);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? init,
+    TResult Function(PermissionStatus? status)? init,
     TResult Function(bool moveToCurrentLocation, double? latitude,
             double? longitude, PermissionStatus? status, UniqueKey? key)?
         map,
     required TResult orElse(),
   }) {
     if (init != null) {
-      return init();
+      return init(status);
     }
     return orElse();
   }
@@ -391,14 +438,21 @@ class _$_Init extends _Init {
 }
 
 abstract class _Init extends LocationState {
-  const factory _Init() = _$_Init;
+  const factory _Init({final PermissionStatus? status}) = _$_Init;
   const _Init._() : super._();
+
+  @override
+  PermissionStatus? get status;
+  @override
+  @JsonKey(ignore: true)
+  _$$_InitCopyWith<_$_Init> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_MapCopyWith<$Res> {
+abstract class _$$_MapCopyWith<$Res> implements $LocationStateCopyWith<$Res> {
   factory _$$_MapCopyWith(_$_Map value, $Res Function(_$_Map) then) =
       __$$_MapCopyWithImpl<$Res>;
+  @override
   @useResult
   $Res call(
       {bool moveToCurrentLocation,
@@ -505,7 +559,7 @@ class _$_Map extends _Map {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() init,
+    required TResult Function(PermissionStatus? status) init,
     required TResult Function(bool moveToCurrentLocation, double? latitude,
             double? longitude, PermissionStatus? status, UniqueKey? key)
         map,
@@ -516,7 +570,7 @@ class _$_Map extends _Map {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? init,
+    TResult? Function(PermissionStatus? status)? init,
     TResult? Function(bool moveToCurrentLocation, double? latitude,
             double? longitude, PermissionStatus? status, UniqueKey? key)?
         map,
@@ -527,7 +581,7 @@ class _$_Map extends _Map {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? init,
+    TResult Function(PermissionStatus? status)? init,
     TResult Function(bool moveToCurrentLocation, double? latitude,
             double? longitude, PermissionStatus? status, UniqueKey? key)?
         map,
@@ -583,8 +637,10 @@ abstract class _Map extends LocationState {
   bool get moveToCurrentLocation;
   double? get latitude;
   double? get longitude;
+  @override
   PermissionStatus? get status;
   UniqueKey? get key;
+  @override
   @JsonKey(ignore: true)
   _$$_MapCopyWith<_$_Map> get copyWith => throw _privateConstructorUsedError;
 }

@@ -27,7 +27,12 @@ class SearchField extends StatelessWidget {
         return Column(
           children: [
             state.map(
-              init: (_) => const SizedBox.shrink(),
+              init: (init) {
+                if (init.status == PermissionStatus.denied) {
+                  return const EnableLocationButton();
+                }
+                return const SizedBox.shrink();
+              },
               map: (loc) {
                 if (loc.status == PermissionStatus.denied) {
                   return const EnableLocationButton();

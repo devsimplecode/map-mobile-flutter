@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -56,7 +57,7 @@ class ActionMapAddress extends StatelessWidget {
                   const SizedBox(height: 8),
                   if (state.loadingAddress) ...[
                     const Center(
-                      child: CircularProgressIndicator(
+                      child: CupertinoActivityIndicator(
                         color: Colors.blue,
                       ),
                     ),

@@ -13,7 +13,7 @@ part 'parts/init_location.dart';
 class LocationBloc extends Bloc<LocationEvent, LocationState> {
   LocationBloc({
     required this.api,
-  }) : super(const LocationState.init()) {
+  }) : super(const LocationState.init(status: PermissionStatus.granted)) {
     on<_InitLocation>(_initLocation);
   }
 
@@ -31,7 +31,9 @@ class LocationEvent with _$LocationEvent {
 class LocationState with _$LocationState {
   const LocationState._();
 
-  const factory LocationState.init() = _Init;
+  const factory LocationState.init({
+    PermissionStatus? status,
+  }) = _Init;
 
   const factory LocationState.map({
     @Default(false) bool moveToCurrentLocation,

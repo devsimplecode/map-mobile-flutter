@@ -23,6 +23,10 @@ extension InitLocation on LocationBloc {
     } catch (error) {
       var permissionGranted = await location.hasPermission();
       final response = await api.getIpAddress();
+      if(response.error!=null){
+        emit(LocationState.init(status: permissionGranted));
+        return;
+      }
       final locationApi = response.data?.loc?.split(',');
       latitude = double.parse(locationApi?[0] ?? '');
       longitude = double.parse(locationApi?[1] ?? '');
