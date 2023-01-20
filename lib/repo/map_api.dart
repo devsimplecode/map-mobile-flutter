@@ -139,13 +139,14 @@ class MapApi {
   }
 
   Future<RequestResponse<List<Place>>> getAddressesYandex(
-    String search, {
+    String search,
+    String ll, {
     Map<String, dynamic>? queryParameters,
     Map<String, String>? headers,
   }) async {
     try {
       final response = await _dio.get(
-        'https://search-maps.yandex.ru/v1/?text=$search&type=biz&lang=en_US&apikey=${Environment.yandexApiKeyPlaces}',
+        'https://search-maps.yandex.ru/v1/?text=$search&ll=$ll&type=biz&lang=en_US&apikey=${Environment.yandexApiKeyPlaces}',
         queryParameters: queryParameters,
         options: Options(
           headers: headers,

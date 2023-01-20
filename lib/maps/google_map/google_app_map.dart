@@ -65,7 +65,6 @@ class _GoogleAppMapState extends State<GoogleAppMap> {
       ],
       child: BlocBuilder<AddressBloc, AddressState>(
         builder: (context, state) {
-          print('${widget.latitude!},${widget.longitude!}');
           return GoogleMap(
             initialCameraPosition: CameraPosition(
               target: LatLng(widget.latitude!, widget.longitude!),

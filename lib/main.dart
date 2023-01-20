@@ -80,6 +80,7 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) => YandexMapBloc(
               api: RepositoryProvider.of<MapApi>(context),
+              bloc: BlocProvider.of<LocationBloc>(context),
             ),
           ),
           BlocProvider(

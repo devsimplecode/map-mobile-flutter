@@ -12,6 +12,7 @@ extension SearchAddress on YandexMapBloc {
     emit(state.copyWith(loadingAddress: true));
     final responsePlaces = await api.getAddressesYandex(
       event.search,
+      '${bloc.state.maybeCurrentLng()},${bloc.state.maybeCurrentLat()}'
     );
     if (responsePlaces.error != null) {
       emit(state.copyWith(

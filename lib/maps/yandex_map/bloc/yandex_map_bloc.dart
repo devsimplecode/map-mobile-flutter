@@ -1,8 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:map_flutter/main_bloc/location_bloc/location_bloc.dart';
 import 'package:map_flutter/models/place.dart';
 import 'package:map_flutter/repo/map_api.dart';
 import 'package:map_flutter/l10n/generated/l10n.dart';
+import 'package:yandex_mapkit/yandex_mapkit.dart';
 
 part 'yandex_map_bloc.freezed.dart';
 
@@ -11,11 +13,13 @@ part 'parts/search_address.dart';
 class YandexMapBloc extends Bloc<YandexMapEvent, YandexMapState> {
   YandexMapBloc({
     required this.api,
+    required this.bloc,
   }) : super(const YandexMapState.yandex()) {
     on<_SearchAddress>(_searchAddress);
   }
 
   final MapApi api;
+  final LocationBloc bloc;
 }
 
 @freezed
