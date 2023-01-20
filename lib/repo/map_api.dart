@@ -49,13 +49,13 @@ class MapApi {
 
   Future<RequestResponse<List<PlaceSearch>>> getAddressesGoogle(
     String search,
-   {
+    String latLng, {
     Map<String, dynamic>? queryParameters,
     Map<String, String>? headers,
   }) async {
     try {
       final response = await _dio.get(
-        'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$search&types=address&key=${Environment.googleApiKey}',
+        'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$search&location=$latLng&radius=5000&sessiontoken=122344&libraries=places&types=address&key=${Environment.googleApiKey}',
         queryParameters: queryParameters,
         options: Options(
           headers: headers,

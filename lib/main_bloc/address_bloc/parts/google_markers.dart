@@ -1,6 +1,7 @@
 import 'package:flutter/painting.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:location/location.dart';
 import 'package:map_flutter/constants/assets.dart';
 import 'package:map_flutter/main_bloc/address_bloc/address_bloc.dart';
 
@@ -9,6 +10,8 @@ extension GoogleMarkers on AddressBloc {
     InitAddress event,
     Emitter<AddressState> emit,
   ) async {
+    final currentLng = bloc.state.maybeCurrentLng();
+    final currentLat = bloc.state.maybeCurrentLat();
     Set<Marker> markers = {};
     List<Marker> markersList = [];
 
@@ -21,13 +24,13 @@ extension GoogleMarkers on AddressBloc {
       AppAssets.images.location,
     );
     if (event.selectionObject) {
-     if(event.setCurrMarker) {
+     if(bloc.state.maybeLocationStatus() == PermissionStatus.granted) {
        markersList.add(
         Marker(
           icon: iconLocation,
           anchor: const Offset(0.5, 0.5),
           markerId: const MarkerId('1'),
-          position: LatLng(event.currentLat ?? 0.0, event.currentLng ?? 0.0),
+          position: LatLng(currentLat ?? 0.0, currentLng ?? 0.0),
         ),
       );
      }

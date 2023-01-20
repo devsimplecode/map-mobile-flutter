@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:map_flutter/app_map.dart';
-import 'package:map_flutter/core/check_internet/bloc/bloc_check_internet.dart';
-import 'package:map_flutter/core/check_internet/check_internet_connection.dart';
+import 'package:map_flutter/main_bloc/bloc_check_internet/bloc_check_internet.dart';
+import 'package:map_flutter/repo/check_internet_connection_repo.dart';
 import 'package:map_flutter/main_bloc/address_bloc/address_bloc.dart';
 import 'package:map_flutter/main_bloc/location_bloc/location_bloc.dart';
 import 'package:map_flutter/main_bloc/type_map_bloc/type_map_bloc.dart';
@@ -48,14 +48,14 @@ class MyApp extends StatelessWidget {
           create: (context) => MapApi(),
         ),
         RepositoryProvider(
-          create: (context) => CheckInternetConnection(),
+          create: (context) => CheckInternetConnectionRepo(),
         ),
       ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
             create: (context) => BlocCheckInternet(
-              RepositoryProvider.of<CheckInternetConnection>(context),
+              RepositoryProvider.of<CheckInternetConnectionRepo>(context),
             ),
           ),
           BlocProvider(
@@ -74,6 +74,7 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) => GoogleMapBloc(
               api: RepositoryProvider.of<MapApi>(context),
+              bloc: BlocProvider.of<LocationBloc>(context),
             ),
           ),
           BlocProvider(

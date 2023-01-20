@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
-import 'package:map_flutter/core/check_internet/check_internet_connection.dart';
+import 'package:map_flutter/repo/check_internet_connection_repo.dart';
 import 'package:map_flutter/main_bloc/address_bloc/address_bloc.dart';
 import 'package:map_flutter/main_bloc/location_bloc/location_bloc.dart';
 
@@ -65,6 +65,7 @@ class _GoogleAppMapState extends State<GoogleAppMap> {
       ],
       child: BlocBuilder<AddressBloc, AddressState>(
         builder: (context, state) {
+          print('${widget.latitude!},${widget.longitude!}');
           return GoogleMap(
             initialCameraPosition: CameraPosition(
               target: LatLng(widget.latitude!, widget.longitude!),
@@ -90,10 +91,7 @@ class _GoogleAppMapState extends State<GoogleAppMap> {
                   AddressEvent.initAddress(
                     lat: latLng.latitude,
                     lng: latLng.longitude,
-                    currentLat: widget.latitude!,
-                    currentLng: widget.longitude!,
                     selectionObject: true,
-                    setCurrMarker: widget.locationStatus == PermissionStatus.granted,
                   ),
                 );
               }

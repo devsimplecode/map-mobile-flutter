@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'package:location/location.dart';
 import 'package:map_flutter/constants/assets.dart';
-import 'package:map_flutter/core/check_internet/check_internet_connection.dart';
+import 'package:map_flutter/repo/check_internet_connection_repo.dart';
 import 'package:map_flutter/main_bloc/address_bloc/address_bloc.dart';
 import 'package:map_flutter/main_bloc/location_bloc/location_bloc.dart';
 
@@ -51,10 +51,7 @@ class _OsmAppMapState extends State<OsmAppMap> {
     BlocProvider.of<AddressBloc>(context).add(AddressEvent.initAddress(
       lat: map.latitude,
       lng: map.longitude,
-      currentLng: widget.longitude!,
-      currentLat: widget.latitude!,
       selectionObject: true,
-      setCurrMarker: widget.locationStatus == PermissionStatus.granted,
     ));
   }
 

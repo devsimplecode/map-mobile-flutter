@@ -5,9 +5,13 @@ import 'package:map_flutter/repo/map_api.dart';
 import 'package:map_flutter/l10n/generated/l10n.dart';
 
 part 'yandex_map_bloc.freezed.dart';
+
 part 'parts/search_address.dart';
+
 class YandexMapBloc extends Bloc<YandexMapEvent, YandexMapState> {
-  YandexMapBloc({required this.api}) : super(const YandexMapState.yandex()) {
+  YandexMapBloc({
+    required this.api,
+  }) : super(const YandexMapState.yandex()) {
     on<_SearchAddress>(_searchAddress);
   }
 

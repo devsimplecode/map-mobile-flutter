@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:location/location.dart';
 import 'package:map_flutter/main_bloc/location_bloc/location_bloc.dart';
 import 'package:map_flutter/models/location.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
@@ -20,6 +21,8 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
       try {
         double? distanceInMeters;
         double? bearing;
+        final currentLng = bloc.state.maybeCurrentLng();
+        final currentLat = bloc.state.maybeCurrentLat();
         emit(state.copyWith(loadingAddress: true));
         List<Placemark> placeMarks = await placemarkFromCoordinates(
           event.lat,
@@ -36,17 +39,19 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
             selectedAddress: '',
           ));
         }
-        if (event.currentLat != null && event.currentLng != null && event.setCurrMarker) {
+        if (currentLng != null &&
+            currentLat != null &&
+            bloc.state.maybeLocationStatus() == PermissionStatus.granted) {
           distanceInMeters = Geolocator.distanceBetween(
-            event.currentLat!,
-            event.currentLng!,
+            currentLat,
+            currentLng,
             event.lat,
             event.lng,
           );
 
           bearing = Geolocator.bearingBetween(
-            event.currentLat!,
-            event.currentLng!,
+            currentLat,
+            currentLng,
             event.lat,
             event.lng,
           );
@@ -80,10 +85,7 @@ class AddressEvent with _$AddressEvent {
   const factory AddressEvent.initAddress({
     required double lat,
     required double lng,
-    double? currentLat,
-    double? currentLng,
     @Default(false) bool selectionObject,
-    @Default(true) bool setCurrMarker,
   }) = InitAddress;
 }
 

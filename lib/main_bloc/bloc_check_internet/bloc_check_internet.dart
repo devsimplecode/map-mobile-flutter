@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:map_flutter/core/check_internet/check_internet_connection.dart';
+import 'package:map_flutter/repo/check_internet_connection_repo.dart';
 
 part 'bloc_check_internet.freezed.dart';
 
@@ -25,7 +25,7 @@ class BlocCheckInternet extends Bloc<EventCheckInternet, StateCheckInternet> {
   }
 
   late StreamSubscription _connectionSubscription;
-  final CheckInternetConnection internetConnection;
+  final CheckInternetConnectionRepo internetConnection;
 
   @override
   Future<void> close() {

@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:location/location.dart';
 import 'package:map_flutter/constants/assets.dart';
-import 'package:map_flutter/core/check_internet/bloc/bloc_check_internet.dart';
-import 'package:map_flutter/core/check_internet/check_internet_connection.dart';
+import 'package:map_flutter/main_bloc/bloc_check_internet/bloc_check_internet.dart';
+import 'package:map_flutter/repo/check_internet_connection_repo.dart';
 import 'package:map_flutter/main_bloc/address_bloc/address_bloc.dart';
 import 'package:map_flutter/main_bloc/location_bloc/location_bloc.dart';
 import 'package:map_flutter/main_bloc/type_map_bloc/type_map_bloc.dart';
@@ -23,8 +23,6 @@ class SearchField extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<LocationBloc, LocationState>(
       builder: (context, state) {
-        final lat = state.maybeCurrentLat();
-        final lng = state.maybeCurrentLng();
         final status = state.maybeLocationStatus();
         return Column(
           children: [
@@ -66,8 +64,6 @@ class SearchField extends StatelessWidget {
                                         .add(AddressEvent.initAddress(
                                       lat: value.lat!,
                                       lng: value.lng!,
-                                      currentLat: lat,
-                                      currentLng: lng,
                                       selectionObject: true,
                                     ));
                                   }
@@ -80,8 +76,6 @@ class SearchField extends StatelessWidget {
                                         .add(AddressEvent.initAddress(
                                       lat: value.lat!,
                                       lng: value.lng!,
-                                      currentLat: lat,
-                                      currentLng: lng,
                                       selectionObject: true,
                                     ));
                                   }
@@ -94,8 +88,6 @@ class SearchField extends StatelessWidget {
                                         .add(AddressEvent.initAddress(
                                       lat: value.lat!,
                                       lng: value.lng!,
-                                      currentLat: lat,
-                                      currentLng: lng,
                                       selectionObject: true,
                                     ));
                                   }

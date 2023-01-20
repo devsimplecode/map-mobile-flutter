@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:location/location.dart';
-import 'package:map_flutter/core/check_internet/check_internet_connection.dart';
+import 'package:map_flutter/repo/check_internet_connection_repo.dart';
 import 'package:map_flutter/main_bloc/address_bloc/address_bloc.dart';
 import 'package:map_flutter/main_bloc/location_bloc/location_bloc.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
@@ -103,10 +103,7 @@ class _YandexAppMapState extends State<YandexAppMap> {
                 BlocProvider.of<AddressBloc>(context).add(AddressEvent.initAddress(
                   lat: point.latitude,
                   lng: point.longitude,
-                  currentLat: widget.latitude!,
-                  currentLng: widget.longitude!,
                   selectionObject: true,
-                  setCurrMarker: widget.locationStatus == PermissionStatus.granted,
                 ));
               }
             },

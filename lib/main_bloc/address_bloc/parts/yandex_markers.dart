@@ -1,5 +1,6 @@
 import 'package:flutter/painting.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:location/location.dart';
 import 'package:map_flutter/constants/assets.dart';
 import 'package:map_flutter/main_bloc/address_bloc/address_bloc.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
@@ -9,6 +10,8 @@ extension GoogleMarkers on AddressBloc {
     InitAddress event,
     Emitter<AddressState> emit,
   ) async {
+    final currentLng = bloc.state.maybeCurrentLng();
+    final currentLat = bloc.state.maybeCurrentLat();
     List<PlacemarkMapObject> markers = [];
     var iconLocation = PlacemarkIcon.composite([
       PlacemarkCompositeIconItem(
@@ -31,14 +34,14 @@ extension GoogleMarkers on AddressBloc {
           )),
     ]);
     if (event.selectionObject) {
-      if (event.setCurrMarker) {
+      if (bloc.state.maybeLocationStatus() == PermissionStatus.granted) {
         markers.add(
           PlacemarkMapObject(
             icon: iconLocation,
             mapId: const MapObjectId('1'),
             point: Point(
-              latitude: event.currentLat ?? 0.0,
-              longitude: event.currentLng ?? 0.0,
+              latitude: currentLat ?? 0.0,
+              longitude: currentLng ?? 0.0,
             ),
           ),
         );
