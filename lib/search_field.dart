@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:location/location.dart';
 import 'package:map_flutter/constants/assets.dart';
 import 'package:map_flutter/main_bloc/bloc_check_internet/bloc_check_internet.dart';
-import 'package:map_flutter/repo/check_internet_connection_repo.dart';
+import 'package:map_flutter/repo/internet_connection_repo.dart';
 import 'package:map_flutter/main_bloc/address_bloc/address_bloc.dart';
 import 'package:map_flutter/main_bloc/location_bloc/location_bloc.dart';
 import 'package:map_flutter/main_bloc/type_map_bloc/type_map_bloc.dart';
@@ -61,7 +61,7 @@ class SearchField extends StatelessWidget {
                           ),
                           onPressed: () async {
                             if (status == PermissionStatus.granted) {
-                              if (mapsType.mapsType == MapsType.google) {
+                              // if (mapsType.mapsType == MapsType.google) {
                                 await showBottomSheetSearchGoogleAddress(context: context)
                                     .then((value) {
                                   if (value != null && value.lat != null && value.lng != null) {
@@ -73,32 +73,35 @@ class SearchField extends StatelessWidget {
                                     ));
                                   }
                                 });
-                              } else if (mapsType.mapsType == MapsType.yandex) {
-                                await showBottomSheetSearchYandexAddress(context: context)
-                                    .then((value) {
-                                  if (value != null && value.lat != null && value.lng != null) {
-                                    BlocProvider.of<AddressBloc>(context)
-                                        .add(AddressEvent.initAddress(
-                                      lat: value.lat!,
-                                      lng: value.lng!,
-                                      selectionObject: true,
-                                    ));
-                                  }
-                                });
-                              } else if (mapsType.mapsType == MapsType.osm) {
-                                await showBottomSheetSearchOsmAddress(context: context)
-                                    .then((value) {
-                                  if (value != null && value.lat != null && value.lng != null) {
-                                    BlocProvider.of<AddressBloc>(context)
-                                        .add(AddressEvent.initAddress(
-                                      lat: value.lat!,
-                                      lng: value.lng!,
-                                      selectionObject: true,
-                                    ));
-                                  }
-                                });
-                              }
-                            } else {
+                              // }
+                              // else if (mapsType.mapsType == MapsType.yandex) {
+                              //   await showBottomSheetSearchYandexAddress(context: context)
+                              //       .then((value) {
+                              //     if (value != null && value.lat != null && value.lng != null) {
+                              //       BlocProvider.of<AddressBloc>(context)
+                              //           .add(AddressEvent.initAddress(
+                              //         lat: value.lat!,
+                              //         lng: value.lng!,
+                              //         selectionObject: true,
+                              //       ));
+                              //     }
+                              //   });
+                              // }
+                              // else if (mapsType.mapsType == MapsType.osm) {
+                              //   await showBottomSheetSearchOsmAddress(context: context)
+                              //       .then((value) {
+                              //     if (value != null && value.lat != null && value.lng != null) {
+                              //       BlocProvider.of<AddressBloc>(context)
+                              //           .add(AddressEvent.initAddress(
+                              //         lat: value.lat!,
+                              //         lng: value.lng!,
+                              //         selectionObject: true,
+                              //       ));
+                              //     }
+                              //   });
+                              // }
+                            }
+                            else {
                               BlocProvider.of<LocationBloc>(context)
                                   .add(const LocationEvent.initLocation());
                             }

@@ -6,13 +6,13 @@ import 'package:rxdart/rxdart.dart';
 
 enum ConnectionStatus { online, offline }
 
-class CheckInternetConnectionRepo {
+class InternetConnectionRepo {
   final Connectivity _connectivity = Connectivity();
 
   final _controller = BehaviorSubject.seeded(ConnectionStatus.online);
   StreamSubscription? _connectionSubscription;
 
-  CheckInternetConnectionRepo() {
+  InternetConnectionRepo() {
     _checkInternetConnection();
   }
 

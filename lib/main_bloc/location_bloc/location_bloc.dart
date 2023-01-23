@@ -18,6 +18,13 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
   }
 
   final MapApi api;
+  StreamSubscription<LocationData>? _subscription;
+
+  @override
+  Future<void> close() async {
+    await _subscription?.cancel();
+    await super.close();
+  }
 }
 
 @freezed

@@ -9,22 +9,24 @@ extension InitLocation on LocationBloc {
     double? longitude = state.maybeCurrentLng();
     Location location = Location();
     try {
-      await location.getLocation().then((location) {
-        latitude = location.latitude;
-        longitude = location.longitude;
-      });
-
-      emit(LocationState.map(
-        latitude: latitude,
-        longitude: longitude,
-        status: PermissionStatus.granted,
-        key: UniqueKey(),
-      ));
-    } catch (error) {
-      var permissionGranted = await location.hasPermission();
+      if (await location.requestService()) {
+        await location.getLocation().then((location) {
+          latitude = location.latitude;
+          longitude = location.longitude;
+        });
+        emit(LocationState.map(
+          latitude: latitude,
+          longitude: longitude,
+          status: PermissionStatus.granted,
+          key: UniqueKey(),
+        ));
+      } else {
+        emit(const LocationState.init(status: PermissionStatus.denied));
+      }
+    } catch (_) {
       final response = await api.getIpAddress();
-      if(response.error!=null){
-        emit(LocationState.init(status: permissionGranted));
+      if (response.error != null) {
+        emit(const LocationState.init(status: PermissionStatus.denied));
         return;
       }
       final locationApi = response.data?.loc?.split(',');
@@ -33,7 +35,7 @@ extension InitLocation on LocationBloc {
       emit(LocationState.map(
         latitude: latitude,
         longitude: longitude,
-        status: permissionGranted,
+        status: PermissionStatus.denied,
         key: UniqueKey(),
       ));
     }

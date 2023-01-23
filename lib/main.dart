@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:map_flutter/app_map.dart';
 import 'package:map_flutter/main_bloc/bloc_check_internet/bloc_check_internet.dart';
-import 'package:map_flutter/repo/check_internet_connection_repo.dart';
+import 'package:map_flutter/repo/internet_connection_repo.dart';
 import 'package:map_flutter/main_bloc/address_bloc/address_bloc.dart';
 import 'package:map_flutter/main_bloc/location_bloc/location_bloc.dart';
 import 'package:map_flutter/main_bloc/type_map_bloc/type_map_bloc.dart';
@@ -48,14 +48,14 @@ class MyApp extends StatelessWidget {
           create: (context) => MapApi(),
         ),
         RepositoryProvider(
-          create: (context) => CheckInternetConnectionRepo(),
+          create: (context) => InternetConnectionRepo(),
         ),
       ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
             create: (context) => BlocCheckInternet(
-              RepositoryProvider.of<CheckInternetConnectionRepo>(context),
+              RepositoryProvider.of<InternetConnectionRepo>(context),
             ),
           ),
           BlocProvider(

@@ -18,19 +18,21 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
     required this.bloc,
   }) : super(const AddressState.address()) {
     on<InitAddress>((event, emit) async {
+
       try {
         double? distanceInMeters;
         double? bearing;
         final currentLng = bloc.state.maybeCurrentLng();
         final currentLat = bloc.state.maybeCurrentLat();
         emit(state.copyWith(loadingAddress: true));
+
         List<Placemark> placeMarks = await placemarkFromCoordinates(
           event.lat,
           event.lng,
           localeIdentifier: 'en_US',
         );
         final address =
-            '${placeMarks.first.street}, ${placeMarks.first.administrativeArea}, ${placeMarks.first.subAdministrativeArea}, ${placeMarks.first.country}';
+            '${street(placeMarks.first.street)}${placeMarks.first.administrativeArea}, ${placeMarks.first.subAdministrativeArea}, ${placeMarks.first.country}';
         if (event.selectionObject) {
           emit(state.copyWith(selectedAddress: address));
         } else {
@@ -78,6 +80,13 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
   }
 
   final LocationBloc bloc;
+
+  String street(String? value) {
+    if (value?.contains("+") ?? true) {
+      return '';
+    }
+    return '$value, ';
+  }
 }
 
 @freezed

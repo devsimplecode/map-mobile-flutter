@@ -41,29 +41,28 @@ class AppMap extends StatelessWidget {
           },
         ),
       ],
-      child: BlocBuilder<BlocCheckInternet, StateCheckInternet>(
-        buildWhen: (prev, curr) => prev.connection != curr.connection,
-        builder: (context, connectionState) {
-          return BlocBuilder<LocationBloc, LocationState>(
-            builder: (context, locationState) {
-              return BlocBuilder<TypeMapCubit, TypeMapState>(
-                buildWhen: (prev, curr) => prev.mapsType != curr.mapsType,
-                builder: (context, mapState) {
-                  return locationState.map(
-                    init: (init) {
-                      if (init.status != PermissionStatus.granted) {
-                        switch (mapState.mapsType) {
-                          case MapsType.yandex:
-                            return const YandexDefaultMap();
-                          case MapsType.osm:
-                            return const OsmDefaultMap();
-                          default:
-                            return const GoogleDefaultMap();
-                        }
-                      }
-                      return const Center(child: CupertinoActivityIndicator(color: Colors.blue));
-                    },
-                    map: (location) {
+      child: BlocBuilder<LocationBloc, LocationState>(
+        builder: (context, locationState) {
+          return BlocBuilder<TypeMapCubit, TypeMapState>(
+            builder: (context, mapState) {
+              return locationState.map(
+                init: (init) {
+                  if (init.status == PermissionStatus.denied) {
+                    switch (mapState.mapsType) {
+                      case MapsType.yandex:
+                        return const YandexDefaultMap();
+                      case MapsType.osm:
+                        return const OsmDefaultMap();
+                      default:
+                        return const GoogleDefaultMap();
+                    }
+                  }
+
+                  return const Center(child: CupertinoActivityIndicator(color: Colors.blue));
+                },
+                map: (location) {
+                  return BlocBuilder<BlocCheckInternet, StateCheckInternet>(
+                    builder: (context, connectionState) {
                       switch (mapState.mapsType) {
                         case MapsType.yandex:
                           return YandexAppMap(

@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:map_flutter/constants/assets.dart';
 import 'package:map_flutter/main_bloc/bloc_check_internet/bloc_check_internet.dart';
-import 'package:map_flutter/repo/check_internet_connection_repo.dart';
+import 'package:map_flutter/repo/internet_connection_repo.dart';
 import 'package:map_flutter/main_bloc/address_bloc/address_bloc.dart';
 import 'package:map_flutter/l10n/generated/l10n.dart';
 
@@ -19,33 +19,36 @@ class ActionMapAddress extends StatelessWidget {
         if (state.connection == ConnectionStatus.offline) {
           return const SizedBox.shrink();
         }
-        return Container(
-          width: double.infinity,
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            color: Colors.white,
-          ),
-          child: BlocBuilder<AddressBloc, AddressState>(
-            builder: (context, state) {
-              if (state.error?.isNotEmpty ?? false) {
-                return Center(
-                  child: Text(
-                    state.error ?? '',
-                    style: const TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey,
-                    ),
+        return BlocBuilder<AddressBloc, AddressState>(
+          builder: (context, state) {
+            if ((state.selectedAddress?.isEmpty ?? true) &&
+                (state.currentAddress?.isEmpty ?? true)) {
+              return const SizedBox.shrink();
+            }
+            if (state.error?.isNotEmpty ?? false) {
+              return Center(
+                child: Text(
+                  state.error ?? '',
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: Colors.grey,
                   ),
-                );
-              }
-              final distance = (state.distanceInMeters ?? 0) > 1000
-                  ? '${state.bearing?.toInt() ?? 0} KM'
-                  : '${state.distanceInMeters?.toInt() ?? 0} M';
-              return Column(
+                ),
+              );
+            }
+            final distance = (state.distanceInMeters ?? 0) > 1000
+                ? '${state.bearing?.toInt() ?? 0} KM'
+                : '${state.distanceInMeters?.toInt() ?? 0} M';
+            return Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: Colors.white,
+              ),
+              child: Column(
                 children: [
-                  if ((state.selectedAddress?.isEmpty ?? true) &&
-                      (state.currentAddress?.isNotEmpty ?? false)) ...[
+                  if (state.selectedAddress?.isEmpty ?? true) ...[
                     Text(
                       S.of(context).yourLocation,
                       style: const TextStyle(
@@ -116,9 +119,9 @@ class ActionMapAddress extends StatelessWidget {
                     ),
                   ],
                 ],
-              );
-            },
-          ),
+              ),
+            );
+          },
         );
       },
     );

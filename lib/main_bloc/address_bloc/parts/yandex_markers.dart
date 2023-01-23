@@ -33,34 +33,24 @@ extension GoogleMarkers on AddressBloc {
             anchor: const Offset(0.5, 0.5),
           )),
     ]);
-    if (event.selectionObject) {
-      if (bloc.state.maybeLocationStatus() == PermissionStatus.granted) {
-        markers.add(
-          PlacemarkMapObject(
-            icon: iconLocation,
-            mapId: const MapObjectId('1'),
-            point: Point(
-              latitude: currentLat ?? 0.0,
-              longitude: currentLng ?? 0.0,
-            ),
-          ),
-        );
-      }
-      markers.add(
-        PlacemarkMapObject(
-          icon: iconPoint,
-          mapId: const MapObjectId('2'),
-          point: Point(
-            latitude: event.lat,
-            longitude: event.lng,
-          ),
-        ),
-      );
-    } else {
+
+    if (bloc.state.maybeLocationStatus() == PermissionStatus.granted) {
       markers.add(
         PlacemarkMapObject(
           icon: iconLocation,
           mapId: const MapObjectId('1'),
+          point: Point(
+            latitude: currentLat ?? 0.0,
+            longitude: currentLng ?? 0.0,
+          ),
+        ),
+      );
+    }
+    if (event.selectionObject) {
+      markers.add(
+        PlacemarkMapObject(
+          icon: iconPoint,
+          mapId: const MapObjectId('2'),
           point: Point(
             latitude: event.lat,
             longitude: event.lng,

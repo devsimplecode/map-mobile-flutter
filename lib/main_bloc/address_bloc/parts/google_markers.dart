@@ -23,9 +23,8 @@ extension GoogleMarkers on AddressBloc {
       const ImageConfiguration(),
       AppAssets.images.location,
     );
-    if (event.selectionObject) {
-     if(bloc.state.maybeLocationStatus() == PermissionStatus.granted) {
-       markersList.add(
+    if (bloc.state.maybeLocationStatus() == PermissionStatus.granted) {
+      markersList.add(
         Marker(
           icon: iconLocation,
           anchor: const Offset(0.5, 0.5),
@@ -33,7 +32,8 @@ extension GoogleMarkers on AddressBloc {
           position: LatLng(currentLat ?? 0.0, currentLng ?? 0.0),
         ),
       );
-     }
+    }
+    if (event.selectionObject) {
       markersList.add(
         Marker(
           icon: iconPoint,
@@ -42,16 +42,8 @@ extension GoogleMarkers on AddressBloc {
           position: LatLng(event.lat, event.lng),
         ),
       );
-    } else {
-      markersList.add(
-        Marker(
-          icon: iconLocation,
-          anchor: const Offset(0.5, 0.5),
-          markerId: const MarkerId('1'),
-          position: LatLng(event.lat, event.lng),
-        ),
-      );
     }
+
     markers.addAll(markersList);
     return markers;
   }
