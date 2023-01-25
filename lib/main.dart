@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:map_flutter/app_map.dart';
+import 'package:map_flutter/core/app_map/app_map.dart';
 import 'package:map_flutter/main_bloc/bloc_check_internet/bloc_check_internet.dart';
 import 'package:map_flutter/repo/internet_connection_repo.dart';
 import 'package:map_flutter/main_bloc/address_bloc/address_bloc.dart';
 import 'package:map_flutter/main_bloc/location_bloc/location_bloc.dart';
 import 'package:map_flutter/main_bloc/type_map_bloc/type_map_bloc.dart';
-import 'package:map_flutter/maps/google_map/bloc/google_map_bloc.dart';
-import 'package:map_flutter/maps/osm_map/bloc/osm_map_bloc.dart';
-import 'package:map_flutter/maps/yandex_map/bloc/yandex_map_bloc.dart';
+import 'package:map_flutter/main_bloc/search_address_bloc/search_address_bloc.dart';
 import 'package:map_flutter/repo/map_api.dart';
-import 'package:map_flutter/search_field.dart';
+import 'package:map_flutter/core/app_bar/main_app_bar.dart';
 import 'package:map_flutter/widgets/action_map_address.dart';
 import 'package:map_flutter/widgets/current_location_button.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
@@ -72,19 +70,10 @@ class MyApp extends StatelessWidget {
             ),
           ),
           BlocProvider(
-            create: (context) => GoogleMapBloc(
+            create: (context) => SearchAddressBloc(
               api: RepositoryProvider.of<MapApi>(context),
               bloc: BlocProvider.of<LocationBloc>(context),
             ),
-          ),
-          BlocProvider(
-            create: (context) => YandexMapBloc(
-              api: RepositoryProvider.of<MapApi>(context),
-              bloc: BlocProvider.of<LocationBloc>(context),
-            ),
-          ),
-          BlocProvider(
-            create: (context) => OsmMapBloc(),
           ),
         ],
         child: MaterialApp(
@@ -120,7 +109,7 @@ class MapScreen extends StatelessWidget {
             top: MediaQuery.of(context).viewPadding.top,
             left: 0,
             right: 0,
-            child: const SearchField(),
+            child: const MainAppBar(),
           ),
           Positioned(
             bottom: 28,

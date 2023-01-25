@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'osm_map_bloc.dart';
+part of 'search_address_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$OsmMapEvent {
+mixin _$SearchAddressEvent {
   String get search => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
@@ -51,23 +51,23 @@ mixin _$OsmMapEvent {
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $OsmMapEventCopyWith<OsmMapEvent> get copyWith =>
+  $SearchAddressEventCopyWith<SearchAddressEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $OsmMapEventCopyWith<$Res> {
-  factory $OsmMapEventCopyWith(
-          OsmMapEvent value, $Res Function(OsmMapEvent) then) =
-      _$OsmMapEventCopyWithImpl<$Res, OsmMapEvent>;
+abstract class $SearchAddressEventCopyWith<$Res> {
+  factory $SearchAddressEventCopyWith(
+          SearchAddressEvent value, $Res Function(SearchAddressEvent) then) =
+      _$SearchAddressEventCopyWithImpl<$Res, SearchAddressEvent>;
   @useResult
   $Res call({String search});
 }
 
 /// @nodoc
-class _$OsmMapEventCopyWithImpl<$Res, $Val extends OsmMapEvent>
-    implements $OsmMapEventCopyWith<$Res> {
-  _$OsmMapEventCopyWithImpl(this._value, this._then);
+class _$SearchAddressEventCopyWithImpl<$Res, $Val extends SearchAddressEvent>
+    implements $SearchAddressEventCopyWith<$Res> {
+  _$SearchAddressEventCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -90,7 +90,7 @@ class _$OsmMapEventCopyWithImpl<$Res, $Val extends OsmMapEvent>
 
 /// @nodoc
 abstract class _$$_SearchAddressCopyWith<$Res>
-    implements $OsmMapEventCopyWith<$Res> {
+    implements $SearchAddressEventCopyWith<$Res> {
   factory _$$_SearchAddressCopyWith(
           _$_SearchAddress value, $Res Function(_$_SearchAddress) then) =
       __$$_SearchAddressCopyWithImpl<$Res>;
@@ -101,7 +101,7 @@ abstract class _$$_SearchAddressCopyWith<$Res>
 
 /// @nodoc
 class __$$_SearchAddressCopyWithImpl<$Res>
-    extends _$OsmMapEventCopyWithImpl<$Res, _$_SearchAddress>
+    extends _$SearchAddressEventCopyWithImpl<$Res, _$_SearchAddress>
     implements _$$_SearchAddressCopyWith<$Res> {
   __$$_SearchAddressCopyWithImpl(
       _$_SearchAddress _value, $Res Function(_$_SearchAddress) _then)
@@ -131,7 +131,7 @@ class _$_SearchAddress implements _SearchAddress {
 
   @override
   String toString() {
-    return 'OsmMapEvent.searchAddress(search: $search)';
+    return 'SearchAddressEvent.searchAddress(search: $search)';
   }
 
   @override
@@ -208,7 +208,7 @@ class _$_SearchAddress implements _SearchAddress {
   }
 }
 
-abstract class _SearchAddress implements OsmMapEvent {
+abstract class _SearchAddress implements SearchAddressEvent {
   const factory _SearchAddress({required final String search}) =
       _$_SearchAddress;
 
@@ -221,65 +221,67 @@ abstract class _SearchAddress implements OsmMapEvent {
 }
 
 /// @nodoc
-mixin _$OsmMapState {
+mixin _$SearchAddressState {
   bool get loadingAddress => throw _privateConstructorUsedError;
-  List<Place>? get places => throw _privateConstructorUsedError;
+  List<PlaceSearch>? get places => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            bool loadingAddress, List<Place>? places, String? error)
-        osm,
+            bool loadingAddress, List<PlaceSearch>? places, String? error)
+        address,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(bool loadingAddress, List<Place>? places, String? error)?
-        osm,
+    TResult? Function(
+            bool loadingAddress, List<PlaceSearch>? places, String? error)?
+        address,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool loadingAddress, List<Place>? places, String? error)?
-        osm,
+    TResult Function(
+            bool loadingAddress, List<PlaceSearch>? places, String? error)?
+        address,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Osm value) osm,
+    required TResult Function(_Google value) address,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Osm value)? osm,
+    TResult? Function(_Google value)? address,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Osm value)? osm,
+    TResult Function(_Google value)? address,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $OsmMapStateCopyWith<OsmMapState> get copyWith =>
+  $SearchAddressStateCopyWith<SearchAddressState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $OsmMapStateCopyWith<$Res> {
-  factory $OsmMapStateCopyWith(
-          OsmMapState value, $Res Function(OsmMapState) then) =
-      _$OsmMapStateCopyWithImpl<$Res, OsmMapState>;
+abstract class $SearchAddressStateCopyWith<$Res> {
+  factory $SearchAddressStateCopyWith(
+          SearchAddressState value, $Res Function(SearchAddressState) then) =
+      _$SearchAddressStateCopyWithImpl<$Res, SearchAddressState>;
   @useResult
-  $Res call({bool loadingAddress, List<Place>? places, String? error});
+  $Res call({bool loadingAddress, List<PlaceSearch>? places, String? error});
 }
 
 /// @nodoc
-class _$OsmMapStateCopyWithImpl<$Res, $Val extends OsmMapState>
-    implements $OsmMapStateCopyWith<$Res> {
-  _$OsmMapStateCopyWithImpl(this._value, this._then);
+class _$SearchAddressStateCopyWithImpl<$Res, $Val extends SearchAddressState>
+    implements $SearchAddressStateCopyWith<$Res> {
+  _$SearchAddressStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -301,7 +303,7 @@ class _$OsmMapStateCopyWithImpl<$Res, $Val extends OsmMapState>
       places: freezed == places
           ? _value.places
           : places // ignore: cast_nullable_to_non_nullable
-              as List<Place>?,
+              as List<PlaceSearch>?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -311,18 +313,20 @@ class _$OsmMapStateCopyWithImpl<$Res, $Val extends OsmMapState>
 }
 
 /// @nodoc
-abstract class _$$_OsmCopyWith<$Res> implements $OsmMapStateCopyWith<$Res> {
-  factory _$$_OsmCopyWith(_$_Osm value, $Res Function(_$_Osm) then) =
-      __$$_OsmCopyWithImpl<$Res>;
+abstract class _$$_GoogleCopyWith<$Res>
+    implements $SearchAddressStateCopyWith<$Res> {
+  factory _$$_GoogleCopyWith(_$_Google value, $Res Function(_$_Google) then) =
+      __$$_GoogleCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool loadingAddress, List<Place>? places, String? error});
+  $Res call({bool loadingAddress, List<PlaceSearch>? places, String? error});
 }
 
 /// @nodoc
-class __$$_OsmCopyWithImpl<$Res> extends _$OsmMapStateCopyWithImpl<$Res, _$_Osm>
-    implements _$$_OsmCopyWith<$Res> {
-  __$$_OsmCopyWithImpl(_$_Osm _value, $Res Function(_$_Osm) _then)
+class __$$_GoogleCopyWithImpl<$Res>
+    extends _$SearchAddressStateCopyWithImpl<$Res, _$_Google>
+    implements _$$_GoogleCopyWith<$Res> {
+  __$$_GoogleCopyWithImpl(_$_Google _value, $Res Function(_$_Google) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -332,7 +336,7 @@ class __$$_OsmCopyWithImpl<$Res> extends _$OsmMapStateCopyWithImpl<$Res, _$_Osm>
     Object? places = freezed,
     Object? error = freezed,
   }) {
-    return _then(_$_Osm(
+    return _then(_$_Google(
       loadingAddress: null == loadingAddress
           ? _value.loadingAddress
           : loadingAddress // ignore: cast_nullable_to_non_nullable
@@ -340,7 +344,7 @@ class __$$_OsmCopyWithImpl<$Res> extends _$OsmMapStateCopyWithImpl<$Res, _$_Osm>
       places: freezed == places
           ? _value._places
           : places // ignore: cast_nullable_to_non_nullable
-              as List<Place>?,
+              as List<PlaceSearch>?,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -351,17 +355,19 @@ class __$$_OsmCopyWithImpl<$Res> extends _$OsmMapStateCopyWithImpl<$Res, _$_Osm>
 
 /// @nodoc
 
-class _$_Osm implements _Osm {
-  const _$_Osm(
-      {this.loadingAddress = false, final List<Place>? places, this.error})
+class _$_Google implements _Google {
+  const _$_Google(
+      {this.loadingAddress = false,
+      final List<PlaceSearch>? places,
+      this.error})
       : _places = places;
 
   @override
   @JsonKey()
   final bool loadingAddress;
-  final List<Place>? _places;
+  final List<PlaceSearch>? _places;
   @override
-  List<Place>? get places {
+  List<PlaceSearch>? get places {
     final value = _places;
     if (value == null) return null;
     if (_places is EqualUnmodifiableListView) return _places;
@@ -374,14 +380,14 @@ class _$_Osm implements _Osm {
 
   @override
   String toString() {
-    return 'OsmMapState.osm(loadingAddress: $loadingAddress, places: $places, error: $error)';
+    return 'SearchAddressState.address(loadingAddress: $loadingAddress, places: $places, error: $error)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Osm &&
+            other is _$_Google &&
             (identical(other.loadingAddress, loadingAddress) ||
                 other.loadingAddress == loadingAddress) &&
             const DeepCollectionEquality().equals(other._places, _places) &&
@@ -395,37 +401,39 @@ class _$_Osm implements _Osm {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OsmCopyWith<_$_Osm> get copyWith =>
-      __$$_OsmCopyWithImpl<_$_Osm>(this, _$identity);
+  _$$_GoogleCopyWith<_$_Google> get copyWith =>
+      __$$_GoogleCopyWithImpl<_$_Google>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            bool loadingAddress, List<Place>? places, String? error)
-        osm,
+            bool loadingAddress, List<PlaceSearch>? places, String? error)
+        address,
   }) {
-    return osm(loadingAddress, places, error);
+    return address(loadingAddress, places, error);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(bool loadingAddress, List<Place>? places, String? error)?
-        osm,
+    TResult? Function(
+            bool loadingAddress, List<PlaceSearch>? places, String? error)?
+        address,
   }) {
-    return osm?.call(loadingAddress, places, error);
+    return address?.call(loadingAddress, places, error);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool loadingAddress, List<Place>? places, String? error)?
-        osm,
+    TResult Function(
+            bool loadingAddress, List<PlaceSearch>? places, String? error)?
+        address,
     required TResult orElse(),
   }) {
-    if (osm != null) {
-      return osm(loadingAddress, places, error);
+    if (address != null) {
+      return address(loadingAddress, places, error);
     }
     return orElse();
   }
@@ -433,45 +441,46 @@ class _$_Osm implements _Osm {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Osm value) osm,
+    required TResult Function(_Google value) address,
   }) {
-    return osm(this);
+    return address(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Osm value)? osm,
+    TResult? Function(_Google value)? address,
   }) {
-    return osm?.call(this);
+    return address?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Osm value)? osm,
+    TResult Function(_Google value)? address,
     required TResult orElse(),
   }) {
-    if (osm != null) {
-      return osm(this);
+    if (address != null) {
+      return address(this);
     }
     return orElse();
   }
 }
 
-abstract class _Osm implements OsmMapState {
-  const factory _Osm(
+abstract class _Google implements SearchAddressState {
+  const factory _Google(
       {final bool loadingAddress,
-      final List<Place>? places,
-      final String? error}) = _$_Osm;
+      final List<PlaceSearch>? places,
+      final String? error}) = _$_Google;
 
   @override
   bool get loadingAddress;
   @override
-  List<Place>? get places;
+  List<PlaceSearch>? get places;
   @override
   String? get error;
   @override
   @JsonKey(ignore: true)
-  _$$_OsmCopyWith<_$_Osm> get copyWith => throw _privateConstructorUsedError;
+  _$$_GoogleCopyWith<_$_Google> get copyWith =>
+      throw _privateConstructorUsedError;
 }

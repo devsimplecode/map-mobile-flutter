@@ -3,6 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
+import 'package:map_flutter/constants/constants.dart';
 import 'package:map_flutter/main_bloc/location_bloc/location_bloc.dart';
 import 'package:map_flutter/models/location.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
@@ -18,7 +19,6 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
     required this.bloc,
   }) : super(const AddressState.address()) {
     on<InitAddress>((event, emit) async {
-
       try {
         double? distanceInMeters;
         double? bearing;
@@ -38,7 +38,7 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
         } else {
           emit(state.copyWith(
             currentAddress: address,
-            selectedAddress: '',
+            selectedAddress: Constants.empty,
           ));
         }
         if (currentLng != null &&
@@ -64,10 +64,10 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
             bearing: bearing,
             distanceInMeters: distanceInMeters,
             setMarkersOsm: event.selectionObject,
-            markersGoogle: await googleMarkers(event, emit),
-            markersYandex: await yandexMarkers(event, emit),
+            markersGoogle: await googleMarkers(event, emit, currentLat, currentLng),
+            markersYandex: await yandexMarkers(event, emit, currentLat, currentLng),
             location: LocationMap(lat: event.lat, lng: event.lng),
-            error: '',
+            error: Constants.empty,
           ),
         );
       } catch (error) {
@@ -83,7 +83,7 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
 
   String street(String? value) {
     if (value?.contains("+") ?? true) {
-      return '';
+      return Constants.empty;
     }
     return '$value, ';
   }

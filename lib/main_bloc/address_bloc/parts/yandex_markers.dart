@@ -9,6 +9,8 @@ extension GoogleMarkers on AddressBloc {
   Future<List<PlacemarkMapObject>> yandexMarkers(
     InitAddress event,
     Emitter<AddressState> emit,
+    double? currentLat,
+    double? currentLng,
   ) async {
     final currentLng = bloc.state.maybeCurrentLng();
     final currentLat = bloc.state.maybeCurrentLat();

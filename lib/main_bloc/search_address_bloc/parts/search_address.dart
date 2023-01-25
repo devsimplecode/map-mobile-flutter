@@ -1,9 +1,9 @@
-part of '../google_map_bloc.dart';
+part of '../search_address_bloc.dart';
 
-extension SearchAddress on GoogleMapBloc {
+extension SearchAddress on SearchAddressBloc {
   Future<void> _searchAddress(
     _SearchAddress event,
-    Emitter<GoogleMapState> emit,
+    Emitter<SearchAddressState> emit,
   ) async {
     if (event.search.isEmpty) {
       emit(state.copyWith(places: []));

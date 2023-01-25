@@ -8,16 +8,14 @@ import 'package:map_flutter/repo/internet_connection_repo.dart';
 import 'package:map_flutter/main_bloc/address_bloc/address_bloc.dart';
 import 'package:map_flutter/main_bloc/location_bloc/location_bloc.dart';
 import 'package:map_flutter/main_bloc/type_map_bloc/type_map_bloc.dart';
-import 'package:map_flutter/maps/google_map/widgets/bottom_sheet.dart';
-import 'package:map_flutter/maps/osm_map/widgets/bottom_sheet.dart';
-import 'package:map_flutter/maps/yandex_map/widgets/bottom_sheet.dart';
+import 'package:map_flutter/widgets/app_bottom_sheet/bottom_sheet_search_address.dart';
 import 'package:map_flutter/widgets/app_bottom_sheet/bottom_sheet_select_map.dart';
 import 'package:map_flutter/l10n/generated/l10n.dart';
 import 'package:map_flutter/widgets/enable_location_button.dart';
 import 'package:map_flutter/widgets/warning_internet.dart';
 
-class SearchField extends StatelessWidget {
-  const SearchField({Key? key}) : super(key: key);
+class MainAppBar extends StatelessWidget {
+  const MainAppBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -61,8 +59,7 @@ class SearchField extends StatelessWidget {
                           ),
                           onPressed: () async {
                             if (status == PermissionStatus.granted) {
-                              // if (mapsType.mapsType == MapsType.google) {
-                                await showBottomSheetSearchGoogleAddress(context: context)
+                                await showBottomSheetSearchAddress(context: context)
                                     .then((value) {
                                   if (value != null && value.lat != null && value.lng != null) {
                                     BlocProvider.of<AddressBloc>(context)
@@ -73,33 +70,6 @@ class SearchField extends StatelessWidget {
                                     ));
                                   }
                                 });
-                              // }
-                              // else if (mapsType.mapsType == MapsType.yandex) {
-                              //   await showBottomSheetSearchYandexAddress(context: context)
-                              //       .then((value) {
-                              //     if (value != null && value.lat != null && value.lng != null) {
-                              //       BlocProvider.of<AddressBloc>(context)
-                              //           .add(AddressEvent.initAddress(
-                              //         lat: value.lat!,
-                              //         lng: value.lng!,
-                              //         selectionObject: true,
-                              //       ));
-                              //     }
-                              //   });
-                              // }
-                              // else if (mapsType.mapsType == MapsType.osm) {
-                              //   await showBottomSheetSearchOsmAddress(context: context)
-                              //       .then((value) {
-                              //     if (value != null && value.lat != null && value.lng != null) {
-                              //       BlocProvider.of<AddressBloc>(context)
-                              //           .add(AddressEvent.initAddress(
-                              //         lat: value.lat!,
-                              //         lng: value.lng!,
-                              //         selectionObject: true,
-                              //       ));
-                              //     }
-                              //   });
-                              // }
                             }
                             else {
                               BlocProvider.of<LocationBloc>(context)

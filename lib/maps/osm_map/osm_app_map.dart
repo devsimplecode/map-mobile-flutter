@@ -25,23 +25,23 @@ class OsmAppMap extends StatefulWidget {
 }
 
 class _OsmAppMapState extends State<OsmAppMap> {
-  late MapController markerController;
+  late MapController mapController;
   double? lat;
   double? lng;
 
   @override
   void initState() {
-    markerController = MapController(
+    mapController = MapController(
       initMapWithUserPosition: false,
       initPosition: GeoPoint(
         latitude: widget.latitude!,
         longitude: widget.longitude!,
       ),
     );
-    markerController.listenerMapSingleTapping.addListener(() async {
-      if (markerController.listenerMapSingleTapping.value != null &&
+    mapController.listenerMapSingleTapping.addListener(() async {
+      if (mapController.listenerMapSingleTapping.value != null &&
           widget.connectionStatus == ConnectionStatus.online) {
-        initAddress(markerController.listenerMapSingleTapping.value!);
+        initAddress(mapController.listenerMapSingleTapping.value!);
       }
     });
     super.initState();
@@ -56,7 +56,7 @@ class _OsmAppMapState extends State<OsmAppMap> {
   }
 
   Future<void> moveToCurrentLocation() async {
-    markerController.goToLocation(
+    mapController.goToLocation(
       GeoPoint(
         latitude: widget.latitude!,
         longitude: widget.longitude!,
@@ -69,7 +69,7 @@ class _OsmAppMapState extends State<OsmAppMap> {
     required double longitude,
   }) async {
     if (lat != null && lng != null) {
-      markerController.changeLocationMarker(
+      mapController.changeLocationMarker(
         oldLocation: GeoPoint(
           latitude: lat!,
           longitude: lng!,
@@ -80,14 +80,14 @@ class _OsmAppMapState extends State<OsmAppMap> {
         ),
       );
     } else {
-      await markerController.addMarker(
+      await mapController.addMarker(
         GeoPoint(
           latitude: latitude,
           longitude: longitude,
         ),
       );
     }
-    markerController.goToLocation(
+    mapController.goToLocation(
       GeoPoint(
         latitude: latitude,
         longitude: longitude,
@@ -123,7 +123,7 @@ class _OsmAppMapState extends State<OsmAppMap> {
         },
         builder: (context, state) {
           return OSMFlutter(
-            controller: markerController,
+            controller: mapController,
             initZoom: widget.locationStatus == PermissionStatus.granted ? 18 : 2,
             stepZoom: 5,
             staticPoints: [
