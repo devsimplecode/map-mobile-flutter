@@ -1,5 +1,10 @@
 PODS:
   - Alamofire (5.6.4)
+  - "app_settings (3.0.0+1)":
+    - Flutter
+  - connectivity_plus (0.0.1):
+    - Flutter
+    - ReachabilitySwift
   - Flutter (1.0.0)
   - flutter_osm_plugin (0.0.1):
     - Alamofire
@@ -23,6 +28,7 @@ PODS:
   - permission_handler_apple (9.0.4):
     - Flutter
   - Polyline (5.1.0)
+  - ReachabilitySwift (5.0.0)
   - shared_preferences_ios (0.0.1):
     - Flutter
   - Tangram-es (0.17.1)
@@ -34,6 +40,8 @@ PODS:
   - YandexMapsMobile (4.2.2-full)
 
 DEPENDENCIES:
+  - app_settings (from `.symlinks/plugins/app_settings/ios`)
+  - connectivity_plus (from `.symlinks/plugins/connectivity_plus/ios`)
   - Flutter (from `Flutter`)
   - flutter_osm_plugin (from `.symlinks/plugins/flutter_osm_plugin/ios`)
   - geocoding (from `.symlinks/plugins/geocoding/ios`)
@@ -50,10 +58,15 @@ SPEC REPOS:
     - Alamofire
     - GoogleMaps
     - Polyline
+    - ReachabilitySwift
     - Tangram-es
     - YandexMapsMobile
 
 EXTERNAL SOURCES:
+  app_settings:
+    :path: ".symlinks/plugins/app_settings/ios"
+  connectivity_plus:
+    :path: ".symlinks/plugins/connectivity_plus/ios"
   Flutter:
     :path: Flutter
   flutter_osm_plugin:
@@ -77,6 +90,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Alamofire: 4e95d97098eacb88856099c4fc79b526a299e48c
+  app_settings: d103828c9f5d515c4df9ee754dabd443f7cedcf3
+  connectivity_plus: 413a8857dd5d9f1c399a39130850d02fe0feaf7e
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   flutter_osm_plugin: f06ae1e854af57270c61ae27bdb8a386cfd4afa5
   geocoding: 32cfcdb16d38d907caaba65e2e42ad10d38bee58
@@ -86,6 +101,7 @@ SPEC CHECKSUMS:
   location: 3a2eed4dd2fab25e7b7baf2a9efefe82b512d740
   permission_handler_apple: 44366e37eaf29454a1e7b1b7d736c2cceaeb17ce
   Polyline: 2a1f29f87f8d9b7de868940f4f76deb8c678a5b1
+  ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   shared_preferences_ios: 548a61f8053b9b8a49ac19c1ffbc8b92c50d68ad
   Tangram-es: 628b634f7fc09d2217469b9914de00d9de49ff9d
   url_launcher_ios: 839c58cdb4279282219f5e248c3321761ff3c4de
