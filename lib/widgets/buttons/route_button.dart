@@ -15,7 +15,7 @@ class RouteButton extends StatelessWidget {
             Expanded(
               child: TextButton(
                 onPressed: () {
-                  if (state.mapObjectsYandex?.isEmpty ?? true) {
+                  if (state.polylineYandex?.isEmpty ?? true) {
                     BlocProvider.of<AddressBloc>(context).add(const AddressEvent.setPolyline());
                   }
                 },
@@ -26,7 +26,7 @@ class RouteButton extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     )),
                 child: Text(
-                  state.mapObjectsYandex?.isEmpty ?? true
+                  state.polylineYandex?.isEmpty ?? true
                       ? S.of(context).route
                       : S.of(context).turnByTurn,
                   style: const TextStyle(

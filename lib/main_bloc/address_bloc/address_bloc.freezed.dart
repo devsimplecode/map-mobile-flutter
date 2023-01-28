@@ -376,9 +376,11 @@ abstract class SetPolyline implements AddressEvent {
 mixin _$AddressState {
   bool get loadingAddress => throw _privateConstructorUsedError;
   bool get setMarkersOsm => throw _privateConstructorUsedError;
+  bool get setPolylineOsm => throw _privateConstructorUsedError;
   List<PlacemarkMapObject>? get markersYandex =>
       throw _privateConstructorUsedError;
-  List<MapObject>? get mapObjectsYandex => throw _privateConstructorUsedError;
+  List<MapObject>? get polylineYandex => throw _privateConstructorUsedError;
+  Set<dynamic>? get polylineGoogle => throw _privateConstructorUsedError;
   Set<Marker>? get markersGoogle => throw _privateConstructorUsedError;
   LocationMap? get location => throw _privateConstructorUsedError;
   String? get currentAddress => throw _privateConstructorUsedError;
@@ -391,8 +393,10 @@ mixin _$AddressState {
     required TResult Function(
             bool loadingAddress,
             bool setMarkersOsm,
+            bool setPolylineOsm,
             List<PlacemarkMapObject>? markersYandex,
-            List<MapObject>? mapObjectsYandex,
+            List<MapObject>? polylineYandex,
+            Set<dynamic>? polylineGoogle,
             Set<Marker>? markersGoogle,
             LocationMap? location,
             String? currentAddress,
@@ -408,8 +412,10 @@ mixin _$AddressState {
     TResult? Function(
             bool loadingAddress,
             bool setMarkersOsm,
+            bool setPolylineOsm,
             List<PlacemarkMapObject>? markersYandex,
-            List<MapObject>? mapObjectsYandex,
+            List<MapObject>? polylineYandex,
+            Set<dynamic>? polylineGoogle,
             Set<Marker>? markersGoogle,
             LocationMap? location,
             String? currentAddress,
@@ -425,8 +431,10 @@ mixin _$AddressState {
     TResult Function(
             bool loadingAddress,
             bool setMarkersOsm,
+            bool setPolylineOsm,
             List<PlacemarkMapObject>? markersYandex,
-            List<MapObject>? mapObjectsYandex,
+            List<MapObject>? polylineYandex,
+            Set<dynamic>? polylineGoogle,
             Set<Marker>? markersGoogle,
             LocationMap? location,
             String? currentAddress,
@@ -469,8 +477,10 @@ abstract class $AddressStateCopyWith<$Res> {
   $Res call(
       {bool loadingAddress,
       bool setMarkersOsm,
+      bool setPolylineOsm,
       List<PlacemarkMapObject>? markersYandex,
-      List<MapObject>? mapObjectsYandex,
+      List<MapObject>? polylineYandex,
+      Set<dynamic>? polylineGoogle,
       Set<Marker>? markersGoogle,
       LocationMap? location,
       String? currentAddress,
@@ -495,8 +505,10 @@ class _$AddressStateCopyWithImpl<$Res, $Val extends AddressState>
   $Res call({
     Object? loadingAddress = null,
     Object? setMarkersOsm = null,
+    Object? setPolylineOsm = null,
     Object? markersYandex = freezed,
-    Object? mapObjectsYandex = freezed,
+    Object? polylineYandex = freezed,
+    Object? polylineGoogle = freezed,
     Object? markersGoogle = freezed,
     Object? location = freezed,
     Object? currentAddress = freezed,
@@ -514,14 +526,22 @@ class _$AddressStateCopyWithImpl<$Res, $Val extends AddressState>
           ? _value.setMarkersOsm
           : setMarkersOsm // ignore: cast_nullable_to_non_nullable
               as bool,
+      setPolylineOsm: null == setPolylineOsm
+          ? _value.setPolylineOsm
+          : setPolylineOsm // ignore: cast_nullable_to_non_nullable
+              as bool,
       markersYandex: freezed == markersYandex
           ? _value.markersYandex
           : markersYandex // ignore: cast_nullable_to_non_nullable
               as List<PlacemarkMapObject>?,
-      mapObjectsYandex: freezed == mapObjectsYandex
-          ? _value.mapObjectsYandex
-          : mapObjectsYandex // ignore: cast_nullable_to_non_nullable
+      polylineYandex: freezed == polylineYandex
+          ? _value.polylineYandex
+          : polylineYandex // ignore: cast_nullable_to_non_nullable
               as List<MapObject>?,
+      polylineGoogle: freezed == polylineGoogle
+          ? _value.polylineGoogle
+          : polylineGoogle // ignore: cast_nullable_to_non_nullable
+              as Set<dynamic>?,
       markersGoogle: freezed == markersGoogle
           ? _value.markersGoogle
           : markersGoogle // ignore: cast_nullable_to_non_nullable
@@ -565,8 +585,10 @@ abstract class _$$_AddressCopyWith<$Res>
   $Res call(
       {bool loadingAddress,
       bool setMarkersOsm,
+      bool setPolylineOsm,
       List<PlacemarkMapObject>? markersYandex,
-      List<MapObject>? mapObjectsYandex,
+      List<MapObject>? polylineYandex,
+      Set<dynamic>? polylineGoogle,
       Set<Marker>? markersGoogle,
       LocationMap? location,
       String? currentAddress,
@@ -588,8 +610,10 @@ class __$$_AddressCopyWithImpl<$Res>
   $Res call({
     Object? loadingAddress = null,
     Object? setMarkersOsm = null,
+    Object? setPolylineOsm = null,
     Object? markersYandex = freezed,
-    Object? mapObjectsYandex = freezed,
+    Object? polylineYandex = freezed,
+    Object? polylineGoogle = freezed,
     Object? markersGoogle = freezed,
     Object? location = freezed,
     Object? currentAddress = freezed,
@@ -607,14 +631,22 @@ class __$$_AddressCopyWithImpl<$Res>
           ? _value.setMarkersOsm
           : setMarkersOsm // ignore: cast_nullable_to_non_nullable
               as bool,
+      setPolylineOsm: null == setPolylineOsm
+          ? _value.setPolylineOsm
+          : setPolylineOsm // ignore: cast_nullable_to_non_nullable
+              as bool,
       markersYandex: freezed == markersYandex
           ? _value._markersYandex
           : markersYandex // ignore: cast_nullable_to_non_nullable
               as List<PlacemarkMapObject>?,
-      mapObjectsYandex: freezed == mapObjectsYandex
-          ? _value._mapObjectsYandex
-          : mapObjectsYandex // ignore: cast_nullable_to_non_nullable
+      polylineYandex: freezed == polylineYandex
+          ? _value._polylineYandex
+          : polylineYandex // ignore: cast_nullable_to_non_nullable
               as List<MapObject>?,
+      polylineGoogle: freezed == polylineGoogle
+          ? _value._polylineGoogle
+          : polylineGoogle // ignore: cast_nullable_to_non_nullable
+              as Set<dynamic>?,
       markersGoogle: freezed == markersGoogle
           ? _value._markersGoogle
           : markersGoogle // ignore: cast_nullable_to_non_nullable
@@ -653,8 +685,10 @@ class _$_Address extends _Address {
   const _$_Address(
       {this.loadingAddress = false,
       this.setMarkersOsm = false,
+      this.setPolylineOsm = false,
       final List<PlacemarkMapObject>? markersYandex,
-      final List<MapObject>? mapObjectsYandex,
+      final List<MapObject>? polylineYandex,
+      final Set<dynamic>? polylineGoogle,
       final Set<Marker>? markersGoogle,
       this.location,
       this.currentAddress,
@@ -663,7 +697,8 @@ class _$_Address extends _Address {
       this.bearing,
       this.error})
       : _markersYandex = markersYandex,
-        _mapObjectsYandex = mapObjectsYandex,
+        _polylineYandex = polylineYandex,
+        _polylineGoogle = polylineGoogle,
         _markersGoogle = markersGoogle,
         super._();
 
@@ -673,6 +708,9 @@ class _$_Address extends _Address {
   @override
   @JsonKey()
   final bool setMarkersOsm;
+  @override
+  @JsonKey()
+  final bool setPolylineOsm;
   final List<PlacemarkMapObject>? _markersYandex;
   @override
   List<PlacemarkMapObject>? get markersYandex {
@@ -683,15 +721,24 @@ class _$_Address extends _Address {
     return EqualUnmodifiableListView(value);
   }
 
-  final List<MapObject>? _mapObjectsYandex;
+  final List<MapObject>? _polylineYandex;
   @override
-  List<MapObject>? get mapObjectsYandex {
-    final value = _mapObjectsYandex;
+  List<MapObject>? get polylineYandex {
+    final value = _polylineYandex;
     if (value == null) return null;
-    if (_mapObjectsYandex is EqualUnmodifiableListView)
-      return _mapObjectsYandex;
+    if (_polylineYandex is EqualUnmodifiableListView) return _polylineYandex;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
+  }
+
+  final Set<dynamic>? _polylineGoogle;
+  @override
+  Set<dynamic>? get polylineGoogle {
+    final value = _polylineGoogle;
+    if (value == null) return null;
+    if (_polylineGoogle is EqualUnmodifiableSetView) return _polylineGoogle;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableSetView(value);
   }
 
   final Set<Marker>? _markersGoogle;
@@ -719,7 +766,7 @@ class _$_Address extends _Address {
 
   @override
   String toString() {
-    return 'AddressState.address(loadingAddress: $loadingAddress, setMarkersOsm: $setMarkersOsm, markersYandex: $markersYandex, mapObjectsYandex: $mapObjectsYandex, markersGoogle: $markersGoogle, location: $location, currentAddress: $currentAddress, selectedAddress: $selectedAddress, distanceInMeters: $distanceInMeters, bearing: $bearing, error: $error)';
+    return 'AddressState.address(loadingAddress: $loadingAddress, setMarkersOsm: $setMarkersOsm, setPolylineOsm: $setPolylineOsm, markersYandex: $markersYandex, polylineYandex: $polylineYandex, polylineGoogle: $polylineGoogle, markersGoogle: $markersGoogle, location: $location, currentAddress: $currentAddress, selectedAddress: $selectedAddress, distanceInMeters: $distanceInMeters, bearing: $bearing, error: $error)';
   }
 
   @override
@@ -731,10 +778,14 @@ class _$_Address extends _Address {
                 other.loadingAddress == loadingAddress) &&
             (identical(other.setMarkersOsm, setMarkersOsm) ||
                 other.setMarkersOsm == setMarkersOsm) &&
+            (identical(other.setPolylineOsm, setPolylineOsm) ||
+                other.setPolylineOsm == setPolylineOsm) &&
             const DeepCollectionEquality()
                 .equals(other._markersYandex, _markersYandex) &&
             const DeepCollectionEquality()
-                .equals(other._mapObjectsYandex, _mapObjectsYandex) &&
+                .equals(other._polylineYandex, _polylineYandex) &&
+            const DeepCollectionEquality()
+                .equals(other._polylineGoogle, _polylineGoogle) &&
             const DeepCollectionEquality()
                 .equals(other._markersGoogle, _markersGoogle) &&
             (identical(other.location, location) ||
@@ -754,8 +805,10 @@ class _$_Address extends _Address {
       runtimeType,
       loadingAddress,
       setMarkersOsm,
+      setPolylineOsm,
       const DeepCollectionEquality().hash(_markersYandex),
-      const DeepCollectionEquality().hash(_mapObjectsYandex),
+      const DeepCollectionEquality().hash(_polylineYandex),
+      const DeepCollectionEquality().hash(_polylineGoogle),
       const DeepCollectionEquality().hash(_markersGoogle),
       location,
       currentAddress,
@@ -776,8 +829,10 @@ class _$_Address extends _Address {
     required TResult Function(
             bool loadingAddress,
             bool setMarkersOsm,
+            bool setPolylineOsm,
             List<PlacemarkMapObject>? markersYandex,
-            List<MapObject>? mapObjectsYandex,
+            List<MapObject>? polylineYandex,
+            Set<dynamic>? polylineGoogle,
             Set<Marker>? markersGoogle,
             LocationMap? location,
             String? currentAddress,
@@ -790,8 +845,10 @@ class _$_Address extends _Address {
     return address(
         loadingAddress,
         setMarkersOsm,
+        setPolylineOsm,
         markersYandex,
-        mapObjectsYandex,
+        polylineYandex,
+        polylineGoogle,
         markersGoogle,
         location,
         currentAddress,
@@ -807,8 +864,10 @@ class _$_Address extends _Address {
     TResult? Function(
             bool loadingAddress,
             bool setMarkersOsm,
+            bool setPolylineOsm,
             List<PlacemarkMapObject>? markersYandex,
-            List<MapObject>? mapObjectsYandex,
+            List<MapObject>? polylineYandex,
+            Set<dynamic>? polylineGoogle,
             Set<Marker>? markersGoogle,
             LocationMap? location,
             String? currentAddress,
@@ -821,8 +880,10 @@ class _$_Address extends _Address {
     return address?.call(
         loadingAddress,
         setMarkersOsm,
+        setPolylineOsm,
         markersYandex,
-        mapObjectsYandex,
+        polylineYandex,
+        polylineGoogle,
         markersGoogle,
         location,
         currentAddress,
@@ -838,8 +899,10 @@ class _$_Address extends _Address {
     TResult Function(
             bool loadingAddress,
             bool setMarkersOsm,
+            bool setPolylineOsm,
             List<PlacemarkMapObject>? markersYandex,
-            List<MapObject>? mapObjectsYandex,
+            List<MapObject>? polylineYandex,
+            Set<dynamic>? polylineGoogle,
             Set<Marker>? markersGoogle,
             LocationMap? location,
             String? currentAddress,
@@ -854,8 +917,10 @@ class _$_Address extends _Address {
       return address(
           loadingAddress,
           setMarkersOsm,
+          setPolylineOsm,
           markersYandex,
-          mapObjectsYandex,
+          polylineYandex,
+          polylineGoogle,
           markersGoogle,
           location,
           currentAddress,
@@ -900,8 +965,10 @@ abstract class _Address extends AddressState {
   const factory _Address(
       {final bool loadingAddress,
       final bool setMarkersOsm,
+      final bool setPolylineOsm,
       final List<PlacemarkMapObject>? markersYandex,
-      final List<MapObject>? mapObjectsYandex,
+      final List<MapObject>? polylineYandex,
+      final Set<dynamic>? polylineGoogle,
       final Set<Marker>? markersGoogle,
       final LocationMap? location,
       final String? currentAddress,
@@ -916,9 +983,13 @@ abstract class _Address extends AddressState {
   @override
   bool get setMarkersOsm;
   @override
+  bool get setPolylineOsm;
+  @override
   List<PlacemarkMapObject>? get markersYandex;
   @override
-  List<MapObject>? get mapObjectsYandex;
+  List<MapObject>? get polylineYandex;
+  @override
+  Set<dynamic>? get polylineGoogle;
   @override
   Set<Marker>? get markersGoogle;
   @override

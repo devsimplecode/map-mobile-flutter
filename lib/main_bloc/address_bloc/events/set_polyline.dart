@@ -14,19 +14,25 @@ extension SetPolylineMap on AddressBloc {
       );
       emit(
         state.copyWith(
-          mapObjectsYandex: await yandexPolyline(
+          polylineGoogle: await googleSetPolyline(
             event,
             emit,
-            currentLat,
-            currentLng,
             result.points,
           ),
+          polylineYandex: await yandexPolyline(
+            event,
+            emit,
+            result.points,
+          ),
+          setPolylineOsm: true,
         ),
       );
     } else {
       emit(
         state.copyWith(
-          mapObjectsYandex: const [],
+          polylineGoogle: const {},
+          polylineYandex: const [],
+          setPolylineOsm: false,
         ),
       );
     }

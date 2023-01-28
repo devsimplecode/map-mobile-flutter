@@ -12,11 +12,14 @@ import 'package:yandex_mapkit/yandex_mapkit.dart';
 import 'package:map_flutter/main_bloc/address_bloc/parts/google_markers.dart';
 import 'package:map_flutter/main_bloc/address_bloc/parts/yandex_markers.dart';
 import 'package:map_flutter/main_bloc/address_bloc/parts/yandex_polyline.dart';
+import 'package:map_flutter/main_bloc/address_bloc/parts/google_polyline.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:map_flutter/l10n/generated/l10n.dart';
 
 part 'events/init_address.dart';
+
 part 'events/set_polyline.dart';
+
 part 'utils/utils.dart';
 
 part 'address_bloc.freezed.dart';
@@ -31,7 +34,6 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
 
   final LocationBloc bloc;
   PolylinePoints polylinePoints = PolylinePoints();
-
 }
 
 @freezed
@@ -54,8 +56,10 @@ class AddressState with _$AddressState {
   const factory AddressState.address({
     @Default(false) bool loadingAddress,
     @Default(false) bool setMarkersOsm,
+    @Default(false) bool setPolylineOsm,
     List<PlacemarkMapObject>? markersYandex,
-    List<MapObject>? mapObjectsYandex,
+    List<MapObject>? polylineYandex,
+    Set<dynamic>? polylineGoogle,
     Set<Marker>? markersGoogle,
     LocationMap? location,
     String? currentAddress,

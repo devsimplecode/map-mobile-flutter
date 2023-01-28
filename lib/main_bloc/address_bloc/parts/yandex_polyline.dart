@@ -8,13 +8,11 @@ extension YandexPolyline on AddressBloc {
   Future<List<MapObject>> yandexPolyline(
     SetPolyline event,
     Emitter<AddressState> emit,
-    double? currentLat,
-    double? currentLng,
     List<PointLatLng> points,
   ) async {
     List<MapObject> mapObjectsYandex = [];
 
-    const MapObjectId mapObjectId = MapObjectId('polyline');
+    const MapObjectId mapObjectId = MapObjectId('yandex_polyline');
     final mapObject = PolylineMapObject(
       mapId: mapObjectId,
       polyline: Polyline(
@@ -26,11 +24,10 @@ extension YandexPolyline on AddressBloc {
             ),
         ],
       ),
-      strokeColor: Colors.orange[700]!,
-      strokeWidth: 7.5,
-      outlineColor: Colors.yellow[200]!,
-      outlineWidth: 2.0,
-      turnRadius: 10.0,
+      strokeColor: Colors.blue,
+      outlineColor: Colors.blue,
+      strokeWidth: 4,
+      turnRadius: 8.0,
       arcApproximationStep: 1.0,
       gradientLength: 1.0,
       isInnerOutlineEnabled: true,

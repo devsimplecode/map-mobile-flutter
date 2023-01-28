@@ -109,7 +109,7 @@ class _YandexAppMapState extends State<YandexAppMap> {
             },
             mapObjects: [
               ...state.markersYandex ?? [],
-              ...state.mapObjectsYandex ?? [],
+              ...state.polylineYandex ?? [],
             ],
           );
         },

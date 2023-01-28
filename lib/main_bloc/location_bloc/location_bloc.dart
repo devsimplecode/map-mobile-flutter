@@ -79,16 +79,6 @@ class LocationState with _$LocationState {
         orElse: () => null,
       );
 
-  T? maybeLocationStatus<T extends PermissionStatus>() => maybeWhen(
-        map: (_, lat, lng, status, ___) {
-          if (status is T) {
-            return status;
-          }
-
-          return null;
-        },
-        orElse: () => null,
-      );
 
   T? maybeKey<T extends UniqueKey>() => maybeWhen(
         map: (_, lat, lng, __, key) {

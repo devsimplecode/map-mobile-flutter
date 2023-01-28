@@ -21,7 +21,7 @@ extension GoogleMarkers on AddressBloc {
       const ImageConfiguration(),
       AppAssets.images.location,
     );
-    if (bloc.state.maybeLocationStatus() == PermissionStatus.granted) {
+    if (bloc.state.status == PermissionStatus.granted) {
       markersList.add(
         Marker(
           icon: iconLocation,

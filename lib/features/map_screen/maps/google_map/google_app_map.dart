@@ -27,6 +27,7 @@ class GoogleAppMap extends StatefulWidget {
 class _GoogleAppMapState extends State<GoogleAppMap> {
   final Completer<GoogleMapController> _controller = Completer();
   GoogleMapController? _baseController;
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocListener(
@@ -82,6 +83,7 @@ class _GoogleAppMapState extends State<GoogleAppMap> {
 
               _controller.complete(googleMapController);
             },
+            polylines: state.polylineGoogle?.cast<Polyline>() ?? {},
             markers: state.markersGoogle ?? {},
             onTap: (latLng) {
               if (widget.connectionStatus == ConnectionStatus.online) {

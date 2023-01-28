@@ -15,7 +15,7 @@ class AppBackButton extends StatelessWidget {
     final theme = Theme.of(context);
     return BlocBuilder<AddressBloc, AddressState>(
       builder: (context, state) {
-        if (state.mapObjectsYandex?.isEmpty ?? true) {
+        if (state.polylineYandex?.isEmpty ?? true) {
           return const SizedBox.shrink();
         }
         return GestureDetector(

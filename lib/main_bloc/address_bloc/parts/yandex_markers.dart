@@ -32,7 +32,7 @@ extension YandexMarkers on AddressBloc {
           )),
     ]);
 
-    if (bloc.state.maybeLocationStatus() == PermissionStatus.granted) {
+    if (bloc.state.status == PermissionStatus.granted) {
       markers.add(
         PlacemarkMapObject(
           icon: iconLocation,

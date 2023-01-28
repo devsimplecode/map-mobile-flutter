@@ -55,7 +55,7 @@ class _OsmAppMapState extends State<OsmAppMap> {
     ));
   }
 
-  Future<void> moveToCurrentLocation() async {
+  void moveToCurrentLocation() {
     mapController.goToLocation(
       GeoPoint(
         latitude: widget.latitude!,
@@ -64,10 +64,10 @@ class _OsmAppMapState extends State<OsmAppMap> {
     );
   }
 
-  Future<void> goToLocation({
+  void goToLocation({
     required double latitude,
     required double longitude,
-  }) async {
+  }) {
     if (lat != null && lng != null) {
       mapController.changeLocationMarker(
         oldLocation: GeoPoint(
@@ -80,13 +80,14 @@ class _OsmAppMapState extends State<OsmAppMap> {
         ),
       );
     } else {
-      await mapController.addMarker(
+      mapController.addMarker(
         GeoPoint(
           latitude: latitude,
           longitude: longitude,
         ),
       );
     }
+
     mapController.goToLocation(
       GeoPoint(
         latitude: latitude,
@@ -99,28 +100,51 @@ class _OsmAppMapState extends State<OsmAppMap> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<LocationBloc, LocationState>(
-      listenWhen: (prev, curr) => prev.maybeKey() != curr.maybeKey(),
-      listener: (context, state) {
-        state.maybeMap(
-          orElse: () {},
-          map: (google) async {
-            if (google.status == PermissionStatus.granted) {
-              await moveToCurrentLocation();
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<LocationBloc, LocationState>(
+          listenWhen: (prev, curr) => prev.maybeKey() != curr.maybeKey(),
+          listener: (context, state) {
+            state.maybeMap(
+              orElse: () {},
+              map: (google) {
+                if (google.status == PermissionStatus.granted) {
+                  moveToCurrentLocation();
+                }
+              },
+            );
+          },
+        ),
+        BlocListener<AddressBloc, AddressState>(
+          listener: (context, state) {
+            if (state.setMarkersOsm) {
+              goToLocation(
+                latitude: state.location!.lat!,
+                longitude: state.location!.lng!,
+              );
+            }
+            if (state.setPolylineOsm) {
+              mapController.drawRoad(
+                GeoPoint(
+                  latitude: widget.latitude!,
+                  longitude: widget.longitude!,
+                ),
+                GeoPoint(
+                  latitude: state.location!.lat!,
+                  longitude: state.location!.lng!,
+                ),
+                roadOption: const RoadOption(
+                  roadColor: Colors.blue,
+                  roadWidth: 8,
+                ),
+              );
+            } else {
+              mapController.clearAllRoads();
             }
           },
-        );
-      },
-      child: BlocConsumer<AddressBloc, AddressState>(
-        listenWhen: (prev, curr) => prev.location != curr.location,
-        listener: (context, state) async {
-          if (state.setMarkersOsm) {
-            await goToLocation(
-              latitude: state.location!.lat!,
-              longitude: state.location!.lng!,
-            );
-          }
-        },
+        ),
+      ],
+      child: BlocBuilder<AddressBloc, AddressState>(
         builder: (context, state) {
           return OSMFlutter(
             controller: mapController,
