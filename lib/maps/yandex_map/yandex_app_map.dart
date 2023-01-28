@@ -36,10 +36,8 @@ class _YandexAppMapState extends State<YandexAppMap> {
       listener: (context, state) {
         state.maybeMap(
           orElse: () {},
-          map: (google) async{
+          map: (google) async {
             if (google.status == PermissionStatus.granted) {
-              final a = await _baseController.getCameraPosition();
-              print(a.target);
               _baseController.moveCamera(
                 CameraUpdate.newCameraPosition(
                   CameraPosition(
@@ -81,8 +79,6 @@ class _YandexAppMapState extends State<YandexAppMap> {
         builder: (context, state) {
           return YandexMap(
             onMapCreated: (YandexMapController yandexMapController) async {
-
-
               _baseController = yandexMapController;
               if (widget.locationStatus == PermissionStatus.granted) {
                 yandexMapController.moveCamera(
@@ -111,7 +107,10 @@ class _YandexAppMapState extends State<YandexAppMap> {
                 ));
               }
             },
-            mapObjects: state.markersYandex ?? [],
+            mapObjects: [
+              ...state.markersYandex ?? [],
+              ...state.mapObjectsYandex ?? [],
+            ],
           );
         },
       ),

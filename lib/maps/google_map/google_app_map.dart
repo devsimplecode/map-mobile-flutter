@@ -27,7 +27,6 @@ class GoogleAppMap extends StatefulWidget {
 class _GoogleAppMapState extends State<GoogleAppMap> {
   final Completer<GoogleMapController> _controller = Completer();
   GoogleMapController? _baseController;
-
   @override
   Widget build(BuildContext context) {
     return MultiBlocListener(

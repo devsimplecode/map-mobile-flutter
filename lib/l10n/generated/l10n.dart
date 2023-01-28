@@ -169,6 +169,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Построить маршрут`
+  String get route {
+    return Intl.message(
+      'Построить маршрут',
+      name: 'route',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Идти по шагом`
+  String get turnByTurn {
+    return Intl.message(
+      'Идти по шагом',
+      name: 'turnByTurn',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

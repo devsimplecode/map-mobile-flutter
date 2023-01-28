@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:map_flutter/core/app_map/app_map.dart';
+import 'package:map_flutter/features/app_map/app_map.dart';
 import 'package:map_flutter/main_bloc/bloc_check_internet/bloc_check_internet.dart';
 import 'package:map_flutter/repo/internet_connection_repo.dart';
 import 'package:map_flutter/main_bloc/address_bloc/address_bloc.dart';
@@ -9,9 +9,10 @@ import 'package:map_flutter/main_bloc/location_bloc/location_bloc.dart';
 import 'package:map_flutter/main_bloc/type_map_bloc/type_map_bloc.dart';
 import 'package:map_flutter/main_bloc/search_address_bloc/search_address_bloc.dart';
 import 'package:map_flutter/repo/map_api.dart';
-import 'package:map_flutter/core/app_bar/main_app_bar.dart';
+import 'package:map_flutter/features/app_bar/main_app_bar.dart';
 import 'package:map_flutter/widgets/action_map_address.dart';
-import 'package:map_flutter/widgets/current_location_button.dart';
+import 'package:map_flutter/widgets/buttons/back_button.dart';
+import 'package:map_flutter/widgets/buttons/current_location_button.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:map_flutter/l10n/generated/l10n.dart';
@@ -118,10 +119,16 @@ class MapScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.end,
-              children: const [
-                CurrentLocationButton(),
-                SizedBox(height: 28),
-                ActionMapAddress(),
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    AppBackButton(),
+                    CurrentLocationButton(),
+                  ],
+                ),
+                const SizedBox(height: 28),
+                const ActionMapAddress(),
               ],
             ),
           ),

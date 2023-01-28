@@ -31,10 +31,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "loading": MessageLookupByLibrary.simpleMessage("Идет загрузка..."),
         "noInternet": MessageLookupByLibrary.simpleMessage("Нет соединения"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
+        "route": MessageLookupByLibrary.simpleMessage("Построить маршрут"),
         "search": MessageLookupByLibrary.simpleMessage("Поиск"),
         "selectMap":
             MessageLookupByLibrary.simpleMessage("Выберите тип карты:"),
         "tryAgain": MessageLookupByLibrary.simpleMessage("Пробовать снова"),
+        "turnByTurn": MessageLookupByLibrary.simpleMessage("Идти по шагом"),
         "unreceivedLocation": MessageLookupByLibrary.simpleMessage(
             "Не удалось определить, где вы"),
         "whereDoYouGo": MessageLookupByLibrary.simpleMessage("Куда поедете?"),

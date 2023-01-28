@@ -14,10 +14,17 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
   LocationBloc({
     required this.api,
   }) : super(const LocationState.init(status: PermissionStatus.granted)) {
+    _subscription ??= location.onLocationChanged.listen((event) async {
+      var hasPermission = await location.hasPermission() == PermissionStatus.granted;
+      if (state is _Init && hasPermission) {
+        add(const LocationEvent.initLocation(moveToCurrentLocation: true));
+      }
+    });
     on<_InitLocation>(_initLocation);
   }
 
   final MapApi api;
+  Location location = Location();
   StreamSubscription<LocationData>? _subscription;
 
   @override

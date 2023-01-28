@@ -7,6 +7,7 @@ import 'package:map_flutter/main_bloc/bloc_check_internet/bloc_check_internet.da
 import 'package:map_flutter/repo/internet_connection_repo.dart';
 import 'package:map_flutter/main_bloc/address_bloc/address_bloc.dart';
 import 'package:map_flutter/l10n/generated/l10n.dart';
+import 'package:map_flutter/widgets/buttons/route_button.dart';
 
 class ActionMapAddress extends StatelessWidget {
   const ActionMapAddress({Key? key}) : super(key: key);
@@ -21,11 +22,10 @@ class ActionMapAddress extends StatelessWidget {
         }
         return BlocBuilder<AddressBloc, AddressState>(
           builder: (context, state) {
-            if ((state.selectedAddress?.isEmpty ?? true) &&
-                (state.currentAddress?.isEmpty ?? true)) {
+            if (state.emptyAddress) {
               return const SizedBox.shrink();
             }
-            if (state.error?.isNotEmpty ?? false) {
+            if (!state.errorIsEmpty) {
               return Center(
                 child: Text(
                   state.error ?? '',
@@ -36,9 +36,7 @@ class ActionMapAddress extends StatelessWidget {
                 ),
               );
             }
-            final distance = (state.distanceInMeters ?? 0) > 1000
-                ? '${state.bearing?.toInt() ?? 0} KM'
-                : '${state.distanceInMeters?.toInt() ?? 0} M';
+
             return Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -47,8 +45,9 @@ class ActionMapAddress extends StatelessWidget {
                 color: Colors.white,
               ),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  if (state.selectedAddress?.isEmpty ?? true) ...[
+                  if (state.selectedAddressIsEmpty && !state.loadingAddress) ...[
                     Text(
                       S.of(context).yourLocation,
                       style: const TextStyle(
@@ -67,7 +66,7 @@ class ActionMapAddress extends StatelessWidget {
                   ] else ...[
                     Column(
                       children: [
-                        if (state.currentAddress?.isNotEmpty ?? false) ...[
+                        if (!state.currentAddressIsEmpty) ...[
                           Row(
                             children: [
                               SvgPicture.asset(AppAssets.svg.currentLocation),
@@ -86,7 +85,7 @@ class ActionMapAddress extends StatelessWidget {
                             ],
                           ),
                         ],
-                        if (state.selectedAddress?.isNotEmpty ?? false) ...[
+                        if (!state.selectedAddressIsEmpty) ...[
                           const SizedBox(height: 16),
                           Row(
                             children: [
@@ -105,7 +104,7 @@ class ActionMapAddress extends StatelessWidget {
                               ),
                               const SizedBox(width: 12),
                               Text(
-                                distance,
+                                state.distance,
                                 style: const TextStyle(
                                   fontSize: 12,
                                   fontWeight: FontWeight.w500,
@@ -114,6 +113,8 @@ class ActionMapAddress extends StatelessWidget {
                               ),
                             ],
                           ),
+                          const SizedBox(height: 16),
+                          const RouteButton(),
                         ],
                       ],
                     ),

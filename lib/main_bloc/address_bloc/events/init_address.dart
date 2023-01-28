@@ -1,6 +1,6 @@
-part of 'address_bloc.dart';
+part of '../address_bloc.dart';
 
-extension GoogleMarkers on AddressBloc {
+extension InitAddressMap on AddressBloc {
   Future<void> _initAddress(
     InitAddress event,
     Emitter<AddressState> emit,
@@ -18,20 +18,12 @@ extension GoogleMarkers on AddressBloc {
         localeIdentifier: 'en_US',
       );
       final address = adr(placeMarks.first);
-      if (event.selectionObject) {
-        emit(state.copyWith(selectedAddress: address));
-      } else {
-        emit(state.copyWith(
-          currentAddress: address,
-          selectedAddress: Constants.empty,
-        ));
-      }
-      if (currentLng != null &&
-          currentLat != null &&
-          bloc.state.maybeLocationStatus() == PermissionStatus.granted) {
+      if (notNull(currentLat) &&
+          notNull(currentLng) &&
+          bloc.state.status == PermissionStatus.granted) {
         distanceInMeters = Geolocator.distanceBetween(
-          currentLat,
-          currentLng,
+          currentLat!,
+          currentLng!,
           event.lat,
           event.lng,
         );
@@ -51,8 +43,11 @@ extension GoogleMarkers on AddressBloc {
           setMarkersOsm: event.selectionObject,
           markersGoogle: await googleMarkers(event, emit, currentLat, currentLng),
           markersYandex: await yandexMarkers(event, emit, currentLat, currentLng),
+          mapObjectsYandex: const [],
           location: LocationMap(lat: event.lat, lng: event.lng),
           error: Constants.empty,
+          selectedAddress: event.selectionObject ? address : Constants.empty,
+          currentAddress: !event.selectionObject ? address : state.currentAddress,
         ),
       );
     } catch (error) {
@@ -61,16 +56,5 @@ extension GoogleMarkers on AddressBloc {
         location: LocationMap(lat: event.lat, lng: event.lng),
       ));
     }
-  }
-
-  String adr(Placemark value) {
-    return '${street(value.street)}${value.administrativeArea}, ${value.subAdministrativeArea}, ${value.country}';
-  }
-
-  String street(String? value) {
-    if (value?.contains("+") ?? true) {
-      return Constants.empty;
-    }
-    return '$value, ';
   }
 }

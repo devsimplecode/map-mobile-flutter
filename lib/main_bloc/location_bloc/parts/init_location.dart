@@ -7,7 +7,7 @@ extension InitLocation on LocationBloc {
   ) async {
     double? latitude = state.maybeCurrentLat();
     double? longitude = state.maybeCurrentLng();
-    Location location = Location();
+
     try {
       if (await location.requestService()) {
         await location.getLocation().then((location) {

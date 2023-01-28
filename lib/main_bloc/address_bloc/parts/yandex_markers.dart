@@ -5,15 +5,13 @@ import 'package:map_flutter/constants/assets.dart';
 import 'package:map_flutter/main_bloc/address_bloc/address_bloc.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
 
-extension GoogleMarkers on AddressBloc {
+extension YandexMarkers on AddressBloc {
   Future<List<PlacemarkMapObject>> yandexMarkers(
     InitAddress event,
     Emitter<AddressState> emit,
     double? currentLat,
     double? currentLng,
   ) async {
-    final currentLng = bloc.state.maybeCurrentLng();
-    final currentLat = bloc.state.maybeCurrentLat();
     List<PlacemarkMapObject> markers = [];
     var iconLocation = PlacemarkIcon.composite([
       PlacemarkCompositeIconItem(

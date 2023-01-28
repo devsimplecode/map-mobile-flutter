@@ -6,8 +6,8 @@ import 'package:map_flutter/repo/internet_connection_repo.dart';
 import 'package:map_flutter/l10n/generated/l10n.dart';
 import 'package:map_flutter/widgets/warning_internet.dart';
 
-class EnableLocationButton extends StatelessWidget {
-  const EnableLocationButton({
+class SwitchLocationButton extends StatelessWidget {
+  const SwitchLocationButton({
     Key? key,
     this.noInternet = true,
   }) : super(key: key);

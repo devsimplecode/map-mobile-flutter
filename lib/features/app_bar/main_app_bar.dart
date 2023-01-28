@@ -11,7 +11,7 @@ import 'package:map_flutter/main_bloc/type_map_bloc/type_map_bloc.dart';
 import 'package:map_flutter/widgets/app_bottom_sheet/bottom_sheet_search_address.dart';
 import 'package:map_flutter/widgets/app_bottom_sheet/bottom_sheet_select_map.dart';
 import 'package:map_flutter/l10n/generated/l10n.dart';
-import 'package:map_flutter/widgets/enable_location_button.dart';
+import 'package:map_flutter/widgets/buttons/switch_location_button.dart';
 import 'package:map_flutter/widgets/warning_internet.dart';
 
 class MainAppBar extends StatelessWidget {
@@ -27,13 +27,13 @@ class MainAppBar extends StatelessWidget {
             state.map(
               init: (init) {
                 if (init.status == PermissionStatus.denied) {
-                  return const EnableLocationButton();
+                  return const SwitchLocationButton();
                 }
                 return const SizedBox.shrink();
               },
               map: (loc) {
                 if (loc.status == PermissionStatus.denied) {
-                  return const EnableLocationButton();
+                  return const SwitchLocationButton();
                 }
                 return BlocBuilder<BlocCheckInternet, StateCheckInternet>(
                   buildWhen: (prev, curr) => prev.connection != curr.connection,
