@@ -9,8 +9,6 @@ extension YandexMarkers on AddressBloc {
   Future<List<PlacemarkMapObject>> yandexMarkers(
     InitAddress event,
     Emitter<AddressState> emit,
-    double? currentLat,
-    double? currentLng,
   ) async {
     List<PlacemarkMapObject> markers = [];
     var iconLocation = PlacemarkIcon.composite([

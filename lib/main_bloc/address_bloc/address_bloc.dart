@@ -30,6 +30,8 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
   }
 
   final LocationBloc bloc;
+  PolylinePoints polylinePoints = PolylinePoints();
+
 }
 
 @freezed
@@ -40,7 +42,9 @@ class AddressEvent with _$AddressEvent {
     @Default(false) bool selectionObject,
   }) = InitAddress;
 
-  const factory AddressEvent.setPolyline() = SetPolyline;
+  const factory AddressEvent.setPolyline({
+    @Default(false) bool clearAllPolyline,
+  }) = SetPolyline;
 }
 
 @freezed

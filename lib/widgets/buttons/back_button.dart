@@ -19,7 +19,10 @@ class AppBackButton extends StatelessWidget {
           return const SizedBox.shrink();
         }
         return GestureDetector(
-          onTap: onPressed,
+          onTap: () {
+            BlocProvider.of<AddressBloc>(context)
+                .add(const AddressEvent.setPolyline(clearAllPolyline: true));
+          },
           child: Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(

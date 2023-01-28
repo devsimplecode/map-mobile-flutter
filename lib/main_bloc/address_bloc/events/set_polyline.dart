@@ -5,10 +5,7 @@ extension SetPolylineMap on AddressBloc {
     SetPolyline event,
     Emitter<AddressState> emit,
   ) async {
-    final currentLng = bloc.state.maybeCurrentLng();
-    final currentLat = bloc.state.maybeCurrentLat();
-    PolylinePoints polylinePoints = PolylinePoints();
-    if (isNotEmptyLatLng) {
+    if (!event.clearAllPolyline && isNotEmptyLatLng) {
       PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
         Environment.googleApiKey,
         PointLatLng(currentLat!, currentLng!),
@@ -24,6 +21,12 @@ extension SetPolylineMap on AddressBloc {
             currentLng,
             result.points,
           ),
+        ),
+      );
+    } else {
+      emit(
+        state.copyWith(
+          mapObjectsYandex: const [],
         ),
       );
     }

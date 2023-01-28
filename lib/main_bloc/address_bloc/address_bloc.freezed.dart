@@ -20,20 +20,20 @@ mixin _$AddressEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(double lat, double lng, bool selectionObject)
         initAddress,
-    required TResult Function() setPolyline,
+    required TResult Function(bool clearAllPolyline) setPolyline,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(double lat, double lng, bool selectionObject)?
         initAddress,
-    TResult? Function()? setPolyline,
+    TResult? Function(bool clearAllPolyline)? setPolyline,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(double lat, double lng, bool selectionObject)? initAddress,
-    TResult Function()? setPolyline,
+    TResult Function(bool clearAllPolyline)? setPolyline,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -161,7 +161,7 @@ class _$InitAddress implements InitAddress {
   TResult when<TResult extends Object?>({
     required TResult Function(double lat, double lng, bool selectionObject)
         initAddress,
-    required TResult Function() setPolyline,
+    required TResult Function(bool clearAllPolyline) setPolyline,
   }) {
     return initAddress(lat, lng, selectionObject);
   }
@@ -171,7 +171,7 @@ class _$InitAddress implements InitAddress {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(double lat, double lng, bool selectionObject)?
         initAddress,
-    TResult? Function()? setPolyline,
+    TResult? Function(bool clearAllPolyline)? setPolyline,
   }) {
     return initAddress?.call(lat, lng, selectionObject);
   }
@@ -180,7 +180,7 @@ class _$InitAddress implements InitAddress {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(double lat, double lng, bool selectionObject)? initAddress,
-    TResult Function()? setPolyline,
+    TResult Function(bool clearAllPolyline)? setPolyline,
     required TResult orElse(),
   }) {
     if (initAddress != null) {
@@ -240,6 +240,8 @@ abstract class _$$SetPolylineCopyWith<$Res> {
   factory _$$SetPolylineCopyWith(
           _$SetPolyline value, $Res Function(_$SetPolyline) then) =
       __$$SetPolylineCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool clearAllPolyline});
 }
 
 /// @nodoc
@@ -249,35 +251,61 @@ class __$$SetPolylineCopyWithImpl<$Res>
   __$$SetPolylineCopyWithImpl(
       _$SetPolyline _value, $Res Function(_$SetPolyline) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? clearAllPolyline = null,
+  }) {
+    return _then(_$SetPolyline(
+      clearAllPolyline: null == clearAllPolyline
+          ? _value.clearAllPolyline
+          : clearAllPolyline // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$SetPolyline implements SetPolyline {
-  const _$SetPolyline();
+  const _$SetPolyline({this.clearAllPolyline = false});
+
+  @override
+  @JsonKey()
+  final bool clearAllPolyline;
 
   @override
   String toString() {
-    return 'AddressEvent.setPolyline()';
+    return 'AddressEvent.setPolyline(clearAllPolyline: $clearAllPolyline)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$SetPolyline);
+        (other.runtimeType == runtimeType &&
+            other is _$SetPolyline &&
+            (identical(other.clearAllPolyline, clearAllPolyline) ||
+                other.clearAllPolyline == clearAllPolyline));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, clearAllPolyline);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SetPolylineCopyWith<_$SetPolyline> get copyWith =>
+      __$$SetPolylineCopyWithImpl<_$SetPolyline>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(double lat, double lng, bool selectionObject)
         initAddress,
-    required TResult Function() setPolyline,
+    required TResult Function(bool clearAllPolyline) setPolyline,
   }) {
-    return setPolyline();
+    return setPolyline(clearAllPolyline);
   }
 
   @override
@@ -285,20 +313,20 @@ class _$SetPolyline implements SetPolyline {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(double lat, double lng, bool selectionObject)?
         initAddress,
-    TResult? Function()? setPolyline,
+    TResult? Function(bool clearAllPolyline)? setPolyline,
   }) {
-    return setPolyline?.call();
+    return setPolyline?.call(clearAllPolyline);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(double lat, double lng, bool selectionObject)? initAddress,
-    TResult Function()? setPolyline,
+    TResult Function(bool clearAllPolyline)? setPolyline,
     required TResult orElse(),
   }) {
     if (setPolyline != null) {
-      return setPolyline();
+      return setPolyline(clearAllPolyline);
     }
     return orElse();
   }
@@ -336,7 +364,12 @@ class _$SetPolyline implements SetPolyline {
 }
 
 abstract class SetPolyline implements AddressEvent {
-  const factory SetPolyline() = _$SetPolyline;
+  const factory SetPolyline({final bool clearAllPolyline}) = _$SetPolyline;
+
+  bool get clearAllPolyline;
+  @JsonKey(ignore: true)
+  _$$SetPolylineCopyWith<_$SetPolyline> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

@@ -1,6 +1,10 @@
 part of '../address_bloc.dart';
 
 extension Utils on AddressBloc {
+  double? get currentLng => bloc.state.maybeCurrentLng();
+
+  double? get currentLat => bloc.state.maybeCurrentLat();
+
   String adr(Placemark value) {
     return '${street(value.street)}${value.administrativeArea}, ${value.subAdministrativeArea}, ${value.country}';
   }

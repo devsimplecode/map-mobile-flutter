@@ -9,8 +9,6 @@ extension GoogleMarkers on AddressBloc {
   Future<Set<Marker>> googleMarkers(
     InitAddress event,
     Emitter<AddressState> emit,
-    double? currentLat,
-    double? currentLng,
   ) async {
     Set<Marker> markers = {};
     List<Marker> markersList = [];

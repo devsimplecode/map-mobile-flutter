@@ -8,8 +8,7 @@ extension InitAddressMap on AddressBloc {
     try {
       double? distanceInMeters;
       double? bearing;
-      final currentLng = bloc.state.maybeCurrentLng();
-      final currentLat = bloc.state.maybeCurrentLat();
+
       emit(state.copyWith(loadingAddress: true));
 
       List<Placemark> placeMarks = await placemarkFromCoordinates(
@@ -29,8 +28,8 @@ extension InitAddressMap on AddressBloc {
         );
 
         bearing = Geolocator.bearingBetween(
-          currentLat,
-          currentLng,
+          currentLat!,
+          currentLng!,
           event.lat,
           event.lng,
         );
@@ -41,9 +40,8 @@ extension InitAddressMap on AddressBloc {
           bearing: bearing,
           distanceInMeters: distanceInMeters,
           setMarkersOsm: event.selectionObject,
-          markersGoogle: await googleMarkers(event, emit, currentLat, currentLng),
-          markersYandex: await yandexMarkers(event, emit, currentLat, currentLng),
-          mapObjectsYandex: const [],
+          markersGoogle: await googleMarkers(event, emit),
+          markersYandex: await yandexMarkers(event, emit),
           location: LocationMap(lat: event.lat, lng: event.lng),
           error: Constants.empty,
           selectedAddress: event.selectionObject ? address : Constants.empty,
