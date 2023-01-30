@@ -11,11 +11,7 @@ extension InitAddressMap on AddressBloc {
 
       emit(state.copyWith(loadingAddress: true));
 
-      List<Placemark> placeMarks = await placemarkFromCoordinates(
-        event.lat,
-        event.lng,
-        localeIdentifier: 'en_US',
-      );
+      List<Placemark> placeMarks = await placemarkFromCoordinates(event.lat, event.lng);
       final address = adr(placeMarks.first);
       if (notNull(currentLat) &&
           notNull(currentLng) &&
@@ -36,14 +32,17 @@ extension InitAddressMap on AddressBloc {
       }
       emit(
         state.copyWith(
-          loadingAddress: false,
           bearing: bearing,
+          setPolylineOsm: false,
+          loadingAddress: false,
+          error: Constants.empty,
+          polylineGoogle: const {},
+          polylineYandex: const [],
           distanceInMeters: distanceInMeters,
           setMarkersOsm: event.selectionObject,
           markersGoogle: await googleMarkers(event, emit),
           markersYandex: await yandexMarkers(event, emit),
           location: LocationMap(lat: event.lat, lng: event.lng),
-          error: Constants.empty,
           selectedAddress: event.selectionObject ? address : Constants.empty,
           currentAddress: !event.selectionObject ? address : state.currentAddress,
         ),

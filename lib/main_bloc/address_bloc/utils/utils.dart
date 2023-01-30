@@ -5,6 +5,7 @@ extension Utils on AddressBloc {
 
   double? get currentLat => bloc.state.maybeCurrentLat();
 
+
   String adr(Placemark value) {
     return '${street(value.street)}${value.administrativeArea}, ${value.subAdministrativeArea}, ${value.country}';
   }

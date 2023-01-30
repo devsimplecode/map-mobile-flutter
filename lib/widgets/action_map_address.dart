@@ -10,7 +10,16 @@ import 'package:map_flutter/l10n/generated/l10n.dart';
 import 'package:map_flutter/widgets/buttons/route_button.dart';
 
 class ActionMapAddress extends StatelessWidget {
-  const ActionMapAddress({Key? key}) : super(key: key);
+  const ActionMapAddress({
+    Key? key,
+    required this.navButton,
+  }) : super(key: key);
+  final Function(
+    double sourceLat,
+    double sourceLng,
+    double desLat,
+    double desLng,
+  ) navButton;
 
   @override
   Widget build(BuildContext context) {
@@ -114,7 +123,7 @@ class ActionMapAddress extends StatelessWidget {
                             ],
                           ),
                           const SizedBox(height: 16),
-                          const RouteButton(),
+                          RouteButton(navButton: navButton),
                         ],
                       ],
                     ),

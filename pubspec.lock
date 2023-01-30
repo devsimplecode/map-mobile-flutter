@@ -546,6 +546,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.3"
+  navigation_with_mapbox:
+    dependency: "direct main"
+    description:
+      name: navigation_with_mapbox
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.6"
   nested:
     dependency: transitive
     description:

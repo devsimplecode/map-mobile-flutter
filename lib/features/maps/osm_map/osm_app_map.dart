@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'package:location/location.dart';
 import 'package:map_flutter/constants/assets.dart';
+import 'package:map_flutter/constants/constants.dart';
 import 'package:map_flutter/repo/internet_connection_repo.dart';
 import 'package:map_flutter/main_bloc/address_bloc/address_bloc.dart';
 import 'package:map_flutter/main_bloc/location_bloc/location_bloc.dart';
@@ -41,6 +42,7 @@ class _OsmAppMapState extends State<OsmAppMap> {
     mapController.listenerMapSingleTapping.addListener(() async {
       if (mapController.listenerMapSingleTapping.value != null &&
           widget.connectionStatus == ConnectionStatus.online) {
+        await mapController.clearAllRoads();
         initAddress(mapController.listenerMapSingleTapping.value!);
       }
     });
@@ -55,7 +57,7 @@ class _OsmAppMapState extends State<OsmAppMap> {
     ));
   }
 
-  void moveToCurrentLocation() {
+  void moveToCurrentLocation() async {
     mapController.goToLocation(
       GeoPoint(
         latitude: widget.latitude!,
@@ -116,6 +118,8 @@ class _OsmAppMapState extends State<OsmAppMap> {
           },
         ),
         BlocListener<AddressBloc, AddressState>(
+          listenWhen: (prev, curr) =>
+              prev.location != curr.location || prev.setPolylineOsm != curr.setPolylineOsm,
           listener: (context, state) {
             if (state.setMarkersOsm) {
               goToLocation(
@@ -153,7 +157,7 @@ class _OsmAppMapState extends State<OsmAppMap> {
             staticPoints: [
               if (widget.locationStatus == PermissionStatus.granted)
                 StaticPositionGeoPoint(
-                  '1',
+                  Constants.keyCurrLoc,
                   MarkerIcon(
                     assetMarker: AssetMarker(
                       image: AssetImage(AppAssets.images.location),

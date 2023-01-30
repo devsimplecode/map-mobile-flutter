@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:map_flutter/constants/assets.dart';
+import 'package:map_flutter/constants/constants.dart';
 import 'package:map_flutter/main_bloc/address_bloc/address_bloc.dart';
 
 extension GoogleMarkers on AddressBloc {
@@ -26,7 +27,7 @@ extension GoogleMarkers on AddressBloc {
         Marker(
           icon: iconLocation,
           anchor: const Offset(0.5, 0.5),
-          markerId: const MarkerId('1'),
+          markerId: const MarkerId(Constants.keyCurrLoc),
           position: LatLng(currentLat ?? 0.0, currentLng ?? 0.0),
         ),
       );
@@ -36,7 +37,7 @@ extension GoogleMarkers on AddressBloc {
         Marker(
           icon: iconPoint,
           anchor: const Offset(0.5, 0.5),
-          markerId: const MarkerId('2'),
+          markerId: const MarkerId(Constants.keyDesLoc),
           position: LatLng(event.lat, event.lng),
         ),
       );

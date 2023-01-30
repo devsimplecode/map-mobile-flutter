@@ -2,6 +2,7 @@ import 'package:flutter/painting.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:location/location.dart';
 import 'package:map_flutter/constants/assets.dart';
+import 'package:map_flutter/constants/constants.dart';
 import 'package:map_flutter/main_bloc/address_bloc/address_bloc.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
 
@@ -13,7 +14,7 @@ extension YandexMarkers on AddressBloc {
     List<PlacemarkMapObject> markers = [];
     var iconLocation = PlacemarkIcon.composite([
       PlacemarkCompositeIconItem(
-          name: 'Current Location',
+          name: Constants.nameIconCurrLoc,
           style: PlacemarkIconStyle(
             image: BitmapDescriptor.fromAssetImage(
               AppAssets.images.location,
@@ -23,7 +24,7 @@ extension YandexMarkers on AddressBloc {
     ]);
     var iconPoint = PlacemarkIcon.composite([
       PlacemarkCompositeIconItem(
-          name: 'Select Location',
+          name: Constants.nameIconDesLoc,
           style: PlacemarkIconStyle(
             image: BitmapDescriptor.fromAssetImage(
               AppAssets.images.point,
@@ -36,7 +37,7 @@ extension YandexMarkers on AddressBloc {
       markers.add(
         PlacemarkMapObject(
           icon: iconLocation,
-          mapId: const MapObjectId('1'),
+          mapId: const MapObjectId(Constants.keyCurrLoc),
           point: Point(
             latitude: currentLat ?? 0.0,
             longitude: currentLng ?? 0.0,
@@ -48,7 +49,7 @@ extension YandexMarkers on AddressBloc {
       markers.add(
         PlacemarkMapObject(
           icon: iconPoint,
-          mapId: const MapObjectId('2'),
+          mapId: const MapObjectId(Constants.keyDesLoc),
           point: Point(
             latitude: event.lat,
             longitude: event.lng,

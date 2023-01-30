@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:map_flutter/constants/constants.dart';
 import 'package:map_flutter/main_bloc/address_bloc/address_bloc.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
 
@@ -12,9 +13,8 @@ extension YandexPolyline on AddressBloc {
   ) async {
     List<MapObject> mapObjectsYandex = [];
 
-    const MapObjectId mapObjectId = MapObjectId('yandex_polyline');
     final mapObject = PolylineMapObject(
-      mapId: mapObjectId,
+      mapId: const MapObjectId(Constants.keyYandexPolyline),
       polyline: Polyline(
         points: [
           for (var point in points)

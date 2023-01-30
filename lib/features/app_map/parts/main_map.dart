@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:location/location.dart';
-import 'package:map_flutter/features/map_screen/maps/google_map/google_app_map.dart';
-import 'package:map_flutter/features/map_screen/maps/osm_map/osm_app_map.dart';
-import 'package:map_flutter/features/map_screen/maps/yandex_map/yandex_app_map.dart';
+import 'package:map_flutter/features/maps/google_map/google_app_map.dart';
+import 'package:map_flutter/features/maps/osm_map/osm_app_map.dart';
+import 'package:map_flutter/features/maps/yandex_map/yandex_app_map.dart';
 import 'package:map_flutter/main_bloc/bloc_check_internet/bloc_check_internet.dart';
 import 'package:map_flutter/main_bloc/type_map_bloc/type_map_bloc.dart';
 
