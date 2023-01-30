@@ -7,7 +7,7 @@ import 'package:location/location.dart';
 import 'package:map_flutter/constants/constants.dart';
 import 'package:map_flutter/constants/environment.dart';
 import 'package:map_flutter/main_bloc/location_bloc/location_bloc.dart';
-import 'package:map_flutter/models/location.dart';
+import 'package:map_flutter/models/location_map.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
 import 'package:map_flutter/main_bloc/address_bloc/parts/google_markers.dart';
 import 'package:map_flutter/main_bloc/address_bloc/parts/yandex_markers.dart';
