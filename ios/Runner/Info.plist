@@ -54,7 +54,7 @@
     <key>NSLocationWhenInUseUsageDescription</key>
     <string>Чтобы Вы могли найти свой дом на карте</string>
     <key>MBXAccessToken</key>
-    <string>pk.eyJ1IjoibWlyc2hvZGJlayIsImEiOiJjbGRpZDRxdncwOTVzM3BxcG9tdGZuZHJvIn0.5LwSy7pvFBTkjPlirIe3VA</string>
+    <string>pk.eyJ1IjoibWlyc2hvZGJlayIsImEiOiJjbGRpcWdiYXcwYTB5M3Ztd3YzbDQ5eHZ3In0.QSDQ1Fx193eHxfGhibVwhg</string>
     <key>MGLMapboxMetricsEnabledSettingShownInApp</key>
     <string>YES</string>
     <key>UIBackgroundModes</key>
