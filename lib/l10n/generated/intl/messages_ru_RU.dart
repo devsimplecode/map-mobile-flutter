@@ -36,7 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "selectMap":
             MessageLookupByLibrary.simpleMessage("Выберите тип карты:"),
         "tryAgain": MessageLookupByLibrary.simpleMessage("Пробовать снова"),
-        "turnByTurn": MessageLookupByLibrary.simpleMessage("Идти по шагом"),
+        "turnByTurn": MessageLookupByLibrary.simpleMessage("Идти пешком"),
         "unreceivedLocation": MessageLookupByLibrary.simpleMessage(
             "Не удалось определить, где вы"),
         "whereDoYouGo": MessageLookupByLibrary.simpleMessage("Куда поедете?"),

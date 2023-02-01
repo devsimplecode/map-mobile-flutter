@@ -180,10 +180,10 @@ class S {
     );
   }
 
-  /// `Идти по шагом`
+  /// `Идти пешком`
   String get turnByTurn {
     return Intl.message(
-      'Идти по шагом',
+      'Идти пешком',
       name: 'turnByTurn',
       desc: '',
       args: [],
