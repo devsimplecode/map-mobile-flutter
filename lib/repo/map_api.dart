@@ -6,7 +6,6 @@ import 'package:map_flutter/models/app_error.dart';
 import 'package:map_flutter/models/place.dart';
 import 'package:map_flutter/models/place_search.dart';
 import 'package:map_flutter/models/request_response_model.dart';
-import 'dart:convert' as convert;
 
 part 'parts/interceptors.dart';
 
@@ -48,13 +47,14 @@ class MapApi {
   }
 
   Future<RequestResponse<List<PlaceSearch>>> getAddressesGoogle(
-    String search, {
+    String search,
+    String latLng, {
     Map<String, dynamic>? queryParameters,
     Map<String, String>? headers,
   }) async {
     try {
       final response = await _dio.get(
-        'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$search&types=address&key=${Environment.googleApiKey}',
+        'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$search&location=$latLng&radius=5000&sessiontoken=122344&libraries=places&types=address&key=${Environment.googleApiKey}',
         queryParameters: queryParameters,
         options: Options(
           headers: headers,
@@ -93,39 +93,7 @@ class MapApi {
       );
       var jsonResult = response.data['result'] as Map<String, dynamic>;
       return RequestResponse(
-        data: Place.fromJsonGoogle(jsonResult),
-      );
-    } on DioError catch (error) {
-      return RequestResponse(
-        error: AppError(
-          message: error.response?.statusMessage ?? '',
-          code: error.response?.statusCode,
-        ),
-      );
-    }
-  }
-
-  Future<RequestResponse<List<Place>>> getPlaces(
-    double lat,
-    double lng,
-    String placeType, {
-    Map<String, dynamic>? queryParameters,
-    Map<String, String>? headers,
-  }) async {
-    try {
-      final response = await _dio.get(
-        'https://maps.googleapis.com/maps/api/place/textsearch/json?location=$lat,$lng&type=$placeType&rankby=distance&key=${Environment.googleApiKey}',
-        queryParameters: queryParameters,
-        options: Options(
-          headers: headers,
-          sendTimeout: _options.sendTimeout,
-          receiveTimeout: _options.receiveTimeout,
-        ),
-      );
-      var json = convert.jsonDecode(response.data);
-      var jsonResults = json['results'] as List;
-      return RequestResponse(
-        data: jsonResults.map((place) => Place.fromJsonGoogle(place)).toList(),
+        data: Place.fromJson(jsonResult),
       );
     } on DioError catch (error) {
       return RequestResponse(
@@ -138,13 +106,14 @@ class MapApi {
   }
 
   Future<RequestResponse<List<Place>>> getAddressesYandex(
-    String search, {
+    String search,
+    String ll, {
     Map<String, dynamic>? queryParameters,
     Map<String, String>? headers,
   }) async {
     try {
       final response = await _dio.get(
-        'https://search-maps.yandex.ru/v1/?text=$search&type=biz&lang=en_US&apikey=${Environment.yandexApiKeyPlaces}',
+        'https://search-maps.yandex.ru/v1/?text=$search&ll=$ll&type=biz&lang=en_US&apikey={Environment.yandexApiKeyPlaces}',
         queryParameters: queryParameters,
         options: Options(
           headers: headers,
@@ -154,7 +123,7 @@ class MapApi {
       );
       var jsonResults = response.data['features'] as List;
       return RequestResponse(
-        data: jsonResults.map((place) => Place.fromJsonYandex(place)).toList(),
+        data: jsonResults.map((place) => Place.fromJson(place)).toList(),
       );
     } on DioError catch (error) {
       return RequestResponse(

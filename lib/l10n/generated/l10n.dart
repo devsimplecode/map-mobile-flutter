@@ -120,11 +120,71 @@ class S {
     );
   }
 
-  /// `S.current.dataNoLoaded`
+  /// `Данные не загружено`
   String get dataNoLoaded {
     return Intl.message(
-      'S.current.dataNoLoaded',
+      'Данные не загружено',
       name: 'dataNoLoaded',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Разрешите доступ к геолокации`
+  String get givePermission {
+    return Intl.message(
+      'Разрешите доступ к геолокации',
+      name: 'givePermission',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Не удалось определить, где вы`
+  String get unreceivedLocation {
+    return Intl.message(
+      'Не удалось определить, где вы',
+      name: 'unreceivedLocation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Нет соединения`
+  String get noInternet {
+    return Intl.message(
+      'Нет соединения',
+      name: 'noInternet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Проверьте подключение к интернету`
+  String get checkInternet {
+    return Intl.message(
+      'Проверьте подключение к интернету',
+      name: 'checkInternet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Построить маршрут`
+  String get route {
+    return Intl.message(
+      'Построить маршрут',
+      name: 'route',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Идти по шагом`
+  String get turnByTurn {
+    return Intl.message(
+      'Идти по шагом',
+      name: 'turnByTurn',
       desc: '',
       args: [],
     );

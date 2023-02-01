@@ -83,3 +83,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.yandex.android:maps.mobile:4.2.2-full'
 }
+
+configurations {
+    all*.exclude group: 'com.mapbox.mapboxsdk', module: 'mapbox-android-telemetry'
+}

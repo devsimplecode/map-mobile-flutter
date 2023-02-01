@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:map_flutter/app_map.dart';
+import 'package:map_flutter/features/map_screen.dart';
+import 'package:map_flutter/main_bloc/bloc_check_internet/bloc_check_internet.dart';
+import 'package:map_flutter/repo/internet_connection_repo.dart';
 import 'package:map_flutter/main_bloc/address_bloc/address_bloc.dart';
 import 'package:map_flutter/main_bloc/location_bloc/location_bloc.dart';
 import 'package:map_flutter/main_bloc/type_map_bloc/type_map_bloc.dart';
-import 'package:map_flutter/maps/google_map/bloc/google_map_bloc.dart';
-import 'package:map_flutter/maps/osm_map/bloc/osm_map_bloc.dart';
-import 'package:map_flutter/maps/yandex_map/bloc/yandex_map_bloc.dart';
+import 'package:map_flutter/main_bloc/search_address_bloc/search_address_bloc.dart';
 import 'package:map_flutter/repo/map_api.dart';
-import 'package:map_flutter/search_field.dart';
-import 'package:map_flutter/widgets/action_map_address.dart';
-import 'package:map_flutter/widgets/current_location_button.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:map_flutter/l10n/generated/l10n.dart';
@@ -40,10 +37,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider(
-      create: (context) => MapApi(),
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider(
+          create: (context) => MapApi(),
+        ),
+        RepositoryProvider(
+          create: (context) => InternetConnectionRepo(),
+        ),
+      ],
       child: MultiBlocProvider(
         providers: [
+          BlocProvider(
+            create: (context) => BlocCheckInternet(
+              RepositoryProvider.of<InternetConnectionRepo>(context),
+            ),
+          ),
           BlocProvider(
             create: (context) => TypeMapCubit()..initMapsType(),
           ),
@@ -53,20 +62,15 @@ class MyApp extends StatelessWidget {
             )..add(const LocationEvent.initLocation()),
           ),
           BlocProvider(
-            create: (context) => AddressBloc(),
-          ),
-          BlocProvider(
-            create: (context) => GoogleMapBloc(
-              api: RepositoryProvider.of<MapApi>(context),
+            create: (context) => AddressBloc(
+              bloc: BlocProvider.of<LocationBloc>(context),
             ),
           ),
           BlocProvider(
-            create: (context) => YandexMapBloc(
+            create: (context) => SearchAddressBloc(
               api: RepositoryProvider.of<MapApi>(context),
+              bloc: BlocProvider.of<LocationBloc>(context),
             ),
-          ),
-          BlocProvider(
-            create: (context) => OsmMapBloc(),
           ),
         ],
         child: MaterialApp(
@@ -84,41 +88,6 @@ class MyApp extends StatelessWidget {
           supportedLocales: S.delegate.supportedLocales,
           home: const MapScreen(),
         ),
-      ),
-    );
-  }
-}
-
-class MapScreen extends StatelessWidget {
-  const MapScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          const AppMap(),
-          Positioned(
-            top: MediaQuery.of(context).viewPadding.top,
-            left: 16,
-            right: 16,
-            child: const SearchField(),
-          ),
-          Positioned(
-            bottom: 28,
-            right: 16,
-            left: 16,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: const [
-                CurrentLocationButton(),
-                SizedBox(height: 28),
-                ActionMapAddress(),
-              ],
-            ),
-          ),
-        ],
       ),
     );
   }

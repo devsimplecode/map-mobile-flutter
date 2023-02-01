@@ -1,24 +1,27 @@
-import 'package:map_flutter/models/location.dart';
+import 'package:map_flutter/models/location_map.dart';
+import 'package:flutter/foundation.dart';
 
+@immutable
 class Geometry {
   final LocationMap? locationGoogle;
-  final LocationMap? locationYandex;
-  final LocationMap? locationOsm;
 
-  Geometry({
-    this.locationGoogle,
-    this.locationYandex,
-    this.locationOsm,
-  });
+  const Geometry({this.locationGoogle});
 
-  factory Geometry.fromJsonGoogle(Map<dynamic, dynamic> parsedJson) =>
-      Geometry(locationGoogle: LocationMap.fromJsonGoogle(parsedJson['location']));
-
-  factory Geometry.fromJsonYandex(Map<dynamic, dynamic> parsedJson) =>
-      Geometry(locationYandex: LocationMap.fromJsonYandex(parsedJson['coordinates']));
+  factory Geometry.fromJson(Map<dynamic, dynamic> parsedJson) =>
+      Geometry(locationGoogle: LocationMap.fromJson(parsedJson['location']));
 
   @override
   String toString() {
-    return 'Geometry{locationGoogle: $locationGoogle, locationYandex: $locationYandex, locationOsm: $locationOsm}';
+    return 'Geometry{locationGoogle: $locationGoogle}';
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Geometry &&
+          runtimeType == other.runtimeType &&
+          locationGoogle == other.locationGoogle;
+
+  @override
+  int get hashCode => locationGoogle.hashCode;
 }

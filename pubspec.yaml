@@ -2,13 +2,8 @@ name: map_flutter
 description: A new Flutter project.
 publish_to: 'none'
 
-  #For build bundle
-  #  flutter build appbundle --target-platform android-arm,android-arm64,android-x64 --dart-define GOOGLE_API_KEY=AIzaSyDOaiRTglZiVGsdvOq1hgK4wGKRhqdQRMY --dart-define YANDEX_API_KEY_PLACES=c687c609-ae0e-4b12-8d9a-aab953d8642f
 
-  #For build apk
-  #  flutter build apk --dart-define GOOGLE_API_KEY=AIzaSyDOaiRTglZiVGsdvOq1hgK4wGKRhqdQRMY --dart-define YANDEX_API_KEY_PLACES=c687c609-ae0e-4b12-8d9a-aab953d8642f
-
-version: 1.0.0+1
+version: 1.0.3+4
 
 environment:
   sdk: '>=2.18.6 <3.0.0'
@@ -32,6 +27,11 @@ dependencies:
   shared_preferences: ^2.0.15
   flutter_osm_plugin: ^0.42.0
   geolocator: ^9.0.2
+  rxdart: ^0.27.7
+  connectivity_plus: ^3.0.2
+  app_settings: ^4.2.0
+  flutter_polyline_points: ^1.0.0
+  navigation_with_mapbox: ^0.0.6
 
 dev_dependencies:
   flutter_test:

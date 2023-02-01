@@ -224,33 +224,28 @@ abstract class _InitLocation implements LocationEvent {
 
 /// @nodoc
 mixin _$LocationState {
+  PermissionStatus? get status => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() init,
-    required TResult Function(String? error) error,
-    required TResult Function() loading,
+    required TResult Function(PermissionStatus? status) init,
     required TResult Function(bool moveToCurrentLocation, double? latitude,
-            double? longitude, UniqueKey? key)
+            double? longitude, PermissionStatus? status, UniqueKey? key)
         map,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? init,
-    TResult? Function(String? error)? error,
-    TResult? Function()? loading,
+    TResult? Function(PermissionStatus? status)? init,
     TResult? Function(bool moveToCurrentLocation, double? latitude,
-            double? longitude, UniqueKey? key)?
+            double? longitude, PermissionStatus? status, UniqueKey? key)?
         map,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? init,
-    TResult Function(String? error)? error,
-    TResult Function()? loading,
+    TResult Function(PermissionStatus? status)? init,
     TResult Function(bool moveToCurrentLocation, double? latitude,
-            double? longitude, UniqueKey? key)?
+            double? longitude, PermissionStatus? status, UniqueKey? key)?
         map,
     required TResult orElse(),
   }) =>
@@ -258,27 +253,25 @@ mixin _$LocationState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Init value) init,
-    required TResult Function(_Error value) error,
-    required TResult Function(_Loading value) loading,
     required TResult Function(_Map value) map,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Init value)? init,
-    TResult? Function(_Error value)? error,
-    TResult? Function(_Loading value)? loading,
     TResult? Function(_Map value)? map,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Init value)? init,
-    TResult Function(_Error value)? error,
-    TResult Function(_Loading value)? loading,
     TResult Function(_Map value)? map,
     required TResult orElse(),
   }) =>
+      throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $LocationStateCopyWith<LocationState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -287,6 +280,8 @@ abstract class $LocationStateCopyWith<$Res> {
   factory $LocationStateCopyWith(
           LocationState value, $Res Function(LocationState) then) =
       _$LocationStateCopyWithImpl<$Res, LocationState>;
+  @useResult
+  $Res call({PermissionStatus? status});
 }
 
 /// @nodoc
@@ -298,12 +293,28 @@ class _$LocationStateCopyWithImpl<$Res, $Val extends LocationState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? status = freezed,
+  }) {
+    return _then(_value.copyWith(
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as PermissionStatus?,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$_InitCopyWith<$Res> {
+abstract class _$$_InitCopyWith<$Res> implements $LocationStateCopyWith<$Res> {
   factory _$$_InitCopyWith(_$_Init value, $Res Function(_$_Init) then) =
       __$$_InitCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({PermissionStatus? status});
 }
 
 /// @nodoc
@@ -312,66 +323,84 @@ class __$$_InitCopyWithImpl<$Res>
     implements _$$_InitCopyWith<$Res> {
   __$$_InitCopyWithImpl(_$_Init _value, $Res Function(_$_Init) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? status = freezed,
+  }) {
+    return _then(_$_Init(
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as PermissionStatus?,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_Init extends _Init {
-  const _$_Init() : super._();
+  const _$_Init({this.status}) : super._();
+
+  @override
+  final PermissionStatus? status;
 
   @override
   String toString() {
-    return 'LocationState.init()';
+    return 'LocationState.init(status: $status)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Init);
+        (other.runtimeType == runtimeType &&
+            other is _$_Init &&
+            (identical(other.status, status) || other.status == status));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, status);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_InitCopyWith<_$_Init> get copyWith =>
+      __$$_InitCopyWithImpl<_$_Init>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() init,
-    required TResult Function(String? error) error,
-    required TResult Function() loading,
+    required TResult Function(PermissionStatus? status) init,
     required TResult Function(bool moveToCurrentLocation, double? latitude,
-            double? longitude, UniqueKey? key)
+            double? longitude, PermissionStatus? status, UniqueKey? key)
         map,
   }) {
-    return init();
+    return init(status);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? init,
-    TResult? Function(String? error)? error,
-    TResult? Function()? loading,
+    TResult? Function(PermissionStatus? status)? init,
     TResult? Function(bool moveToCurrentLocation, double? latitude,
-            double? longitude, UniqueKey? key)?
+            double? longitude, PermissionStatus? status, UniqueKey? key)?
         map,
   }) {
-    return init?.call();
+    return init?.call(status);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? init,
-    TResult Function(String? error)? error,
-    TResult Function()? loading,
+    TResult Function(PermissionStatus? status)? init,
     TResult Function(bool moveToCurrentLocation, double? latitude,
-            double? longitude, UniqueKey? key)?
+            double? longitude, PermissionStatus? status, UniqueKey? key)?
         map,
     required TResult orElse(),
   }) {
     if (init != null) {
-      return init();
+      return init(status);
     }
     return orElse();
   }
@@ -380,8 +409,6 @@ class _$_Init extends _Init {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Init value) init,
-    required TResult Function(_Error value) error,
-    required TResult Function(_Loading value) loading,
     required TResult Function(_Map value) map,
   }) {
     return init(this);
@@ -391,8 +418,6 @@ class _$_Init extends _Init {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Init value)? init,
-    TResult? Function(_Error value)? error,
-    TResult? Function(_Loading value)? loading,
     TResult? Function(_Map value)? map,
   }) {
     return init?.call(this);
@@ -402,8 +427,6 @@ class _$_Init extends _Init {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Init value)? init,
-    TResult Function(_Error value)? error,
-    TResult Function(_Loading value)? loading,
     TResult Function(_Map value)? map,
     required TResult orElse(),
   }) {
@@ -415,289 +438,27 @@ class _$_Init extends _Init {
 }
 
 abstract class _Init extends LocationState {
-  const factory _Init() = _$_Init;
+  const factory _Init({final PermissionStatus? status}) = _$_Init;
   const _Init._() : super._();
-}
-
-/// @nodoc
-abstract class _$$_ErrorCopyWith<$Res> {
-  factory _$$_ErrorCopyWith(_$_Error value, $Res Function(_$_Error) then) =
-      __$$_ErrorCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String? error});
-}
-
-/// @nodoc
-class __$$_ErrorCopyWithImpl<$Res>
-    extends _$LocationStateCopyWithImpl<$Res, _$_Error>
-    implements _$$_ErrorCopyWith<$Res> {
-  __$$_ErrorCopyWithImpl(_$_Error _value, $Res Function(_$_Error) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? error = freezed,
-  }) {
-    return _then(_$_Error(
-      error: freezed == error
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_Error extends _Error {
-  const _$_Error({required this.error}) : super._();
 
   @override
-  final String? error;
-
+  PermissionStatus? get status;
   @override
-  String toString() {
-    return 'LocationState.error(error: $error)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_Error &&
-            (identical(other.error, error) || other.error == error));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, error);
-
   @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_ErrorCopyWith<_$_Error> get copyWith =>
-      __$$_ErrorCopyWithImpl<_$_Error>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() init,
-    required TResult Function(String? error) error,
-    required TResult Function() loading,
-    required TResult Function(bool moveToCurrentLocation, double? latitude,
-            double? longitude, UniqueKey? key)
-        map,
-  }) {
-    return error(this.error);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? init,
-    TResult? Function(String? error)? error,
-    TResult? Function()? loading,
-    TResult? Function(bool moveToCurrentLocation, double? latitude,
-            double? longitude, UniqueKey? key)?
-        map,
-  }) {
-    return error?.call(this.error);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? init,
-    TResult Function(String? error)? error,
-    TResult Function()? loading,
-    TResult Function(bool moveToCurrentLocation, double? latitude,
-            double? longitude, UniqueKey? key)?
-        map,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(this.error);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Init value) init,
-    required TResult Function(_Error value) error,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Map value) map,
-  }) {
-    return error(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Init value)? init,
-    TResult? Function(_Error value)? error,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Map value)? map,
-  }) {
-    return error?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Init value)? init,
-    TResult Function(_Error value)? error,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Map value)? map,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Error extends LocationState {
-  const factory _Error({required final String? error}) = _$_Error;
-  const _Error._() : super._();
-
-  String? get error;
-  @JsonKey(ignore: true)
-  _$$_ErrorCopyWith<_$_Error> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_InitCopyWith<_$_Init> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_LoadingCopyWith<$Res> {
-  factory _$$_LoadingCopyWith(
-          _$_Loading value, $Res Function(_$_Loading) then) =
-      __$$_LoadingCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_LoadingCopyWithImpl<$Res>
-    extends _$LocationStateCopyWithImpl<$Res, _$_Loading>
-    implements _$$_LoadingCopyWith<$Res> {
-  __$$_LoadingCopyWithImpl(_$_Loading _value, $Res Function(_$_Loading) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_Loading extends _Loading {
-  const _$_Loading() : super._();
-
-  @override
-  String toString() {
-    return 'LocationState.loading()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Loading);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() init,
-    required TResult Function(String? error) error,
-    required TResult Function() loading,
-    required TResult Function(bool moveToCurrentLocation, double? latitude,
-            double? longitude, UniqueKey? key)
-        map,
-  }) {
-    return loading();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? init,
-    TResult? Function(String? error)? error,
-    TResult? Function()? loading,
-    TResult? Function(bool moveToCurrentLocation, double? latitude,
-            double? longitude, UniqueKey? key)?
-        map,
-  }) {
-    return loading?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? init,
-    TResult Function(String? error)? error,
-    TResult Function()? loading,
-    TResult Function(bool moveToCurrentLocation, double? latitude,
-            double? longitude, UniqueKey? key)?
-        map,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Init value) init,
-    required TResult Function(_Error value) error,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Map value) map,
-  }) {
-    return loading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Init value)? init,
-    TResult? Function(_Error value)? error,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Map value)? map,
-  }) {
-    return loading?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Init value)? init,
-    TResult Function(_Error value)? error,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Map value)? map,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Loading extends LocationState {
-  const factory _Loading() = _$_Loading;
-  const _Loading._() : super._();
-}
-
-/// @nodoc
-abstract class _$$_MapCopyWith<$Res> {
+abstract class _$$_MapCopyWith<$Res> implements $LocationStateCopyWith<$Res> {
   factory _$$_MapCopyWith(_$_Map value, $Res Function(_$_Map) then) =
       __$$_MapCopyWithImpl<$Res>;
+  @override
   @useResult
   $Res call(
       {bool moveToCurrentLocation,
       double? latitude,
       double? longitude,
+      PermissionStatus? status,
       UniqueKey? key});
 }
 
@@ -714,6 +475,7 @@ class __$$_MapCopyWithImpl<$Res>
     Object? moveToCurrentLocation = null,
     Object? latitude = freezed,
     Object? longitude = freezed,
+    Object? status = freezed,
     Object? key = freezed,
   }) {
     return _then(_$_Map(
@@ -729,6 +491,10 @@ class __$$_MapCopyWithImpl<$Res>
           ? _value.longitude
           : longitude // ignore: cast_nullable_to_non_nullable
               as double?,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as PermissionStatus?,
       key: freezed == key
           ? _value.key
           : key // ignore: cast_nullable_to_non_nullable
@@ -744,6 +510,7 @@ class _$_Map extends _Map {
       {this.moveToCurrentLocation = false,
       this.latitude,
       this.longitude,
+      this.status,
       this.key})
       : super._();
 
@@ -755,11 +522,13 @@ class _$_Map extends _Map {
   @override
   final double? longitude;
   @override
+  final PermissionStatus? status;
+  @override
   final UniqueKey? key;
 
   @override
   String toString() {
-    return 'LocationState.map(moveToCurrentLocation: $moveToCurrentLocation, latitude: $latitude, longitude: $longitude, key: $key)';
+    return 'LocationState.map(moveToCurrentLocation: $moveToCurrentLocation, latitude: $latitude, longitude: $longitude, status: $status, key: $key)';
   }
 
   @override
@@ -773,12 +542,13 @@ class _$_Map extends _Map {
                 other.latitude == latitude) &&
             (identical(other.longitude, longitude) ||
                 other.longitude == longitude) &&
+            (identical(other.status, status) || other.status == status) &&
             (identical(other.key, key) || other.key == key));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, moveToCurrentLocation, latitude, longitude, key);
+  int get hashCode => Object.hash(
+      runtimeType, moveToCurrentLocation, latitude, longitude, status, key);
 
   @JsonKey(ignore: true)
   @override
@@ -789,42 +559,36 @@ class _$_Map extends _Map {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() init,
-    required TResult Function(String? error) error,
-    required TResult Function() loading,
+    required TResult Function(PermissionStatus? status) init,
     required TResult Function(bool moveToCurrentLocation, double? latitude,
-            double? longitude, UniqueKey? key)
+            double? longitude, PermissionStatus? status, UniqueKey? key)
         map,
   }) {
-    return map(moveToCurrentLocation, latitude, longitude, key);
+    return map(moveToCurrentLocation, latitude, longitude, status, key);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? init,
-    TResult? Function(String? error)? error,
-    TResult? Function()? loading,
+    TResult? Function(PermissionStatus? status)? init,
     TResult? Function(bool moveToCurrentLocation, double? latitude,
-            double? longitude, UniqueKey? key)?
+            double? longitude, PermissionStatus? status, UniqueKey? key)?
         map,
   }) {
-    return map?.call(moveToCurrentLocation, latitude, longitude, key);
+    return map?.call(moveToCurrentLocation, latitude, longitude, status, key);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? init,
-    TResult Function(String? error)? error,
-    TResult Function()? loading,
+    TResult Function(PermissionStatus? status)? init,
     TResult Function(bool moveToCurrentLocation, double? latitude,
-            double? longitude, UniqueKey? key)?
+            double? longitude, PermissionStatus? status, UniqueKey? key)?
         map,
     required TResult orElse(),
   }) {
     if (map != null) {
-      return map(moveToCurrentLocation, latitude, longitude, key);
+      return map(moveToCurrentLocation, latitude, longitude, status, key);
     }
     return orElse();
   }
@@ -833,8 +597,6 @@ class _$_Map extends _Map {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Init value) init,
-    required TResult Function(_Error value) error,
-    required TResult Function(_Loading value) loading,
     required TResult Function(_Map value) map,
   }) {
     return map(this);
@@ -844,8 +606,6 @@ class _$_Map extends _Map {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Init value)? init,
-    TResult? Function(_Error value)? error,
-    TResult? Function(_Loading value)? loading,
     TResult? Function(_Map value)? map,
   }) {
     return map?.call(this);
@@ -855,8 +615,6 @@ class _$_Map extends _Map {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Init value)? init,
-    TResult Function(_Error value)? error,
-    TResult Function(_Loading value)? loading,
     TResult Function(_Map value)? map,
     required TResult orElse(),
   }) {
@@ -872,13 +630,17 @@ abstract class _Map extends LocationState {
       {final bool moveToCurrentLocation,
       final double? latitude,
       final double? longitude,
+      final PermissionStatus? status,
       final UniqueKey? key}) = _$_Map;
   const _Map._() : super._();
 
   bool get moveToCurrentLocation;
   double? get latitude;
   double? get longitude;
+  @override
+  PermissionStatus? get status;
   UniqueKey? get key;
+  @override
   @JsonKey(ignore: true)
   _$$_MapCopyWith<_$_Map> get copyWith => throw _privateConstructorUsedError;
 }

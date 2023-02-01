@@ -22,14 +22,23 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "checkInternet": MessageLookupByLibrary.simpleMessage(
+            "Проверьте подключение к интернету"),
         "dataNoLoaded":
-            MessageLookupByLibrary.simpleMessage("S.current.dataNoLoaded"),
+            MessageLookupByLibrary.simpleMessage("Данные не загружено"),
+        "givePermission": MessageLookupByLibrary.simpleMessage(
+            "Разрешите доступ к геолокации"),
         "loading": MessageLookupByLibrary.simpleMessage("Идет загрузка..."),
+        "noInternet": MessageLookupByLibrary.simpleMessage("Нет соединения"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
+        "route": MessageLookupByLibrary.simpleMessage("Построить маршрут"),
         "search": MessageLookupByLibrary.simpleMessage("Поиск"),
         "selectMap":
             MessageLookupByLibrary.simpleMessage("Выберите тип карты:"),
         "tryAgain": MessageLookupByLibrary.simpleMessage("Пробовать снова"),
+        "turnByTurn": MessageLookupByLibrary.simpleMessage("Идти по шагом"),
+        "unreceivedLocation": MessageLookupByLibrary.simpleMessage(
+            "Не удалось определить, где вы"),
         "whereDoYouGo": MessageLookupByLibrary.simpleMessage("Куда поедете?"),
         "yourLocation":
             MessageLookupByLibrary.simpleMessage("Ваше текущее местоположение:")
