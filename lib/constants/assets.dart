@@ -1,6 +1,8 @@
+import 'dart:io';
+
 abstract class AppAssets {
   static const svg = _Svg();
-  static const images = _Images();
+  static final images = _Images();
 }
 
 class _Svg {
@@ -14,8 +16,10 @@ class _Svg {
 }
 
 class _Images {
-  const _Images();
+  _Images();
 
-  final String location = 'assets/images/location.png';
-  final String point = 'assets/images/point.png';
+  final String location =
+      Platform.isAndroid ? 'assets/images/location_4x.png' : 'assets/images/location.png';
+  final String point =
+      Platform.isAndroid ? 'assets/images/point_4x.png' : 'assets/images/point.png';
 }
