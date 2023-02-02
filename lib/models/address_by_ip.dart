@@ -24,14 +24,15 @@ class AddressByIp {
 
   factory AddressByIp.fromJson(dynamic data) {
     return AddressByIp(
-        ip: data['ip'],
-        hostname: data['hostname'],
-        region: data['region'],
-        city: data['city'],
-        country: data['country'],
-        loc: data['loc'],
-        org: data['org'],
-        timeZone: data['timezone']);
+      ip: data['ip'],
+      hostname: data['hostname'],
+      region: data['region'],
+      city: data['city'],
+      country: data['country'],
+      loc: data['loc'],
+      org: data['org'],
+      timeZone: data['timezone'],
+    );
   }
 
   @override

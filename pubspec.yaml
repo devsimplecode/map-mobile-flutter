@@ -32,6 +32,7 @@ dependencies:
   app_settings: ^4.2.0
   flutter_polyline_points: ^1.0.0
   navigation_with_mapbox: ^0.0.6
+  http_mock_adapter: ^0.3.3
 
 dev_dependencies:
   flutter_test:

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 import 'package:map_flutter/constants/environment.dart';
@@ -18,23 +20,32 @@ class MapApi {
     sendTimeout: 30000,
   );
 
+  MapApi({
+    this.testResponse,
+    this.runTest = false,
+  });
+
+  final Future<Response>? testResponse;
+  final bool runTest;
+
   Future<RequestResponse<AddressByIp>> getIpAddress({
     Map<String, dynamic>? queryParameters,
     Map<String, String>? headers,
   }) async {
     try {
-      final response = await _dio.get(
-        'https://ipinfo.io/json?',
-        queryParameters: queryParameters,
-        options: Options(
-          headers: headers,
-          sendTimeout: _options.sendTimeout,
-          receiveTimeout: _options.receiveTimeout,
-        ),
-      );
+      final response = await testResponse ??
+          await _dio.get(
+            'https://ipinfo.io/json?',
+            queryParameters: queryParameters,
+            options: Options(
+              headers: headers,
+              sendTimeout: _options.sendTimeout,
+              receiveTimeout: _options.receiveTimeout,
+            ),
+          );
 
       return RequestResponse(
-        data: AddressByIp.fromJson(response.data),
+        data: AddressByIp.fromJson(runTest ? jsonDecode(response.data) : response.data),
       );
     } on DioError catch (error) {
       return RequestResponse(
