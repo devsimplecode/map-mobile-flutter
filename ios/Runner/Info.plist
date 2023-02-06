@@ -63,5 +63,7 @@
     		<string>location</string>
     		<string>remote-notification</string>
     </array>
+    <key>io.flutter.embedded_views_preview</key>
+    <true/>
 </dict>
 </plist>
