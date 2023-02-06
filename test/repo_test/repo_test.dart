@@ -5,10 +5,26 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:map_flutter/constants/constants.dart';
 import 'package:map_flutter/repo/map_api.dart';
 
-final headers = {Headers.contentTypeHeader: 'application/json; charset=utf-8'};
-final Dio dio = Dio()..interceptors.add(BaseInterceptor());
+void main() {
+  test('Fetching LatLng by user ip', () async {
+    final repo = _mapApi('test/repo_test/address_by_ip.json');
+    final result = await repo.getIpAddress();
+    expect(
+      result.data?.loc,
+      "42.4531,59.6103",
+    );
+  });
 
-Future<Response> response(String files) async {
+  test('Error fetching data by user ip', () async {
+    final repo = _mapApi('test/repo_test/response_error.json');
+    final result = await repo.getIpAddress();
+    expect(result.error?.message, null);
+  });
+}
+
+final headers = {Headers.contentTypeHeader: 'application/json; charset=utf-8'};
+
+Future<Response> _response(String files) async {
   return Response(
     data: await File(files).readAsString(),
     requestOptions: RequestOptions(
@@ -19,18 +35,7 @@ Future<Response> response(String files) async {
   );
 }
 
-MapApi api(String file) => MapApi(
-      testResponse: response(file),
+MapApi _mapApi(String file) => MapApi(
+      testResponse: _response(file),
       runTest: true,
     );
-void main(){
-  test('Fetching LatLng by user ip', () async {
-    final resultApi = api('test/repo_test/address_by_ip.json');
-    final result = await resultApi.getIpAddress();
-    print(jsonEncode(result.data!));
-    expect(
-      result.data?.loc,
-      "42.4531,59.6103",
-    );
-  });
-}

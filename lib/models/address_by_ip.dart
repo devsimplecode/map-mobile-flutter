@@ -35,6 +35,8 @@ class AddressByIp {
     );
   }
 
+
+
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -59,4 +61,6 @@ class AddressByIp {
       loc.hashCode ^
       org.hashCode ^
       timeZone.hashCode;
+
+
 }
