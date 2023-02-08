@@ -15,6 +15,24 @@ Mobile app: Dart and Flutter
 - OSM Map [example](https://gitlab.com/simplecodedev/portfolio/flutter/flutter-map/portfolio-map-flutter/-/tree/main/lib/features/maps/osm_map)
 - Navigation with MapBox [example](https://gitlab.com/simplecodedev/portfolio/flutter/flutter-map/portfolio-map-flutter/-/blob/main/lib/features/map_screen.dart)
 
+## Logic of app
+Before working with maps, the application will ask you for permission to get your current location and take your coordinates (Latitude, Longitude). All this logic is contained in a block called [location_bloc](https://gitlab.com/simplecodedev/portfolio/flutter/flutter-map/portfolio-map-flutter/-/tree/main/lib/main_bloc/location_bloc). After that it gives the coordinates to another block ([address_bloc](https://gitlab.com/simplecodedev/portfolio/flutter/flutter-map/portfolio-map-flutter/-/tree/main/lib/main_bloc/address_bloc)), which manages the state of all maps.
+
+```bash
+ try {
+      if (await location.requestService()) {
+        await location.getLocation().then((location) {
+          latitude = location.latitude;
+          longitude = location.longitude;
+        });
+        ...
+      }
+    } catch (_) {
+      final response = await api.getIpAddress();
+      ...
+    }
+```
+
 ## Google Map
 ```bash
   BlocBuilder<AddressBloc, AddressState>(
@@ -54,16 +72,82 @@ Mobile app: Dart and Flutter
         },
       ),
 ```
-<img src="https://user-images.githubusercontent.com/36184953/217462541-e7a8a654-ed24-41a1-bd9a-795ef22aa8e7.png" width="300px" /> 
 
 ## Yandex Map
-<img src="https://user-images.githubusercontent.com/36184953/217467700-59cb7498-3285-423e-acf1-07fc92663760.png" width="300px" />
+```bash
+BlocBuilder<AddressBloc, AddressState>(
+      builder: (context, state) {
+          return YandexMap(
+            onMapCreated: (YandexMapController yandexMapController) async {
+              _baseController = yandexMapController;
+              if (widget.locationStatus == PermissionStatus.granted) {
+                yandexMapController.moveCamera(
+                  CameraUpdate.newCameraPosition(
+                    CameraPosition(
+                      target: Point(
+                        latitude: widget.latitude!,
+                        longitude: widget.longitude!,
+                      ),
+                      zoom: 16,
+                    ),
+                  ),
+                  animation: const MapAnimation(
+                    duration: 2.0,
+                  ),
+                );
+              }
+              _controller.complete(yandexMapController);
+            },
+            onMapTap: (point) {
+              if (widget.connectionStatus == ConnectionStatus.online) {
+                BlocProvider.of<AddressBloc>(context).add(AddressEvent.initAddress(
+                  lat: point.latitude,
+                  lng: point.longitude,
+                  selectionObject: true,
+                ));
+              }
+            },
+            mapObjects: [
+              ...state.markersYandex ?? [],
+              ...state.polylineYandex ?? [],
+            ],
+          );
+        },
+      ),
+```
 
 ## OSM Map
-<img src="https://user-images.githubusercontent.com/36184953/217474378-ec493f48-df4d-4670-b4bd-dbf98f07df41.png" width="300px" />
+```bash
+BlocBuilder<AddressBloc, AddressState>(
+        builder: (context, state) {
+          return OSMFlutter(
+            controller: mapController,
+            initZoom: widget.locationStatus == PermissionStatus.granted ? 18 : 2,
+            stepZoom: 5,
+            staticPoints: [
+              if (widget.locationStatus == PermissionStatus.granted)
+                StaticPositionGeoPoint(
+                  Constants.keyCurrLoc,
+                  MarkerIcon(
+                    assetMarker: AssetMarker(
+                      image: AssetImage(AppAssets.images.location),
+                    ),
+                  ),
+                  [
+                    GeoPoint(
+                      latitude: widget.latitude!,
+                      longitude: widget.longitude!,
+                    ),
+                  ],
+                ),
+            ],
+          );
+        },
+      ),
+```
 
-
-
+## Presentation Mobile App
+<img src="https://user-images.githubusercontent.com/36184953/217474378-ec493f48-df4d-4670-b4bd-dbf98f07df41.png" width="300px" /> <img src="https://user-images.githubusercontent.com/36184953/217467700-59cb7498-3285-423e-acf1-07fc92663760.png" width="300px" /> <img src="https://user-images.githubusercontent.com/36184953/217462541-e7a8a654-ed24-41a1-bd9a-795ef22aa8e7.png" width="300px" /> 
 <p align="center">
   <img src="https://github.com/Mirshodbek/sap_work/blob/main/assets/Simulator%20Screen%20Recording%20-%20iPhone%2014%20Pro%20Max%20-%202023-02-08%20at%2012.21.42.gif" alt="animated" />
 </p>
