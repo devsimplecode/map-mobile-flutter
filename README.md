@@ -1,16 +1,17 @@
-# map_flutter
 
-A new Flutter project.
+# Simplecode Map Preview
 
-## Getting Started
+![1024x500](https://user-images.githubusercontent.com/36184953/217436095-92da8bd0-8eb4-42bd-b45e-73593d277295.png)
 
-This project is a starting point for a Flutter application.
+## About app
+Simplecode Map Preview is an application which presents you a map of the world. There are four types of maps available in the app. It shows your current location on a map, as well as the destinations you've marked and searched for. It also shows the distance between the destinations and directions to them and thus guides you step by step.
 
-A few resources to get you started if this is your first Flutter project:
+## 🛠 App languages
+Mobile app: Dart and Flutter
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Features
+- Google Map [example](https://gitlab.com/simplecodedev/portfolio/flutter/flutter-map/portfolio-map-flutter/-/tree/main/lib/features/maps)
+- Yandex Map [example](https://gitlab.com/simplecodedev/portfolio/flutter/flutter-map/portfolio-map-flutter/-/tree/main/lib/features/maps/yandex_map)
+- OSM Map [example](https://gitlab.com/simplecodedev/portfolio/flutter/flutter-map/portfolio-map-flutter/-/tree/main/lib/features/maps/osm_map)
+- Navigation with MapBox [example](https://gitlab.com/simplecodedev/portfolio/flutter/flutter-map/portfolio-map-flutter/-/blob/main/lib/features/map_screen.dart)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
