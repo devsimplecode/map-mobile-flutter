@@ -4,7 +4,7 @@ import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'package:location/location.dart';
 import 'package:map_flutter/constants/assets.dart';
 import 'package:map_flutter/constants/constants.dart';
-import 'package:map_flutter/repo/internet_connection_repo.dart';
+import 'package:map_flutter/repo/internet_connection.dart';
 import 'package:map_flutter/main_bloc/address_bloc/address_bloc.dart';
 import 'package:map_flutter/main_bloc/location_bloc/location_bloc.dart';
 

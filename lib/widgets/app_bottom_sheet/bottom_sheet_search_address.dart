@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:map_flutter/constants/assets.dart';
+import 'package:map_flutter/constants/constants.dart';
 import 'package:map_flutter/main_bloc/search_address_bloc/search_address_bloc.dart';
 import 'package:map_flutter/widgets/search_text_field.dart';
 import 'package:map_flutter/l10n/generated/l10n.dart';
 
-Future<dynamic> showBottomSheetSearchAddress({required BuildContext context}) async {
+Future<dynamic> showBottomSheetSearchAddress(
+    {required BuildContext context}) async {
   final result = await showModalBottomSheet(
     context: context,
     isScrollControlled: true,
@@ -27,7 +29,8 @@ Future<dynamic> showBottomSheetSearchAddress({required BuildContext context}) as
                 error: state.error,
                 controller: controller,
                 onTap: (result) {
-                  Navigator.of(context).pop(result?.place?.geometry?.locationGoogle);
+                  Navigator.of(context)
+                      .pop(result?.place?.geometry?.locationMap);
                 },
                 onChanged: (value) {
                   BlocProvider.of<SearchAddressBloc>(context)
@@ -42,12 +45,11 @@ Future<dynamic> showBottomSheetSearchAddress({required BuildContext context}) as
     },
   ).whenComplete(() {
     BlocProvider.of<SearchAddressBloc>(context).add(
-      const SearchAddressEvent.searchAddress(search: ''),
+      const SearchAddressEvent.searchAddress(search: Constants.empty),
     );
   });
   return result;
 }
-
 
 class BottomSheetSearchAddress extends StatelessWidget {
   const BottomSheetSearchAddress({
@@ -120,7 +122,9 @@ class BottomSheetSearchAddress extends StatelessWidget {
                       controller: controller,
                       itemCount: items.length,
                       itemBuilder: (context, index) {
-                        if (items[index].address?.isEmpty ?? true) return const SizedBox.shrink();
+                        if (items[index].address?.isEmpty ?? true) {
+                          return const SizedBox.shrink();
+                        }
                         return ListTile(
                           title: Padding(
                             padding: const EdgeInsets.all(8),
@@ -138,9 +142,7 @@ class BottomSheetSearchAddress extends StatelessWidget {
                           },
                         );
                       },
-                      separatorBuilder: (context, _) {
-                        return const Divider();
-                      },
+                      separatorBuilder: (context, _) => const Divider(),
                     ),
                   ),
       ],

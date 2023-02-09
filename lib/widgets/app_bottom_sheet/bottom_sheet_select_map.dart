@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:map_flutter/constants/constants.dart';
 import 'package:map_flutter/main_bloc/type_map_bloc/type_map_bloc.dart';
 import 'package:map_flutter/l10n/generated/l10n.dart';
 
@@ -21,7 +22,7 @@ Future<dynamic> showBottomSheetTypeMap({required BuildContext context}) async {
           return BottomSheetSelectMap(
             controller: controller,
             initial: mapsType?.toMapsType,
-            onTap: (String map){
+            onTap: (String map) {
               BlocProvider.of<TypeMapCubit>(context).setMapType(map.mapsType);
             },
           );
@@ -43,20 +44,20 @@ class BottomSheetSelectMap extends StatelessWidget {
   final Function(String)? onTap;
   final ScrollController controller;
 
+  static const List<String> items = [
+    Constants.googleMaps,
+    Constants.yandexMaps,
+    Constants.osmMaps,
+  ];
+
   @override
   Widget build(BuildContext context) {
-    final List<String> items = [
-      'Google maps',
-      'Yandex maps',
-      'OSM maps',
-    ];
-
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
         children: [
           Row(
-            children:  [
+            children: [
               Expanded(
                 child: Text(
                   S.of(context).selectMap,
@@ -86,10 +87,11 @@ class BottomSheetSelectMap extends StatelessWidget {
                     ),
                   ),
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      side: const BorderSide(
-                        color: Color(0xFF474AD0),
-                      )),
+                    borderRadius: BorderRadius.circular(12),
+                    side: const BorderSide(
+                      color: Color(0xFF474AD0),
+                    ),
+                  ),
                   trailing: SizedBox(
                     width: 20.0,
                     height: 20.0,
@@ -106,9 +108,7 @@ class BottomSheetSelectMap extends StatelessWidget {
                   },
                 );
               },
-              separatorBuilder: (context, _) {
-                return const Divider();
-              },
+              separatorBuilder: (context, _) => const Divider(),
             ),
           ),
         ],

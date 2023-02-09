@@ -5,11 +5,11 @@ import 'package:map_flutter/models/address_by_ip.dart';
 import 'package:map_flutter/models/app_error.dart';
 import 'package:map_flutter/models/place.dart';
 import 'package:map_flutter/models/place_search.dart';
-import 'package:map_flutter/models/request_response_model.dart';
+import 'package:map_flutter/models/request_response.dart';
 
 part 'parts/interceptors.dart';
 
-class MapApi {
+class BaseApi {
   late final _dio = Dio(_options)..interceptors.add(BaseInterceptor());
 
   final _options = BaseOptions(

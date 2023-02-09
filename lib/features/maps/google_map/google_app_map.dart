@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
-import 'package:map_flutter/repo/internet_connection_repo.dart';
+import 'package:map_flutter/repo/internet_connection.dart';
 import 'package:map_flutter/main_bloc/address_bloc/address_bloc.dart';
 import 'package:map_flutter/main_bloc/location_bloc/location_bloc.dart';
 

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:map_flutter/repo/internet_connection_repo.dart';
+import 'package:map_flutter/repo/internet_connection.dart';
 
 part 'bloc_check_internet.freezed.dart';
 

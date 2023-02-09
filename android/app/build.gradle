@@ -25,6 +25,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
+// The Google Api Key value is taken from the local.properties file.
+// This file must be kept secret.
 def apiKey = localProperties.getProperty('GOOGLE_API_KEY')
 
 android {
@@ -43,30 +45,35 @@ android {
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
+    // These keys are for publishing to the Play Market and taken from the key.properties file.
+    // This file must be kept secret.
     def keyProps = new Properties()
     def keyPropsFile = rootProject.file('key.properties')
     if (keyPropsFile.exists()) {
         keyProps.load(new FileInputStream(keyPropsFile))
     }
+
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.simplecode.map_flutter"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-build-configuration.
         minSdkVersion 21
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+
+        // This structure is needed so that there is access to the Google API Key value inside the AndroidManifest.xml file.
         manifestPlaceholders += [
                 GOOGLE_API_KEY: apiKey
         ]
 
+        // The Yandex API Key value is taken from the local.properties and generated inside class BuildConfig.java.
+        // That is for keeping secret key.
         Properties properties = new Properties()
         properties.load(project.rootProject.file("local.properties").newDataInputStream())
 
         buildConfigField "String", "YANDEX_API_KEY", "\"${properties.getProperty("YANDEX_API_KEY")}\""
     }
 
+    // The keys are from the key.properties file.
     signingConfigs {
         release {
             keyAlias keyProps['keyAlias']
@@ -78,7 +85,6 @@ android {
 
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.release
             shrinkResources false

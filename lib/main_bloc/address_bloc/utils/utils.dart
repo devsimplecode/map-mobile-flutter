@@ -5,7 +5,6 @@ extension Utils on AddressBloc {
 
   double? get currentLat => bloc.state.maybeCurrentLat();
 
-
   String adr(Placemark value) {
     return '${street(value.street)}${value.administrativeArea}, ${value.subAdministrativeArea}, ${value.country}';
   }
@@ -25,8 +24,8 @@ extension Utils on AddressBloc {
   }
 
   bool get isNotEmptyLatLng =>
-      notNull(bloc.state.maybeCurrentLat()) &&
-      notNull(bloc.state.maybeCurrentLng()) &&
+      notNull(currentLng) &&
+      notNull(currentLat) &&
       notNull(state.location) &&
       notNull(state.location?.lat) &&
       notNull(state.location?.lng);

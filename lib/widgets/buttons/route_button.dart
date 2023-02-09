@@ -26,7 +26,8 @@ class RouteButton extends StatelessWidget {
               child: TextButton(
                 onPressed: () async {
                   if (!state.setPolylineOsm) {
-                    BlocProvider.of<AddressBloc>(context).add(const AddressEvent.setPolyline());
+                    BlocProvider.of<AddressBloc>(context)
+                        .add(const AddressEvent.setPolyline());
                   } else {
                     if (context.read<AddressBloc>().isNotEmptyLatLng) {
                       BlocProvider.of<LocationBloc>(context).add(
@@ -44,13 +45,16 @@ class RouteButton extends StatelessWidget {
                   }
                 },
                 style: TextButton.styleFrom(
-                    backgroundColor: Colors.blue,
-                    padding: const EdgeInsets.all(12),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    )),
+                  backgroundColor: Colors.blue,
+                  padding: const EdgeInsets.all(12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
                 child: Text(
-                  !state.setPolylineOsm ? S.of(context).route : S.of(context).turnByTurn,
+                  !state.setPolylineOsm
+                      ? S.of(context).route
+                      : S.of(context).turnByTurn,
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,

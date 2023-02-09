@@ -5,6 +5,15 @@ publish_to: 'none'
 
 version: 1.0.4+7
 
+# For achieving access to the key of Google API you must add this
+# "--dart-define GOOGLE_API_KEY=AIzaSyDOaiRTglZiVGsdvOq1hgK4wGKRhqdQRMY"
+# after command "flutter run" or if you are using Android Studio,
+# you can add it to the "Additional run args:" (Edit Configurations).
+
+# flutter run --dart-define GOOGLE_API_KEY=AIzaSyDOaiRTglZiVGsdvOq1hgK4wGKRhqdQRMY
+
+# If there are some problems in the process of run project, you need transfer to flutter version 3.3.10.
+
 environment:
   sdk: '>=2.18.6 <3.0.0'
 
