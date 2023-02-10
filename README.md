@@ -10,10 +10,10 @@ Simplecode Map Preview is an application which presents you a map of the world. 
 Mobile app: Dart and Flutter
 
 ## Features
-- Google Map [example](https://gitlab.com/simplecodedev/portfolio/flutter/flutter-map/portfolio-map-flutter/-/tree/main/lib/features/maps)
-- Yandex Map [example](https://gitlab.com/simplecodedev/portfolio/flutter/flutter-map/portfolio-map-flutter/-/tree/main/lib/features/maps/yandex_map)
-- OSM Map [example](https://gitlab.com/simplecodedev/portfolio/flutter/flutter-map/portfolio-map-flutter/-/tree/main/lib/features/maps/osm_map)
-- Navigation with MapBox [example](https://gitlab.com/simplecodedev/portfolio/flutter/flutter-map/portfolio-map-flutter/-/blob/main/lib/features/map_screen.dart)
+- Google Map [example](https://github.com/devsimplecode/map-mobile-flutter/blob/main/lib/features/maps/google_map/google_app_map.dart)
+- Yandex Map [example](https://github.com/devsimplecode/map-mobile-flutter/blob/main/lib/features/maps/yandex_map/yandex_app_map.dart)
+- OSM Map [example](https://github.com/devsimplecode/map-mobile-flutter/blob/main/lib/features/maps/osm_map/osm_app_map.dart)
+- Navigation with MapBox [example](https://github.com/devsimplecode/map-mobile-flutter/blob/main/lib/features/map_screen.dart)
 
 ## Logic of app
 Before working with maps, the application will ask you for permission to get your current location and take your coordinates (Latitude, Longitude). All this logic is contained in a block called [location_bloc](https://gitlab.com/simplecodedev/portfolio/flutter/flutter-map/portfolio-map-flutter/-/tree/main/lib/main_bloc/location_bloc). After that it gives the coordinates to another block ([address_bloc](https://gitlab.com/simplecodedev/portfolio/flutter/flutter-map/portfolio-map-flutter/-/tree/main/lib/main_bloc/address_bloc)), which manages the state of all maps.
