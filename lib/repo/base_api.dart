@@ -20,7 +20,7 @@ class BaseApi {
     sendTimeout: 30000,
   );
 
-  MapApi({
+  BaseApi({
     this.testResponse,
     this.runTest = false,
   });

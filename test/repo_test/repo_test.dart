@@ -1,9 +1,8 @@
-import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:map_flutter/constants/constants.dart';
-import 'package:map_flutter/repo/map_api.dart';
+import 'package:map_flutter/repo/base_api.dart';
 
 void main() {
   test('Fetching LatLng by user ip', () async {
@@ -35,7 +34,7 @@ Future<Response> _response(String files) async {
   );
 }
 
-MapApi _mapApi(String file) => MapApi(
+BaseApi _mapApi(String file) => BaseApi(
       testResponse: _response(file),
       runTest: true,
     );
