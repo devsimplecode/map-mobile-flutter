@@ -3,16 +3,16 @@ import 'package:flutter/foundation.dart';
 
 @immutable
 class Geometry {
-  final LocationMap? locationGoogle;
+  final LocationMap? locationMap;
 
-  const Geometry({this.locationGoogle});
+  const Geometry({this.locationMap});
 
   factory Geometry.fromJson(Map<dynamic, dynamic> parsedJson) =>
-      Geometry(locationGoogle: LocationMap.fromJson(parsedJson['location']));
+      Geometry(locationMap: LocationMap.fromJson(parsedJson['location']));
 
   @override
   String toString() {
-    return 'Geometry{locationGoogle: $locationGoogle}';
+    return 'Geometry{locationMap: $locationMap}';
   }
 
   @override
@@ -20,8 +20,8 @@ class Geometry {
       identical(this, other) ||
       other is Geometry &&
           runtimeType == other.runtimeType &&
-          locationGoogle == other.locationGoogle;
+          locationMap == other.locationMap;
 
   @override
-  int get hashCode => locationGoogle.hashCode;
+  int get hashCode => locationMap.hashCode;
 }

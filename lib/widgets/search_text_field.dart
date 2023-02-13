@@ -34,9 +34,7 @@ class SearchTextField extends StatelessWidget {
         hintText: hintText,
         enabled: enabled,
         prefixIcon: const Icon(Icons.search),
-        hintStyle: const TextStyle(
-          fontSize: 16,
-        ),
+        hintStyle: const TextStyle(fontSize: 16),
         focusedBorder: textFieldStyle,
         enabledBorder: textFieldStyle,
         disabledBorder: textFieldStyle,

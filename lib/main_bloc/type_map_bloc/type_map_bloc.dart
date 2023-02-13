@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:map_flutter/constants/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 enum MapsType { google, yandex, osm }
@@ -9,8 +10,9 @@ class TypeMapCubit extends Cubit<TypeMapState> {
 
   void initMapsType() async {
     preferences = await SharedPreferences.getInstance();
-    if (preferences.getString('map') != null) {
-      switch (preferences.getString('map')?.mapsType) {
+    final savedMap = preferences.getString(Constants.keyMap);
+    if (savedMap != null) {
+      switch (savedMap.mapsType) {
         case MapsType.google:
           emit(state.copyWith(mapsType: MapsType.google));
           break;
@@ -25,13 +27,13 @@ class TypeMapCubit extends Cubit<TypeMapState> {
           return;
       }
     } else {
-      await preferences.setString('map', MapsType.google.toMapsType);
+      await preferences.setString(Constants.keyMap, MapsType.google.toMapsType);
       emit(state.copyWith(mapsType: MapsType.google));
     }
   }
 
   void setMapType(MapsType mapsType) async {
-    await preferences.setString('map', mapsType.toMapsType);
+    await preferences.setString(Constants.keyMap, mapsType.toMapsType);
     emit(state.copyWith(mapsType: mapsType));
   }
 }
@@ -52,18 +54,18 @@ class TypeMapState {
 
 extension MapsTypeString on String {
   MapsType get mapsType {
-    if (this == 'Google maps') return MapsType.google;
-    if (this == 'Yandex maps') return MapsType.yandex;
-    if (this == 'OSM maps') return MapsType.osm;
+    if (this == Constants.googleMaps) return MapsType.google;
+    if (this == Constants.yandexMaps) return MapsType.yandex;
+    if (this == Constants.osmMaps) return MapsType.osm;
     return MapsType.google;
   }
 }
 
 extension ToMapsType on MapsType {
   String get toMapsType {
-    if (this == MapsType.google) return 'Google maps';
-    if (this == MapsType.yandex) return 'Yandex maps';
-    if (this == MapsType.osm) return 'OSM maps';
-    return 'Google maps';
+    if (this == MapsType.google) return Constants.googleMaps;
+    if (this == MapsType.yandex) return Constants.yandexMaps;
+    if (this == MapsType.osm) return Constants.osmMaps;
+    return Constants.googleMaps;
   }
 }

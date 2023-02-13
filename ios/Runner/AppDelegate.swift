@@ -9,8 +9,12 @@ import YandexMapsMobile
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
-    
+    // The api.plist file must be kept secret.
+
+    // Initialization Google Map for IOS
     GMSServices.provideAPIKey(googleApiKey)
+
+    // Initialization Yandex Map for IOS
     YMKMapKit.setApiKey(yandexApiKey)
 
     GeneratedPluginRegistrant.register(with: self)
@@ -18,14 +22,12 @@ import YandexMapsMobile
   }
 }
 
-
+// The Google Api Key value is taken from the api.plist file.
 private var googleApiKey: String {
   get {
-    // 1
     guard let filePath = Bundle.main.path(forResource: "api", ofType: "plist") else {
       fatalError("Couldn't find file 'api.plist'.")
     }
-    // 2
     let plist = NSDictionary(contentsOfFile: filePath)
     guard let value = plist?.object(forKey: "googleApiKey") as? String else {
       fatalError("Couldn't find key 'API_KEY_GOOGLE' in 'api.plist'.")
@@ -34,13 +36,12 @@ private var googleApiKey: String {
   }
 }
 
+// The Google Api Key value is taken from the api.plist file.
 private var yandexApiKey: String {
   get {
-    // 1
     guard let filePath = Bundle.main.path(forResource: "api", ofType: "plist") else {
       fatalError("Couldn't find file 'api.plist'.")
     }
-    // 2
     let plist = NSDictionary(contentsOfFile: filePath)
     guard let value = plist?.object(forKey: "yandexApiKey") as? String else {
       fatalError("Couldn't find key 'API_KEY_YANDEX' in 'api.plist'.")

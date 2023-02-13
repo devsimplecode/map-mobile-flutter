@@ -1,8 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:map_flutter/constants/constants.dart';
 import 'package:map_flutter/main_bloc/location_bloc/location_bloc.dart';
 import 'package:map_flutter/models/place_search.dart';
-import 'package:map_flutter/repo/map_api.dart';
+import 'package:map_flutter/repo/base_api.dart';
 import 'package:map_flutter/l10n/generated/l10n.dart';
 
 part 'search_address_bloc.freezed.dart';
@@ -17,7 +18,7 @@ class SearchAddressBloc extends Bloc<SearchAddressEvent, SearchAddressState> {
     on<_SearchAddress>(_searchAddress);
   }
 
-  final MapApi api;
+  final BaseApi api;
   final LocationBloc bloc;
 }
 

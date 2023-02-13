@@ -11,7 +11,7 @@ extension SearchAddress on SearchAddressBloc {
     }
     emit(state.copyWith(loadingAddress: true));
 
-    List<PlaceSearch> takePlaces = [];
+    List<PlaceSearch> placesSearch = [];
     final responsePlaces = await api.getAddressesGoogle(
       event.search,
       '${bloc.state.maybeCurrentLat()},${bloc.state.maybeCurrentLng()}',
@@ -35,7 +35,7 @@ extension SearchAddress on SearchAddressBloc {
           ));
           return;
         }
-        takePlaces.add(PlaceSearch(
+        placesSearch.add(PlaceSearch(
           placeId: item.placeId,
           address: item.address,
           place: responsePlace.data,
@@ -43,9 +43,9 @@ extension SearchAddress on SearchAddressBloc {
       }
     }
     emit(state.copyWith(
-      places: takePlaces,
+      places: placesSearch,
       loadingAddress: false,
-      error: '',
+      error: Constants.empty,
     ));
   }
 }

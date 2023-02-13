@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:map_flutter/constants/assets.dart';
 import 'package:map_flutter/main_bloc/bloc_check_internet/bloc_check_internet.dart';
-import 'package:map_flutter/repo/internet_connection_repo.dart';
+import 'package:map_flutter/repo/internet_connection.dart';
 import 'package:map_flutter/main_bloc/address_bloc/address_bloc.dart';
 import 'package:map_flutter/l10n/generated/l10n.dart';
 import 'package:map_flutter/widgets/buttons/route_button.dart';

@@ -2,7 +2,7 @@ import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:map_flutter/main_bloc/bloc_check_internet/bloc_check_internet.dart';
-import 'package:map_flutter/repo/internet_connection_repo.dart';
+import 'package:map_flutter/repo/internet_connection.dart';
 import 'package:map_flutter/l10n/generated/l10n.dart';
 import 'package:map_flutter/widgets/warning_internet.dart';
 
@@ -23,9 +23,7 @@ class SwitchLocationButton extends StatelessWidget {
         }
         return TextButton(
           onPressed: () => AppSettings.openLocationSettings(),
-          style: TextButton.styleFrom(
-            backgroundColor: Colors.white,
-          ),
+          style: TextButton.styleFrom(backgroundColor: Colors.white),
           child: Row(
             children: [
               Expanded(

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:map_flutter/constants/constants.dart';
 import 'package:map_flutter/features/map_screen.dart';
 import 'package:map_flutter/main_bloc/bloc_check_internet/bloc_check_internet.dart';
-import 'package:map_flutter/repo/internet_connection_repo.dart';
+import 'package:map_flutter/repo/internet_connection.dart';
 import 'package:map_flutter/main_bloc/address_bloc/address_bloc.dart';
 import 'package:map_flutter/main_bloc/location_bloc/location_bloc.dart';
 import 'package:map_flutter/main_bloc/type_map_bloc/type_map_bloc.dart';
 import 'package:map_flutter/main_bloc/search_address_bloc/search_address_bloc.dart';
-import 'package:map_flutter/repo/map_api.dart';
+import 'package:map_flutter/repo/base_api.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:map_flutter/l10n/generated/l10n.dart';
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider(
-          create: (context) => MapApi(),
+          create: (context) => BaseApi(),
         ),
         RepositoryProvider(
           create: (context) => InternetConnectionRepo(),
@@ -58,7 +59,7 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => LocationBloc(
-              api: RepositoryProvider.of<MapApi>(context),
+              api: RepositoryProvider.of<BaseApi>(context),
             )..add(const LocationEvent.initLocation()),
           ),
           BlocProvider(
@@ -68,16 +69,14 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => SearchAddressBloc(
-              api: RepositoryProvider.of<MapApi>(context),
+              api: RepositoryProvider.of<BaseApi>(context),
               bloc: BlocProvider.of<LocationBloc>(context),
             ),
           ),
         ],
         child: MaterialApp(
-          title: 'Flutter Map',
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-          ),
+          title: Constants.appTitle,
+          theme: ThemeData(primarySwatch: Colors.blue),
           debugShowCheckedModeBanner: false,
           localizationsDelegates: const [
             S.delegate,

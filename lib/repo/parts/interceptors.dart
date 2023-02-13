@@ -1,4 +1,4 @@
-part of '../map_api.dart';
+part of '../base_api.dart';
 
 
 class BaseInterceptor implements Interceptor {

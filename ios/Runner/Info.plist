@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -17,51 +19,52 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>$(FLUTTER_BUILD_NAME)</string>
+	<string>1.0.4</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<string>7</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>MBXAccessToken</key>
+	<string>pk.eyJ1IjoibWlyc2hvZGJlayIsImEiOiJjbGRpcWdiYXcwYTB5M3Ztd3YzbDQ5eHZ3In0.QSDQ1Fx193eHxfGhibVwhg</string>
+	<key>MGLMapboxMetricsEnabledSettingShownInApp</key>
+	<string>YES</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Чтобы Вы могли найти свой дом на карте</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Чтобы Вы могли найти свой дом на карте</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Чтобы Вы могли найти свой дом на карте</string>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>audio</string>
+		<string>location</string>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>UIRequiresFullScreen</key>
+	<false/>
+	<key>UIStatusBarStyle</key>
+	<string></string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
-		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+		<string>UIInterfaceOrientationPortrait</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationPortraitUpsideDown</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<key>io.flutter.embedded_views_preview</key>
 	<true/>
-	<key>UIApplicationSupportsIndirectInputEvents</key>
-	<true/>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-    <string>Чтобы Вы могли найти свой дом на карте</string>
-    <key>NSLocationAlwaysUsageDescription</key>
-    <string>Чтобы Вы могли найти свой дом на карте</string>
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string>Чтобы Вы могли найти свой дом на карте</string>
-    <key>MBXAccessToken</key>
-    <string>pk.eyJ1IjoibWlyc2hvZGJlayIsImEiOiJjbGRpcWdiYXcwYTB5M3Ztd3YzbDQ5eHZ3In0.QSDQ1Fx193eHxfGhibVwhg</string>
-    <key>MGLMapboxMetricsEnabledSettingShownInApp</key>
-    <string>YES</string>
-    <key>UIBackgroundModes</key>
-    <array>
-    		<string>audio</string>
-    		<string>location</string>
-    		<string>remote-notification</string>
-    </array>
 </dict>
 </plist>
